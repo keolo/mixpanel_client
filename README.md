@@ -1,6 +1,13 @@
-# Mixpanel API Client                                                                                           
+# Ruby Mixpanel API Client                                                                                           
 
 Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool. 
+
+## Installation
+    # If you don't already have gemcutter as a rubygems source
+    gem install gemcutter
+    gem tumble
+
+    gem install mixpanel_client
 
 ## Example Usage
     require 'rubygems'

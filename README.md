@@ -1,8 +1,11 @@
 # Mixpanel API Client                                                                                           
 
-Ruby access to the Mixpanel web analytics tool. [Mixpanel](http://mixpanel.com/]
+Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool. 
 
 ## Example Usage
+    require 'rubygems'
+    require 'mixpanel_client'
+
     config = {:api_key => 'changeme123', :api_secret => '123changeme'}
     api = Mixpanel::Client.new(config)
     data = api.request(:events, :general, {

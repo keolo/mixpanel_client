@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "mixpanel_client"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = 'Ruby Mixpanel API Client Library'
+    gem.description = 'Simple ruby client interface to the Mixpanel API.'
     gem.email = "keolo@dreampointmedia.com"
     gem.homepage = "http://github.com/keolo/mixpanel_client"
     gem.authors = ["Keolo Keagy"]

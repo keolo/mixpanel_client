@@ -35,12 +35,16 @@ module Mixpanel
 
       @format = params[:format]
 
-      response = URI.parse("#{BASE_URI}/#{endpoint}/#{VERSION}/#{meth}?#{urlencode(params)}").read
+      response = URI.parse(mixpanel_uri(endpoint, meth, params)).read
       to_hash(response)
     end
 
     def hash_args(args)
       Digest::MD5.hexdigest(args.map{|k,v| "#{k}=#{v}"}.sort.to_s + api_secret)
+    end
+
+    def mixpanel_uri(endpoint, meth, params)
+      %Q(#{BASE_URI}/#{endpoint}/#{VERSION}/#{meth}?#{urlencode(params)})
     end
 
     def urlencode(params)

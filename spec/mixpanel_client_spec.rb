@@ -6,11 +6,30 @@ describe 'Mixpanel::Client' do
     @api = Mixpanel::Client.new(config)
   end
 
+  describe '#request' do
+    it 'should return a valid JSON result set.' do
+      pending 'Need to setup valid Mixpanel test account.'
+      data = @api.request(:events, :general, {
+        :event    => '["test-event"]',
+        :unit     => 'hour',
+        :interval =>  24
+      })
+      data.should == {:some => 'thing'}
+    end
+  end
+
   describe '#hash_args' do
     it 'should return a hashed string alpha sorted by key names.' do
       args              = {:c => 'see', :a => 'aye', :d => 'dee', :b => 'bee'}
       args_alpha_sorted = {:a => 'aye', :b => 'bee', :c => 'see', :d => 'dee'}
       @api.hash_args(args).should == @api.hash_args(args_alpha_sorted)
+    end
+  end
+
+  describe '#mixpanel_uri' do
+    it 'should return a properly formatted mixpanel uri as a string' do
+      endpoint, meth, params  = [:events, :general, {:c => 'see', :a => 'aye'}]
+      @api.mixpanel_uri(endpoint, meth, params).should == 'http://mixpanel.com/api/events/1.0/general?a=aye&c=see'
     end
   end
 

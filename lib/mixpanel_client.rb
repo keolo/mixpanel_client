@@ -57,8 +57,7 @@ module Mixpanel
       when :xml
         # TODO: xml parsing
       else :json
-        require 'rubygems' unless defined?(JSON)
-        require 'json'
+        require 'json' unless defined?(JSON)
         JSON.parse(data)
       end
     end

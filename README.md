@@ -9,7 +9,7 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
     require 'rubygems'
     require 'mixpanel_client'
 
-    config = {:api_key => 'changeme123', :api_secret => '123changeme'}
+    config = {:api_key => 'changeme', :api_secret => 'changeme'}
 
     api = Mixpanel::Client.new(config)
 

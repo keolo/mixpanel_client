@@ -1,3 +1,5 @@
+require 'rubygems'
+
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe 'Mixpanel::Client' do
@@ -7,7 +9,7 @@ describe 'Mixpanel::Client' do
   end
 
   describe '#request' do
-    it 'should return a valid JSON result set.' do
+    it 'should return json and convert to a ruby hash' do
       # Stub Mixpanel web service
       @api.stub!(:get).and_return('{"some" : "thing"}')
 

@@ -12,8 +12,6 @@
 require 'cgi'
 require 'digest/md5'
 require 'open-uri'
-require 'rubygems'
-require 'json'
 
 module Mixpanel
   class Client
@@ -28,19 +26,22 @@ module Mixpanel
     end
 
     def request(endpoint, meth, params)
-      params[:api_key]  = api_key
-      params[:expire]   = Time.now.to_i + 600 # Grant this request 10 minutes
-      params[:format] ||= :json
-      params[:sig]      = hash_args(params)
+      params[:api_key] = api_key
+      params[:expire]  = Time.now.to_i + 600 # Grant this request 10 minutes
+      params[:sig]     = hash_args(params)
 
       @format = params[:format]
 
-      response = URI.parse(mixpanel_uri(endpoint, meth, params)).read
+      response = get(mixpanel_uri(endpoint, meth, params))
       to_hash(response)
     end
 
     def hash_args(args)
       Digest::MD5.hexdigest(args.map{|k,v| "#{k}=#{v}"}.sort.to_s + api_secret)
+    end
+
+    def get(uri)
+      URI.parse(uri).read
     end
 
     def mixpanel_uri(endpoint, meth, params)
@@ -51,12 +52,15 @@ module Mixpanel
       params.map{|k,v| "#{k}=#{CGI.escape(v.to_s)}"}.sort.join('&')
     end
 
-    protected
-      def to_hash(data)
-        case @format
-        when :json
-          JSON.parse(data)
-        end
+    def to_hash(data)
+      case @format
+      when :xml
+        # TODO: xml parsing
+      else :json
+        require 'rubygems' unless defined?(JSON)
+        require 'json'
+        JSON.parse(data)
       end
+    end
   end
 end

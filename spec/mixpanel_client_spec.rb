@@ -8,13 +8,15 @@ describe 'Mixpanel::Client' do
 
   describe '#request' do
     it 'should return a valid JSON result set.' do
-      pending 'Need to setup valid Mixpanel test account.'
+      # Stub Mixpanel web service
+      @api.stub!(:get).and_return('{"some" : "thing"}')
+
       data = @api.request(:events, :general, {
         :event    => '["test-event"]',
         :unit     => 'hour',
         :interval =>  24
       })
-      data.should == {:some => 'thing'}
+      data.should == {'some' => 'thing'}
     end
   end
 
@@ -37,6 +39,12 @@ describe 'Mixpanel::Client' do
     it 'should return a string with url encoded values.' do
       params = {:hey => '!@#$%^&*()\/"Ü', :soo => "hëllö?"}
       @api.urlencode(params).should == 'hey=%21%40%23%24%25%5E%26%2A%28%29%5C%2F%22%C3%9C&soo=h%C3%ABll%C3%B6%3F'
+    end
+  end
+
+  describe '#to_hash' do
+    it 'should return a ruby hash given json as a string' do
+      @api.to_hash('{"a" : "aye", "b" : "bee"}').should == {'a' => 'aye', 'b' => 'bee'}
     end
   end
 end

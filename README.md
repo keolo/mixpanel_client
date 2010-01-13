@@ -1,20 +1,18 @@
-# Ruby Mixpanel API Client                                                                                           
+# Ruby Mixpanel API Client
 
-Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool. 
+Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
 ## Installation
-    # If you don't already have gemcutter as a rubygems source
-    gem install gemcutter
-    gem tumble
-
-    gem install mixpanel_client
+    $ gem install mixpanel_client
 
 ## Example Usage
     require 'rubygems'
     require 'mixpanel_client'
 
     config = {:api_key => 'changeme123', :api_secret => '123changeme'}
+
     api = Mixpanel::Client.new(config)
+
     data = api.request(:events, :general, {
       :event    => '["test-event"]',
       :unit     => 'hour',

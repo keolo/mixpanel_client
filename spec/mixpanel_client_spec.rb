@@ -8,6 +8,10 @@ describe 'Mixpanel::Client' do
     @api = Mixpanel::Client.new(config)
   end
 
+  it 'should have a format attribute that defaults to :json' do
+    @api.format.should == :json
+  end
+
   describe '#request' do
     it 'should return json and convert to a ruby hash' do
       # Stub Mixpanel web service

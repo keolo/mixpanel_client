@@ -7,6 +7,7 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
 ## Example Usage
     require 'rubygems'
+    require 'json'
     require 'mixpanel_client'
 
     config = {:api_key => 'changeme', :api_secret => 'changeme'}

@@ -29,9 +29,10 @@ module Mixpanel
     def request(endpoint, meth, params)
       params[:api_key]  = api_key
       params[:expire]   = Time.now.to_i + 600 # Grant this request 10 minutes
-      params[:sig]      = hash_args(params)
       params[:format] ||= @format
+      params[:sig]      = hash_args(params)
 
+      @sig    = params[:sig]
       @format = params[:format]
 
       response = get(mixpanel_uri(endpoint, meth, params))

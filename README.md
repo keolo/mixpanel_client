@@ -3,7 +3,7 @@
 Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
 ## Installation
-    $ gem install mixpanel_client
+    gem install mixpanel_client
 
 ## Example Usage
     require 'rubygems'
@@ -24,4 +24,4 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
 ## Copyright
 
-Copyright (c) 2009 Keolo Keagy. See LICENSE for details.
+Copyright (c) 2009+ Keolo Keagy. See LICENSE for details.

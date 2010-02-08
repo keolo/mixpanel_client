@@ -40,7 +40,7 @@ module Mixpanel
     end
 
     def hash_args(args)
-      Digest::MD5.hexdigest(args.map{|k,v| "#{k}=#{v}"}.sort.to_s + api_secret)
+      Digest::MD5.hexdigest(args.map{|k,v| "#{k}=#{v}"}.sort.join('') + api_secret)
     end
 
     def get(uri)

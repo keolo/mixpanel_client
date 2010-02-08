@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mixpanel_client}
-  s.version = "0.2.3"
+  s.version = "0.2.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Keolo Keagy"]
-  s.date = %q{2010-01-19}
+  s.date = %q{2010-01-31}
   s.description = %q{Simple ruby client interface to the Mixpanel API.}
   s.email = %q{keolo@dreampointmedia.com}
   s.extra_rdoc_files = [
@@ -39,7 +39,8 @@ Gem::Specification.new do |s|
   s.summary = %q{Ruby Mixpanel API Client Library}
   s.test_files = [
     "spec/mixpanel_client_spec.rb",
-     "spec/spec_helper.rb"
+     "spec/spec_helper.rb",
+     "test/manual.rb"
   ]
 
   if s.respond_to? :specification_version then

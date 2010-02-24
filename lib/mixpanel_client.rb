@@ -4,7 +4,6 @@
 #
 # Copyright (c) 2009+ Keolo Keagy
 # See LICENSE for details.
-# Open sourced by the good folks at SharesPost.com
 #
 # Inspired by the official mixpanel php and python libraries.
 # http://mixpanel.com/api/docs/guides/api/

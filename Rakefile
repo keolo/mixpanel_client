@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'rake'
+require 'metric_fu'
 
 begin
   require 'jeweler'

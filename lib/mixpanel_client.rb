@@ -15,7 +15,7 @@ require 'open-uri'
 # Ruby library for the mixpanel.com web service
 module Mixpanel
   BASE_URI = 'http://mixpanel.com/api'
-  VERSION  = '1.0'
+  VERSION  = '2.0'
 
   # The mixpanel client can be used to easily consume data through the
   # mixpanel API.
@@ -29,6 +29,7 @@ module Mixpanel
 
     def request(endpoint, meth, params)
       uri = URI.mixpanel(endpoint, meth, normalize_params(params))
+      puts "GETTING #{uri}"
       response = URI.get(uri)
       to_hash(response)
     end
@@ -54,7 +55,7 @@ module Mixpanel
   # URI related helpers
   class URI
     def self.mixpanel(endpoint, meth, params)
-      %Q(#{BASE_URI}/#{endpoint}/#{VERSION}/#{meth}?#{self.encode(params)})
+      %Q(#{BASE_URI}/#{VERSION}/#{endpoint}/#{meth}?#{self.encode(params)})
     end
 
     def self.encode(params)

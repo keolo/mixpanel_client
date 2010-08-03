@@ -41,7 +41,7 @@ describe Mixpanel::URI do
   describe '.mixpanel' do
     it 'should return a properly formatted mixpanel uri as a string' do
       endpoint, meth, params  = [:events, :general, {:c => 'see', :a => 'aye'}]
-      Mixpanel::URI.mixpanel(endpoint, meth, params).should == 'http://mixpanel.com/api/events/1.0/general?a=aye&c=see'
+      Mixpanel::URI.mixpanel(endpoint, meth, params).should == 'http://mixpanel.com/api/2.0/events/general?a=aye&c=see'
     end
   end
 

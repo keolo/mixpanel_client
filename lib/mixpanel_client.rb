@@ -29,7 +29,6 @@ module Mixpanel
 
     def request(endpoint, meth, params)
       uri = URI.mixpanel(endpoint, meth, normalize_params(params))
-      puts "GETTING #{uri}"
       response = URI.get(uri)
       to_hash(response)
     end

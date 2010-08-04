@@ -14,7 +14,7 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
     api = Mixpanel::Client.new(config)
 
-    data = api.request(:events, :general, {
+    data = api.request(:events, nil, {
       :event    => '["test-event"]',
       :unit     => 'hour',
       :interval =>  24

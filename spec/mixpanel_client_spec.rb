@@ -13,7 +13,7 @@ describe Mixpanel::Client do
       # Stub Mixpanel web service
       Mixpanel::URI.stub!(:get).and_return('{"some" : "thing"}')
 
-      data = @api.request(:events, :general, {
+      data = @api.request(nil, :events, {
         :event    => '["test-event"]',
         :unit     => 'hour',
         :interval =>  24
@@ -39,9 +39,13 @@ end
 
 describe Mixpanel::URI do
   describe '.mixpanel' do
-    it 'should return a properly formatted mixpanel uri as a string' do
-      endpoint, meth, params  = [:events, :general, {:c => 'see', :a => 'aye'}]
-      Mixpanel::URI.mixpanel(endpoint, meth, params).should == 'http://mixpanel.com/api/2.0/events/general?a=aye&c=see'
+    it 'should return a properly formatted mixpanel uri as a string (without an endpoint)' do
+      endpoint, meth, params  = [:events, nil, {:c => 'see', :a => 'aye'}]
+      Mixpanel::URI.mixpanel(endpoint, meth, params).should == 'http://mixpanel.com/api/2.0/events?a=aye&c=see'
+    end
+    it 'should return a properly formatted mixpanel uri as a string (with an endpoint)' do
+      endpoint, meth, params  = [:events, :top, {:c => 'see', :a => 'aye'}]
+      Mixpanel::URI.mixpanel(endpoint, meth, params).should == 'http://mixpanel.com/api/2.0/events/top?a=aye&c=see'
     end
   end
 

@@ -20,6 +20,7 @@ module Mixpanel
   # The mixpanel client can be used to easily consume data through the
   # mixpanel API.
   class Client
+    attr_reader :uri
     attr_accessor :api_key, :api_secret
 
     def initialize(config)
@@ -28,8 +29,8 @@ module Mixpanel
     end
 
     def request(endpoint, meth, params)
-      uri = URI.mixpanel(endpoint, meth, normalize_params(params))
-      response = URI.get(uri)
+      @uri = URI.mixpanel(endpoint, meth, normalize_params(params))
+      response = URI.get(@uri)
       to_hash(response)
     end
 
@@ -54,7 +55,7 @@ module Mixpanel
   # URI related helpers
   class URI
     def self.mixpanel(endpoint, meth, params)
-      %Q(#{BASE_URI}/#{VERSION}/#{endpoint}/#{meth}?#{self.encode(params)})
+      File.join([BASE_URI, VERSION, endpoint.to_s, meth.to_s].reject(&:empty?)) + "?#{self.encode(params)}"
     end
 
     def self.encode(params)

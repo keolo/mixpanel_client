@@ -1,4 +1,4 @@
-# Ruby Mixpanel API Client
+# Ruby Mixpanel API Version 2.0 Client
 
 Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
@@ -14,12 +14,18 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
     api = Mixpanel::Client.new(config)
 
-    data = api.request(:events, nil, {
+    # Example without an endpoint
+    data = api.request(nil, :events, {
       :event    => '["test-event"]',
       :unit     => 'hour',
       :interval =>  24
     })
+    puts data.inspect
 
+    # Example with an endpoint and method
+    data = api.request(:events, :top, {
+      :type    => 'general'
+    })
     puts data.inspect
 
 ## Copyright

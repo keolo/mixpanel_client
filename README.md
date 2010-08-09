@@ -1,4 +1,4 @@
-# Ruby Mixpanel API Version 2.0 Client
+# Mixpanel API Client (for API version 2.0)
 
 Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 

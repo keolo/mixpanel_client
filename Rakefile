@@ -26,6 +26,13 @@ Spec::Rake::SpecTask.new(:spec) do |spec|
   spec.spec_files = FileList['spec/**/*_spec.rb']
 end
 
+namespace :spec do
+  desc 'Run all tests that depend on external dependencies'
+  Spec::Rake::SpecTask.new(:externals) do |t|
+    t.spec_files = FileList['spec/**/*_externalspec.rb']
+  end
+end
+
 Spec::Rake::SpecTask.new(:rcov) do |spec|
   spec.libs << 'lib' << 'spec'
   spec.pattern = 'spec/**/*_spec.rb'

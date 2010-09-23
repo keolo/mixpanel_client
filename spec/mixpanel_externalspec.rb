@@ -12,19 +12,31 @@ describe 'External calls to mixpanel' do
 
   describe '#request' do
     it 'should return json and convert to a ruby hash' do
-      data = @api.request(nil, :events, {
-        :event    => '["test-event"]',
-        :unit     => 'hour',
-        :interval =>  24
-      })
+      data = @api.request do
+        method   'events'
+        event    '["test-event"]'
+        unit     'hour'
+        interval  24
+      end
       data.should == {"data"=>{"series"=>[], "values"=>{}}, "legend_size"=>0}
     end
 
     it 'should respond to top events' do
-      data = @api.request(:events, :top, {
-        :type => 'general',
-      })
+      data = @api.request do
+        endpoint 'events'
+        method   'top'
+        type     'general'
+      end
       data.should == {"events"=>[], "type"=>"general"}
+    end
+
+    it 'should respond to top events properties' do
+      data = @api.request do
+        endpoint 'events/properties'
+        method   'top'
+        type     'general'
+      end
+      data.should == {}
     end
   end
 end

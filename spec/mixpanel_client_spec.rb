@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe Mixpanel::Client do
   before :all do
-    config = {:api_key => 'test', :api_secret => 'test'}
+    config = {'api_key' => 'test', 'api_secret' => 'test'}
     @api = Mixpanel::Client.new(config)
   end
 
@@ -19,9 +19,44 @@ describe Mixpanel::Client do
         :unit     => 'hour',
         :interval =>  24
       })
+
       data.should == {"data"=>{"series"=>[], "values"=>{}}, "legend_size"=>0}
     end
   end
+
+  describe 'block form' do
+    it 'should work without an endpoint' do
+      uri = Regexp.escape(Mixpanel::BASE_URI)
+
+      # Stub Mixpanel request
+      stub_request(:get, /^#{uri}.*/).to_return(:body => '{"legend_size": 0, "data": {"series": [], "values": {}}}')
+
+      # No endpoint
+      data = @api.request do
+        method   'events'
+        event    '["test-event"]'
+        unit     'hour'
+        interval  24
+      end
+      data.should == {"data"=>{"series"=>[], "values"=>{}}, "legend_size"=>0}
+    end
+
+    it 'should work with an endpoint, method, and type' do
+      uri = Regexp.escape(Mixpanel::BASE_URI)
+
+      # Stub Mixpanel request
+      stub_request(:get, /^#{uri}.*/).to_return(:body => '{"events": [], "type": "general"}')
+
+      # With endpoint
+      data = @api.request do
+        endpoint 'events'
+        method   'top'
+        type     'general'
+      end
+      data.should == {"events"=>[], "type"=>"general"}
+    end
+  end
+
 
   describe '#hash_args' do
     it 'should return a hashed string alpha sorted by key names.' do

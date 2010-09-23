@@ -24,14 +24,31 @@ module Mixpanel
     attr_accessor :api_key, :api_secret
 
     def initialize(config)
-      @api_key    = config[:api_key]
-      @api_secret = config[:api_secret]
+      @api_key    = config['api_key']
+      @api_secret = config['api_secret']
     end
 
-    def request(endpoint, meth, params)
-      @uri = URI.mixpanel(endpoint, meth, normalize_params(params))
-      response = URI.get(@uri)
-      to_hash(response)
+    [:endpoint, :method, :event, :unit, :interval, :type].each do |attr|
+      class_eval "
+        def #{attr}(arg=nil)
+          arg ? @#{attr} = arg : @#{attr}
+        end
+      "
+    end
+
+    def request(deprecated_endpoint=nil, deprecated_meth=nil, deprecated_params=nil, &options)
+      if block_given?
+        instance_eval &options
+        params = {:event => event, :unit => unit, :interval => interval, :type => type}.delete_if{|k,v| v.nil?}
+        @uri = URI.mixpanel(endpoint, method, normalize_params(params))
+        response = URI.get(@uri)
+        to_hash(response)
+      else
+        warn 'This usage is deprecated. Please use the block form (see README).'
+        @uri = URI.mixpanel(deprecated_endpoint, deprecated_meth, normalize_params(deprecated_params))
+        response = URI.get(@uri)
+        to_hash(response)
+      end
     end
 
     def normalize_params(params)
@@ -65,5 +82,12 @@ module Mixpanel
     def self.get(uri)
       ::URI.parse(uri).read
     end
+  end
+end
+
+class Object
+  # There's got to be a better way to do this!!
+  def instance_values
+    self.instance_variables.map{|var| var_sym = var.to_s.gsub('@','').to_sym; {var_sym => self.send(var_sym)}}
   end
 end

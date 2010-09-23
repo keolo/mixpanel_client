@@ -9,15 +9,17 @@ describe Mixpanel::Client do
 
   describe '#request' do
     it 'should return json and convert to a ruby hash' do
-      # Stub Mixpanel web service
-      Mixpanel::URI.stub!(:get).and_return('{"some" : "thing"}')
+      uri = Regexp.escape(Mixpanel::BASE_URI)
+
+      # Stub Mixpanel request
+      stub_request(:get, /^#{uri}.*/).to_return(:body => '{"legend_size": 0, "data": {"series": [], "values": {}}}')
 
       data = @api.request(nil, :events, {
         :event    => '["test-event"]',
         :unit     => 'hour',
         :interval =>  24
       })
-      data.should == {'some' => 'thing'}
+      data.should == {"data"=>{"series"=>[], "values"=>{}}, "legend_size"=>0}
     end
   end
 
@@ -52,6 +54,13 @@ describe Mixpanel::URI do
     it 'should return a string with url encoded values.' do
       params = {:hey => '!@#$%^&*()\/"Ü', :soo => "hëllö?"}
       Mixpanel::URI.encode(params).should == 'hey=%21%40%23%24%25%5E%26%2A%28%29%5C%2F%22%C3%9C&soo=h%C3%ABll%C3%B6%3F'
+    end
+  end
+
+  describe '.get' do
+    it 'should return a string response' do
+      stub_request(:get, 'http://example.com').to_return(:body => 'something')
+      Mixpanel::URI.get('http://example.com').should == 'something'
     end
   end
 end

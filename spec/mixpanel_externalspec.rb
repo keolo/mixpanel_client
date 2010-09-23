@@ -1,6 +1,8 @@
 require 'rubygems'
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
+WebMock.allow_net_connect!
+
 describe 'External calls to mixpanel' do
   before :all do
     config = YAML.load_file(File.dirname(__FILE__) + '/../config/mixpanel.yml')

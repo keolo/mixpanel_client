@@ -20,6 +20,7 @@ module Mixpanel
   # The mixpanel client can be used to easily consume data through the
   # mixpanel API.
   class Client
+    OPTIONS = [:resource, :event, :funnel, :name, :type, :unit, :interval, :limit]
     attr_reader :uri
     attr_accessor :api_key, :api_secret
 
@@ -28,7 +29,7 @@ module Mixpanel
       @api_secret = config['api_secret']
     end
 
-    [:endpoint, :method, :event, :unit, :interval, :type].each do |attr|
+    OPTIONS.each do |attr|
       class_eval "
         def #{attr}(arg=nil)
           arg ? @#{attr} = arg : @#{attr}
@@ -36,16 +37,22 @@ module Mixpanel
       "
     end
 
+    def params
+      OPTIONS.inject({}) do |params, param|
+        params.merge!(param => send(param)) if param != :resource && !send(param).nil?
+        params
+      end
+    end
+
     def request(deprecated_endpoint=nil, deprecated_meth=nil, deprecated_params=nil, &options)
       if block_given?
         instance_eval &options
-        params = {:event => event, :unit => unit, :interval => interval, :type => type}.delete_if{|k,v| v.nil?}
-        @uri = URI.mixpanel(endpoint, method, normalize_params(params))
+        @uri = URI.mixpanel(resource, normalize_params(params))
         response = URI.get(@uri)
         to_hash(response)
       else
-        warn 'This usage is deprecated. Please use the block form (see README).'
-        @uri = URI.mixpanel(deprecated_endpoint, deprecated_meth, normalize_params(deprecated_params))
+        warn 'This usage is deprecated. Please use the new block form (see README).'
+        @uri = URI.deprecated_mixpanel(deprecated_endpoint, deprecated_meth, normalize_params(deprecated_params))
         response = URI.get(@uri)
         to_hash(response)
       end
@@ -71,8 +78,12 @@ module Mixpanel
 
   # URI related helpers
   class URI
-    def self.mixpanel(endpoint, meth, params)
+    def self.deprecated_mixpanel(endpoint, meth, params)
       File.join([BASE_URI, VERSION, endpoint.to_s, meth.to_s].reject(&:empty?)) + "?#{self.encode(params)}"
+    end
+
+    def self.mixpanel(resource, params)
+      File.join([BASE_URI, VERSION, resource.to_s]) + "?#{self.encode(params)}"
     end
 
     def self.encode(params)
@@ -82,12 +93,5 @@ module Mixpanel
     def self.get(uri)
       ::URI.parse(uri).read
     end
-  end
-end
-
-class Object
-  # There's got to be a better way to do this!!
-  def instance_values
-    self.instance_variables.map{|var| var_sym = var.to_s.gsub('@','').to_sym; {var_sym => self.send(var_sym)}}
   end
 end

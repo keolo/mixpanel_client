@@ -33,7 +33,7 @@ describe Mixpanel::Client do
 
       # No endpoint
       data = @api.request do
-        method   'events'
+        resource 'events'
         event    '["test-event"]'
         unit     'hour'
         interval  24
@@ -49,14 +49,12 @@ describe Mixpanel::Client do
 
       # With endpoint
       data = @api.request do
-        endpoint 'events'
-        method   'top'
+        resource 'events/top'
         type     'general'
       end
       data.should == {"events"=>[], "type"=>"general"}
     end
   end
-
 
   describe '#hash_args' do
     it 'should return a hashed string alpha sorted by key names.' do
@@ -74,14 +72,25 @@ describe Mixpanel::Client do
 end
 
 describe Mixpanel::URI do
-  describe '.mixpanel' do
+  describe '.deprecated_mixpanel' do
     it 'should return a properly formatted mixpanel uri as a string (without an endpoint)' do
       endpoint, meth, params  = [:events, nil, {:c => 'see', :a => 'aye'}]
-      Mixpanel::URI.mixpanel(endpoint, meth, params).should == 'http://mixpanel.com/api/2.0/events?a=aye&c=see'
+      Mixpanel::URI.deprecated_mixpanel(endpoint, meth, params).should == 'http://mixpanel.com/api/2.0/events?a=aye&c=see'
     end
     it 'should return a properly formatted mixpanel uri as a string (with an endpoint)' do
       endpoint, meth, params  = [:events, :top, {:c => 'see', :a => 'aye'}]
-      Mixpanel::URI.mixpanel(endpoint, meth, params).should == 'http://mixpanel.com/api/2.0/events/top?a=aye&c=see'
+      Mixpanel::URI.deprecated_mixpanel(endpoint, meth, params).should == 'http://mixpanel.com/api/2.0/events/top?a=aye&c=see'
+    end
+  end
+
+  describe '.mixpanel' do
+    it 'should return a properly formatted mixpanel uri as a string (without an endpoint)' do
+      resource, params  = ['events', {:c => 'see', :a => 'aye'}]
+      Mixpanel::URI.mixpanel(resource, params).should == 'http://mixpanel.com/api/2.0/events?a=aye&c=see'
+    end
+    it 'should return a properly formatted mixpanel uri as a string (with an endpoint)' do
+      resource, params  = ['events/top', {:c => 'see', :a => 'aye'}]
+      Mixpanel::URI.mixpanel(resource, params).should == 'http://mixpanel.com/api/2.0/events/top?a=aye&c=see'
     end
   end
 

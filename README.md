@@ -18,19 +18,20 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
     api = Mixpanel::Client.new(config)
 
-    # Example without an endpoint
+    # Get all results for 'test-event' in the last 24 hours
     data = api.request do
-      method   'events'
-      event    '["test-event"]'
+      resource 'events'
+      event    '["test-events"]'
+      type     general
       unit     'hour'
       interval  24
     end
     puts data.inspect
 
-    # Example with an endpoint and method
+    # Get the top property names for 'test-event'
     data = api.request do
-      endpoint 'events/properties'
-      method   'top'
+      resource 'events/properties/top'
+      event    '["test-event"]'
       type     'general'
     end
     puts data.inspect

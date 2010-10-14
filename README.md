@@ -16,20 +16,20 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
     config = {'api_key' => 'changeme', 'api_secret' => 'changeme'}
 
-    api = Mixpanel::Client.new(config)
+    client = Mixpanel::Client.new(config)
 
     # Get all results for 'test-event' in the last 24 hours
-    data = api.request do
+    data = client.request do
       resource 'events'
-      event    '["test-events"]'
-      type     general
+      event    '["test-event"]'
+      type     'general'
       unit     'hour'
       interval  24
     end
     puts data.inspect
 
     # Get the top property names for 'test-event'
-    data = api.request do
+    data = client.request do
       resource 'events/properties/top'
       event    '["test-event"]'
       type     'general'
@@ -37,13 +37,14 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
     puts data.inspect
 
 
-## Old Usage
+## Old Usage (versions prior to 0.5.0)
 
 __NOTE: This old usage is deprecated and will be removed in future versions.__
 
     require 'rubygems'
     require 'json'
     require 'mixpanel_client'
+
     config = {:api_key => 'changeme', :api_secret => 'changeme'}
 
     api = Mixpanel::Client.new(config)
@@ -61,6 +62,7 @@ __NOTE: This old usage is deprecated and will be removed in future versions.__
       :type    => 'general'
     })
     puts data.inspect
+
 
 ## Copyright
 

@@ -17,17 +17,11 @@ module Mixpanel
   BASE_URI = 'http://mixpanel.com/api'
   VERSION  = '2.0'
 
-  # The mixpanel client can be used to easily consume data through the
-  # mixpanel API.
+  # The mixpanel client can be used to easily consume data through the mixpanel API
   class Client
-    OPTIONS = [:resource, :event, :funnel, :name, :type, :unit, :interval, :limit]
+    OPTIONS = [:resource, :event, :funnel, :name, :type, :unit, :interval, :limit, :format]
     attr_reader :uri
     attr_accessor :api_key, :api_secret
-
-    def initialize(config)
-      @api_key    = config['api_key']
-      @api_secret = config['api_secret']
-    end
 
     OPTIONS.each do |attr|
       class_eval "
@@ -35,6 +29,12 @@ module Mixpanel
           arg ? @#{attr} = arg : @#{attr}
         end
       "
+    end
+
+    def initialize(config)
+      @api_key    = config['api_key']
+      @api_secret = config['api_secret']
+      @format     = format || 'json'
     end
 
     def params
@@ -60,9 +60,8 @@ module Mixpanel
 
     def normalize_params(params)
       params.merge!(
-        :api_key => api_key,
-        :expire  => Time.now.to_i + 600, # Grant this request 10 minutes
-        :format  => :json
+        :api_key => @api_key,
+        :expire  => Time.now.to_i + 600 # Grant this request 10 minutes
       ).merge!(:sig => hash_args(params))
     end
 
@@ -71,8 +70,20 @@ module Mixpanel
     end
 
     def to_hash(data)
-      require 'json' unless defined?(JSON)
-      JSON.parse(data)
+      if @format == 'json'
+        require 'json' unless defined?(JSON)
+        reset_default_options
+        JSON.parse(data)
+      else
+        reset_default_options
+        data
+      end
+    end
+
+    # This is kind of weird but it allows you to reuse a client object with default options
+    def reset_default_options
+      @format = 'json'
+      @limit  = 255
     end
   end
 

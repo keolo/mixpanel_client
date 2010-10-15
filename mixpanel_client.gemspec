@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mixpanel_client}
-  s.version = "0.4.1"
+  s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Keolo Keagy"]
-  s.date = %q{2010-08-04}
+  s.date = %q{2010-10-14}
   s.description = %q{Simple ruby client interface to the Mixpanel API.}
   s.email = %q{keolo@dreampointmedia.com}
   s.extra_rdoc_files = [
@@ -23,11 +23,13 @@ Gem::Specification.new do |s|
      "README.md",
      "Rakefile",
      "VERSION",
+     "config/mixpanel.template.yml",
      "features/mixpanel_client.feature",
      "features/step_definitions/mixpanel_client_steps.rb",
      "features/support/env.rb",
      "lib/mixpanel_client.rb",
      "mixpanel_client.gemspec",
+     "spec/events_externalspec.rb",
      "spec/mixpanel_client_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb"
@@ -38,9 +40,11 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{Ruby Mixpanel API Client Library}
   s.test_files = [
-    "spec/mixpanel_client_spec.rb",
+    "spec/events_externalspec.rb",
+     "spec/mixpanel_client_spec.rb",
      "spec/spec_helper.rb",
-     "test/manual.rb"
+     "test/manual.rb",
+     "test/test.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -50,13 +54,16 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
       s.add_development_dependency(%q<cucumber>, [">= 0"])
+      s.add_development_dependency(%q<webmock>, [">= 1.3.5"])
     else
       s.add_dependency(%q<rspec>, [">= 1.2.9"])
       s.add_dependency(%q<cucumber>, [">= 0"])
+      s.add_dependency(%q<webmock>, [">= 1.3.5"])
     end
   else
     s.add_dependency(%q<rspec>, [">= 1.2.9"])
     s.add_dependency(%q<cucumber>, [">= 0"])
+    s.add_dependency(%q<webmock>, [">= 1.3.5"])
   end
 end
 

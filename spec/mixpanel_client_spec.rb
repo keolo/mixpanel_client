@@ -80,6 +80,7 @@ describe Mixpanel::Client do
         interval  24
         limit     5
         format    'csv'
+        bucket    'list'
       end
 
       Mixpanel::Client::OPTIONS.each do |option|

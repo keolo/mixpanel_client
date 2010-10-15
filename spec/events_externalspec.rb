@@ -7,13 +7,13 @@ describe 'External calls to mixpanel' do
   before :all do
     config = YAML.load_file(File.dirname(__FILE__) + '/../config/mixpanel.yml')
     config.should_not be_nil
-    @api = Mixpanel::Client.new(config)
+    @client = Mixpanel::Client.new(config)
   end
 
   describe 'Events' do
     it 'should raise an error for bad requests' do
       data = lambda {
-        @api.request do
+        @client.request do
           resource 'events'
         end
       }
@@ -21,7 +21,7 @@ describe 'External calls to mixpanel' do
     end
 
     it 'should return events' do
-      data = @api.request do
+      data = @client.request do
         resource 'events'
         event    '["test-event"]'
         type     'general'
@@ -32,7 +32,7 @@ describe 'External calls to mixpanel' do
     end
 
     it 'should return events in csv format' do
-      data = @api.request do
+      data = @client.request do
         resource 'events'
         event    '["test-event"]'
         type     'general'
@@ -44,8 +44,7 @@ describe 'External calls to mixpanel' do
     end
 
     it 'should return events with optional bucket' do
-      pending
-      data = @api.request do
+      data = @client.request do
         resource 'events'
         event    '["test-event"]'
         type     'general'
@@ -57,7 +56,7 @@ describe 'External calls to mixpanel' do
     end
 
     it 'should return top events' do
-      data = @api.request do
+      data = @client.request do
         resource 'events/top'
         type     'general'
         limit    10
@@ -66,7 +65,7 @@ describe 'External calls to mixpanel' do
     end
 
     it 'should return names' do
-      data = @api.request do
+      data = @client.request do
         resource 'events/names'
         type     'general'
         unit     'hour'
@@ -77,7 +76,7 @@ describe 'External calls to mixpanel' do
     end
 
     it 'should return retention' do
-      data = @api.request do
+      data = @client.request do
         resource 'events/retention'
         event    '["test-event"]'
         type     'general'
@@ -88,7 +87,7 @@ describe 'External calls to mixpanel' do
     end
 
     it 'should return retention in csv format' do
-      data = @api.request do
+      data = @client.request do
         resource 'events/retention'
         event    '["test-event"]'
         type     'general'

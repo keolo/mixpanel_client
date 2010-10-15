@@ -20,7 +20,7 @@ module Mixpanel
 
   # The mixpanel client can be used to easily consume data through the mixpanel API
   class Client
-    OPTIONS = [:resource, :event, :funnel, :name, :type, :unit, :interval, :limit, :format]
+    OPTIONS = [:resource, :event, :funnel, :name, :type, :unit, :interval, :limit, :format, :bucket]
     attr_reader :uri
     attr_accessor :api_key, :api_secret
 

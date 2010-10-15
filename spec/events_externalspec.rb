@@ -11,6 +11,15 @@ describe 'External calls to mixpanel' do
   end
 
   describe 'Events' do
+    it 'should raise an error for bad requests' do
+      data = lambda {
+        @api.request do
+          resource 'events'
+        end
+      }
+      data.should raise_error(Mixpanel::URI::HTTPError)
+    end
+
     it 'should return events' do
       data = @api.request do
         resource 'events'
@@ -19,7 +28,7 @@ describe 'External calls to mixpanel' do
         unit     'hour'
         interval  24
       end
-      data.should_not raise_error(OpenURI::HTTPError)
+      data.should_not be_a Exception
     end
 
     it 'should return events in csv format' do
@@ -31,7 +40,7 @@ describe 'External calls to mixpanel' do
         interval  24
         format   'csv'
       end
-      data.should_not raise_error(OpenURI::HTTPError)
+      data.should_not be_a Exception
     end
 
     it 'should return events with optional bucket' do
@@ -44,7 +53,7 @@ describe 'External calls to mixpanel' do
         interval  24
         bucket   'test'
       end
-      data.should_not raise_error(OpenURI::HTTPError)
+      data.should_not be_a Exception
     end
 
     it 'should return top events' do
@@ -53,7 +62,7 @@ describe 'External calls to mixpanel' do
         type     'general'
         limit    10
       end
-      data.should_not raise_error(OpenURI::HTTPError)
+      data.should_not be_a Exception
     end
 
     it 'should return names' do
@@ -64,7 +73,7 @@ describe 'External calls to mixpanel' do
         interval  24
         limit    10
       end
-      data.should_not raise_error(OpenURI::HTTPError)
+      data.should_not be_a Exception
     end
 
     it 'should return retention' do
@@ -75,7 +84,7 @@ describe 'External calls to mixpanel' do
         unit     'hour'
         interval  24
       end
-      data.should_not raise_error(OpenURI::HTTPError)
+      data.should_not be_a Exception
     end
 
     it 'should return retention in csv format' do
@@ -87,7 +96,7 @@ describe 'External calls to mixpanel' do
         interval  24
         format   'csv'
       end
-      data.should_not raise_error(OpenURI::HTTPError)
+      data.should_not be_a Exception
     end
   end
 end

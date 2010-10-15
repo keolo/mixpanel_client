@@ -11,6 +11,7 @@
 require 'cgi'
 require 'digest/md5'
 require 'open-uri'
+require 'json' unless defined?(JSON)
 
 # Ruby library for the mixpanel.com web service
 module Mixpanel
@@ -23,10 +24,10 @@ module Mixpanel
     attr_reader :uri
     attr_accessor :api_key, :api_secret
 
-    OPTIONS.each do |attr|
+    OPTIONS.each do |option|
       class_eval "
-        def #{attr}(arg=nil)
-          arg ? @#{attr} = arg : @#{attr}
+        def #{option}(arg=nil)
+          arg ? @#{option} = arg : @#{option}
         end
       "
     end
@@ -34,7 +35,6 @@ module Mixpanel
     def initialize(config)
       @api_key    = config['api_key']
       @api_secret = config['api_secret']
-      @format     = format || 'json'
     end
 
     def params
@@ -45,6 +45,7 @@ module Mixpanel
     end
 
     def request(deprecated_endpoint=nil, deprecated_meth=nil, deprecated_params=nil, &options)
+      reset_options
       if block_given?
         instance_eval &options
         @uri = URI.mixpanel(resource, normalize_params(params))
@@ -70,25 +71,24 @@ module Mixpanel
     end
 
     def to_hash(data)
-      if @format == 'json'
-        require 'json' unless defined?(JSON)
-        reset_default_options
-        JSON.parse(data)
-      else
-        reset_default_options
+      if @format == 'csv'
         data
+      else
+        JSON.parse(data)
       end
     end
 
-    # This is kind of weird but it allows you to reuse a client object with default options
-    def reset_default_options
-      @format = 'json'
-      @limit  = 255
+    def reset_options
+      (OPTIONS - [:resource]).each do |option|
+        eval "remove_instance_variable(:@#{option}) if defined?(@#{option})"
+      end
     end
   end
 
   # URI related helpers
   class URI
+    class HTTPError < StandardError; end
+
     def self.deprecated_mixpanel(endpoint, meth, params)
       File.join([BASE_URI, VERSION, endpoint.to_s, meth.to_s].reject(&:empty?)) + "?#{self.encode(params)}"
     end
@@ -103,6 +103,8 @@ module Mixpanel
 
     def self.get(uri)
       ::URI.parse(uri).read
+    rescue OpenURI::HTTPError => error
+      raise HTTPError, JSON.parse(error.io.read)['error']
     end
   end
 end

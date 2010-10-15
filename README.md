@@ -11,7 +11,6 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 ## New Usage
 
     require 'rubygems'
-    require 'json'
     require 'mixpanel_client'
 
     config = {'api_key' => 'changeme', 'api_secret' => 'changeme'}
@@ -42,7 +41,6 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 __NOTE: This old usage is deprecated and will be removed in future versions.__
 
     require 'rubygems'
-    require 'json'
     require 'mixpanel_client'
 
     config = {:api_key => 'changeme', :api_secret => 'changeme'}

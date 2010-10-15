@@ -4,17 +4,16 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe Mixpanel::Client do
   before :all do
     config = {'api_key' => 'test', 'api_secret' => 'test'}
-    @api = Mixpanel::Client.new(config)
+    @client = Mixpanel::Client.new(config)
+    @uri = Regexp.escape(Mixpanel::BASE_URI)
   end
 
   describe '#request' do
     it 'should return json and convert to a ruby hash' do
-      uri = Regexp.escape(Mixpanel::BASE_URI)
-
       # Stub Mixpanel request
-      stub_request(:get, /^#{uri}.*/).to_return(:body => '{"legend_size": 0, "data": {"series": [], "values": {}}}')
+      stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"legend_size": 0, "data": {"series": [], "values": {}}}')
 
-      data = @api.request(nil, :events, {
+      data = @client.request(nil, :events, {
         :event    => '["test-event"]',
         :unit     => 'hour',
         :interval =>  24
@@ -26,13 +25,11 @@ describe Mixpanel::Client do
 
   describe 'block form' do
     it 'should work without an endpoint' do
-      uri = Regexp.escape(Mixpanel::BASE_URI)
-
       # Stub Mixpanel request
-      stub_request(:get, /^#{uri}.*/).to_return(:body => '{"legend_size": 0, "data": {"series": [], "values": {}}}')
+      stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"legend_size": 0, "data": {"series": [], "values": {}}}')
 
       # No endpoint
-      data = @api.request do
+      data = @client.request do
         resource 'events'
         event    '["test-event"]'
         unit     'hour'
@@ -42,13 +39,11 @@ describe Mixpanel::Client do
     end
 
     it 'should work with an endpoint, method, and type' do
-      uri = Regexp.escape(Mixpanel::BASE_URI)
-
       # Stub Mixpanel request
-      stub_request(:get, /^#{uri}.*/).to_return(:body => '{"events": [], "type": "general"}')
+      stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"events": [], "type": "general"}')
 
       # With endpoint
-      data = @api.request do
+      data = @client.request do
         resource 'events/top'
         type     'general'
       end
@@ -60,13 +55,44 @@ describe Mixpanel::Client do
     it 'should return a hashed string alpha sorted by key names.' do
       args              = {:c => 'see', :a => 'aye', :d => 'dee', :b => 'bee'}
       args_alpha_sorted = {:a => 'aye', :b => 'bee', :c => 'see', :d => 'dee'}
-      @api.hash_args(args).should == @api.hash_args(args_alpha_sorted)
+      @client.hash_args(args).should == @client.hash_args(args_alpha_sorted)
     end
   end
 
   describe '#to_hash' do
     it 'should return a ruby hash given json as a string' do
-      @api.to_hash('{"a" : "aye", "b" : "bee"}').should == {'a' => 'aye', 'b' => 'bee'}
+      @client.to_hash('{"a" : "aye", "b" : "bee"}').should == {'a' => 'aye', 'b' => 'bee'}
+    end
+  end
+
+  describe 'resetting options' do
+    it 'options should be reset before each request' do
+      # Stub Mixpanel request
+      stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"events": [], "type": "general"}')
+
+      @client.request do
+        resource 'events'
+        event    '["test-event"]'
+        funnel   'down-the-rabbit-hole'
+        name     'ricky-bobby'
+        type     'tall-dark-handsome'
+        unit     'hour'
+        interval  24
+        limit     5
+        format    'csv'
+      end
+
+      Mixpanel::Client::OPTIONS.each do |option|
+        @client.send(option).should_not be_nil
+      end
+
+      @client.request do
+        resource 'events/properties/top'
+      end
+
+      (Mixpanel::Client::OPTIONS - [:resource]).each do |option|
+        @client.send(option).should be_nil
+      end
     end
   end
 end

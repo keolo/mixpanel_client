@@ -17,13 +17,14 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
     client = Mixpanel::Client.new(config)
 
-    # Get all results for 'test-event' in the last 24 hours
+    # Get all results for 'test-event' in the last 24 hours from the test bucket
     data = client.request do
       resource 'events'
       event    '["test-event"]'
       type     'general'
       unit     'hour'
       interval  24
+      bucket   'test'
     end
     puts data.inspect
 

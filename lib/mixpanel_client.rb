@@ -63,10 +63,10 @@ module Mixpanel
       params.merge!(
         :api_key => @api_key,
         :expire  => Time.now.to_i + 600 # Grant this request 10 minutes
-      ).merge!(:sig => hash_args(params))
+      ).merge!(:sig => generate_signature(params))
     end
 
-    def hash_args(args)
+    def generate_signature(args)
       Digest::MD5.hexdigest(args.map{|key,val| "#{key}=#{val}"}.sort.join + api_secret)
     end
 

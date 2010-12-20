@@ -55,7 +55,7 @@ describe Mixpanel::Client do
     it 'should return a hashed string alpha sorted by key names.' do
       args              = {:c => 'see', :a => 'aye', :d => 'dee', :b => 'bee'}
       args_alpha_sorted = {:a => 'aye', :b => 'bee', :c => 'see', :d => 'dee'}
-      @client.hash_args(args).should == @client.hash_args(args_alpha_sorted)
+      @client.generate_signature(args).should == @client.generate_signature(args_alpha_sorted)
     end
   end
 

@@ -39,24 +39,18 @@ module Mixpanel
 
     def params
       OPTIONS.inject({}) do |params, param|
-        params.merge!(param => send(param)) if param != :resource && !send(param).nil?
+        option = send(param)
+        params.merge!(param => option) if param != :resource && !option.nil?
         params
       end
     end
 
-    def request(deprecated_endpoint=nil, deprecated_meth=nil, deprecated_params=nil, &options)
+    def request(&options)
       reset_options
-      if block_given?
-        instance_eval &options
-        @uri = URI.mixpanel(resource, normalize_params(params))
-        response = URI.get(@uri)
-        to_hash(response)
-      else
-        warn 'This usage is deprecated. Please use the new block form (see README).'
-        @uri = URI.deprecated_mixpanel(deprecated_endpoint, deprecated_meth, normalize_params(deprecated_params))
-        response = URI.get(@uri)
-        to_hash(response)
-      end
+      instance_eval(&options)
+      @uri = URI.mixpanel(resource, normalize_params(params))
+      response = URI.get(@uri)
+      to_hash(response)
     end
 
     def normalize_params(params)
@@ -87,11 +81,8 @@ module Mixpanel
 
   # URI related helpers
   class URI
+    # Create an http error class for us to use
     class HTTPError < StandardError; end
-
-    def self.deprecated_mixpanel(endpoint, meth, params)
-      File.join([BASE_URI, VERSION, endpoint.to_s, meth.to_s].reject(&:empty?)) + "?#{self.encode(params)}"
-    end
 
     def self.mixpanel(resource, params)
       File.join([BASE_URI, VERSION, resource.to_s]) + "?#{self.encode(params)}"

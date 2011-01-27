@@ -9,17 +9,17 @@ describe Mixpanel::Client do
   end
 
   describe '#request' do
-    it 'should return json and convert to a ruby hash' do
+    it 'should return an argument error "Wrong number of arguments" if using the deprecated usage' do
       # Stub Mixpanel request
       stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"legend_size": 0, "data": {"series": [], "values": {}}}')
 
-      data = @client.request(nil, :events, {
+      data = lambda{@client.request(nil, :events, {
         :event    => '["test-event"]',
         :unit     => 'hour',
         :interval =>  24
-      })
+      })}
 
-      data.should == {"data"=>{"series"=>[], "values"=>{}}, "legend_size"=>0}
+      data.should raise_error(ArgumentError)
     end
   end
 
@@ -48,6 +48,19 @@ describe Mixpanel::Client do
         type     'general'
       end
       data.should == {"events"=>[], "type"=>"general"}
+    end
+
+    it 'should create getter methods for given options' do
+      @client.resource.should == 'events/top'
+      @client.type.should     == 'general'
+    end
+
+    it 'should create setter methods for given options' do
+      @client.resource 'hi'
+      @client.resource.should == 'hi'
+
+      @client.type 'ok'
+      @client.type.should == 'ok'
     end
   end
 
@@ -99,17 +112,6 @@ describe Mixpanel::Client do
 end
 
 describe Mixpanel::URI do
-  describe '.deprecated_mixpanel' do
-    it 'should return a properly formatted mixpanel uri as a string (without an endpoint)' do
-      endpoint, meth, params  = [:events, nil, {:c => 'see', :a => 'aye'}]
-      Mixpanel::URI.deprecated_mixpanel(endpoint, meth, params).should == 'http://mixpanel.com/api/2.0/events?a=aye&c=see'
-    end
-    it 'should return a properly formatted mixpanel uri as a string (with an endpoint)' do
-      endpoint, meth, params  = [:events, :top, {:c => 'see', :a => 'aye'}]
-      Mixpanel::URI.deprecated_mixpanel(endpoint, meth, params).should == 'http://mixpanel.com/api/2.0/events/top?a=aye&c=see'
-    end
-  end
-
   describe '.mixpanel' do
     it 'should return a properly formatted mixpanel uri as a string (without an endpoint)' do
       resource, params  = ['events', {:c => 'see', :a => 'aye'}]

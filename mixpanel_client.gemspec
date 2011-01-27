@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mixpanel_client}
-  s.version = "0.5.0"
+  s.version = "0.5.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Keolo Keagy"]
@@ -27,7 +27,6 @@ Gem::Specification.new do |s|
     "mixpanel_client.gemspec",
     "spec/events_externalspec.rb",
     "spec/mixpanel_client_spec.rb",
-    "spec/spec.opts",
     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/keolo/mixpanel_client}

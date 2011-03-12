@@ -7,7 +7,7 @@ describe 'External calls to mixpanel' do
   before :all do
     config = YAML.load_file(File.dirname(__FILE__) + '/../config/mixpanel.yml')
     config.should_not be_nil
-    @client = Mixpanel::Client.new(config)
+    @client = MixpanelClient.new(config)
   end
 
   describe 'Events' do
@@ -17,7 +17,7 @@ describe 'External calls to mixpanel' do
           resource 'events'
         end
       }
-      data.should raise_error(Mixpanel::URI::HTTPError)
+      data.should raise_error(MixpanelClient::URI::HTTPError)
     end
 
     it 'should return events' do

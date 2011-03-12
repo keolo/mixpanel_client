@@ -1,11 +1,11 @@
 require 'rubygems'
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe Mixpanel::Client do
+describe MixpanelClient do
   before :all do
     config = {'api_key' => 'test', 'api_secret' => 'test'}
-    @client = Mixpanel::Client.new(config)
-    @uri = Regexp.escape(Mixpanel::BASE_URI)
+    @client = MixpanelClient.new(config)
+    @uri = Regexp.escape(MixpanelClient::BASE_URI)
   end
 
   describe '#request' do
@@ -96,7 +96,7 @@ describe Mixpanel::Client do
         bucket    'list'
       end
 
-      Mixpanel::Client::OPTIONS.each do |option|
+      MixpanelClient::OPTIONS.each do |option|
         @client.send(option).should_not be_nil
       end
 
@@ -104,36 +104,36 @@ describe Mixpanel::Client do
         resource 'events/properties/top'
       end
 
-      (Mixpanel::Client::OPTIONS - [:resource]).each do |option|
+      (MixpanelClient::OPTIONS - [:resource]).each do |option|
         @client.send(option).should be_nil
       end
     end
   end
 end
 
-describe Mixpanel::URI do
+describe MixpanelClient::URI do
   describe '.mixpanel' do
     it 'should return a properly formatted mixpanel uri as a string (without an endpoint)' do
       resource, params  = ['events', {:c => 'see', :a => 'aye'}]
-      Mixpanel::URI.mixpanel(resource, params).should == 'http://mixpanel.com/api/2.0/events?a=aye&c=see'
+      MixpanelClient::URI.mixpanel(resource, params).should == 'http://mixpanel.com/api/2.0/events?a=aye&c=see'
     end
     it 'should return a properly formatted mixpanel uri as a string (with an endpoint)' do
       resource, params  = ['events/top', {:c => 'see', :a => 'aye'}]
-      Mixpanel::URI.mixpanel(resource, params).should == 'http://mixpanel.com/api/2.0/events/top?a=aye&c=see'
+      MixpanelClient::URI.mixpanel(resource, params).should == 'http://mixpanel.com/api/2.0/events/top?a=aye&c=see'
     end
   end
 
   describe '.encode' do
     it 'should return a string with url encoded values.' do
       params = {:hey => '!@#$%^&*()\/"Ü', :soo => "hëllö?"}
-      Mixpanel::URI.encode(params).should == 'hey=%21%40%23%24%25%5E%26%2A%28%29%5C%2F%22%C3%9C&soo=h%C3%ABll%C3%B6%3F'
+      MixpanelClient::URI.encode(params).should == 'hey=%21%40%23%24%25%5E%26%2A%28%29%5C%2F%22%C3%9C&soo=h%C3%ABll%C3%B6%3F'
     end
   end
 
   describe '.get' do
     it 'should return a string response' do
       stub_request(:get, 'http://example.com').to_return(:body => 'something')
-      Mixpanel::URI.get('http://example.com').should == 'something'
+      MixpanelClient::URI.get('http://example.com').should == 'something'
     end
   end
 end

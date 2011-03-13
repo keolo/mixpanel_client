@@ -22,3 +22,9 @@ pkg
 ## PROJECT::SPECIFIC
 test/
 tmp/
+
+## Bundler/Gems
+*.gem
+.bundle
+Gemfile.lock
+pkg/*

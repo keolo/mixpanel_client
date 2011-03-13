@@ -2,6 +2,9 @@ require 'rubygems'
 require 'rake'
 require 'metric_fu'
 
+require 'bundler'
+Bundler::GemHelper.install_tasks
+
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|

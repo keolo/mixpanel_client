@@ -19,7 +19,6 @@ describe MixpanelClient do
         :unit     => 'hour',
         :interval =>  24
       })}
-
       data.should raise_error(ArgumentError)
     end
   end

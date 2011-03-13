@@ -24,25 +24,12 @@ RSpec::Core::RakeTask.new(:rcov) do |spec|
   spec.rcov = true
 end
 
-task :spec #=> :check_dependencies
-
-begin
-  require 'cucumber/rake/task'
-  Cucumber::Rake::Task.new(:features)
-
-  task :features #=> :check_dependencies
-rescue LoadError
-  task :features do
-    abort 'Cucumber is not available. In order to run features, you must: sudo gem install cucumber'
-  end
-end
-
+task :spec 
 task :default => :spec
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ''
-
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "mixpanel_client #{version}"
   rdoc.rdoc_files.include('README*')

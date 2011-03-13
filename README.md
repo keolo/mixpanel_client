@@ -28,7 +28,7 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
 ## Changelog
 
-### 0.6.0
+### 1.0.0
  * Changed "Mixpanel" class name to "MixpanelClient" to prevent naming collision in other libraries. [a710a84e8ba4b6f018b7](https://github.com/keolo/mixpanel_client/commit/a710a84e8ba4b6f018b7404ab9fabc8f08b4a4f3)
 
 ## Collaborators and Maintainers

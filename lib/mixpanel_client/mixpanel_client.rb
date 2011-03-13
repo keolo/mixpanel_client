@@ -16,7 +16,7 @@ require 'json' unless defined?(JSON)
 # Ruby library for the mixpanel.com web service
 class MixpanelClient
   BASE_URI = 'http://mixpanel.com/api'
-  VERSION  = '2.0'
+  API_VERSION  = '2.0'
 
   # The mixpanel client can be used to easily consume data through the mixpanel API
   OPTIONS = [:resource, :event, :funnel, :name, :type, :unit, :interval, :limit, :format, :bucket]

@@ -14,7 +14,7 @@ class MixpanelClient::URI
   class HTTPError < StandardError; end
 
   def self.mixpanel(resource, params)
-    File.join([MixpanelClient::BASE_URI, MixpanelClient::VERSION, resource.to_s]) + "?#{self.encode(params)}"
+    File.join([MixpanelClient::BASE_URI, MixpanelClient::API_VERSION, resource.to_s]) + "?#{self.encode(params)}"
   end
 
   def self.encode(params)

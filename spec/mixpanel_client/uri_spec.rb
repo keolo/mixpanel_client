@@ -4,12 +4,12 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe MixpanelClient::URI do
   describe '.mixpanel' do
     it 'should return a properly formatted mixpanel uri as a string (without an endpoint)' do
-      resource, params  = ['events', {:c => 'see', :a => 'aye'}]
-      MixpanelClient::URI.mixpanel(resource, params).should == 'http://mixpanel.com/api/2.0/events?a=aye&c=see'
+      resource, params  = ['events', {:c => 'see', :a => 'ey'}]
+      MixpanelClient::URI.mixpanel(resource, params).should == 'http://mixpanel.com/api/2.0/events?a=ey&c=see'
     end
     it 'should return a properly formatted mixpanel uri as a string (with an endpoint)' do
-      resource, params  = ['events/top', {:c => 'see', :a => 'aye'}]
-      MixpanelClient::URI.mixpanel(resource, params).should == 'http://mixpanel.com/api/2.0/events/top?a=aye&c=see'
+      resource, params  = ['events/top', {:c => 'see', :a => 'ey'}]
+      MixpanelClient::URI.mixpanel(resource, params).should == 'http://mixpanel.com/api/2.0/events/top?a=ey&c=see'
     end
   end
 

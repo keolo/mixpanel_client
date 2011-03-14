@@ -64,15 +64,15 @@ describe MixpanelClient do
 
   describe '#hash_args' do
     it 'should return a hashed string alpha sorted by key names.' do
-      args              = {:c => 'see', :a => 'aye', :d => 'dee', :b => 'bee'}
-      args_alpha_sorted = {:a => 'aye', :b => 'bee', :c => 'see', :d => 'dee'}
+      args              = {:c => 'see', :a => 'ey', :d => 'dee', :b => 'bee'}
+      args_alpha_sorted = {:a => 'ey', :b => 'bee', :c => 'see', :d => 'dee'}
       @client.generate_signature(args).should == @client.generate_signature(args_alpha_sorted)
     end
   end
 
   describe '#to_hash' do
     it 'should return a ruby hash given json as a string' do
-      @client.to_hash('{"a" : "aye", "b" : "bee"}').should == {'a' => 'aye', 'b' => 'bee'}
+      @client.to_hash('{"a" : "ey", "b" : "bee"}').should == {'a' => 'ey', 'b' => 'bee'}
     end
   end
 

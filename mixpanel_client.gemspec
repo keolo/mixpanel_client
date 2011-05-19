@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path('../lib', __FILE__)
-require 'mixpanel_client/version'
+require 'mixpanel/version'
 
 Gem::Specification.new do |s|
   s.name        = 'mixpanel_client'
-  s.version     = MixpanelClient::VERSION
+  s.version     = Mixpanel::Client::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Keolo Keagy']
   s.email       = ['keolo@dreampointmedia.com']
@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
 
-  s.add_development_dependency('rspec', '>=2.5.0')
-  s.add_development_dependency('webmock', '>=1.6.2')
+  s.add_development_dependency('rspec',     '>=2.5.0')
+  s.add_development_dependency('webmock',   '>=1.6.2')
   s.add_development_dependency('metric_fu', '>=2.1.1')
 end

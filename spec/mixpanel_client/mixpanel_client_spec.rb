@@ -1,10 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe MixpanelClient do
+describe Mixpanel::Client do
   before :all do
     config = {'api_key' => 'test', 'api_secret' => 'test'}
-    @client = MixpanelClient.new(config)
-    @uri = Regexp.escape(MixpanelClient::BASE_URI)
+    @client = Mixpanel::Client.new(config)
+    @uri = Regexp.escape(Mixpanel::Client::BASE_URI)
   end
 
   context 'when making an invalid request' do
@@ -94,7 +94,7 @@ describe MixpanelClient do
         bucket    'list'
       end
 
-      MixpanelClient::OPTIONS.each do |option|
+      Mixpanel::Client::OPTIONS.each do |option|
         @client.send(option).should_not be_nil
       end
 
@@ -102,7 +102,7 @@ describe MixpanelClient do
         resource 'events/properties/top'
       end
 
-      (MixpanelClient::OPTIONS - [:resource]).each do |option|
+      (Mixpanel::Client::OPTIONS - [:resource]).each do |option|
         @client.send(option).should be_nil
       end
     end

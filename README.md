@@ -13,7 +13,7 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
     require 'rubygems'
     require 'mixpanel_client'
 
-    client = MixpanelClient.new('api_key' => 'changeme', 'api_secret' => 'changeme')
+    client = Mixpanel::Client.new('api_key' => 'changeme', 'api_secret' => 'changeme')
 
     data = client.request do
       resource 'events/retention'
@@ -27,6 +27,11 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
     puts data.inspect
 
 ## Changelog
+
+### 2.0.0.beta1
+ * Reverted to namespacing via module name because it's a better practice.
+   I.e. Use `Mixpanel::Client` instead of `MixpanelClient`.
+ * Added 'values' as an optional parameter
 
 ### 1.0.1
  * Minor housekeeping and organizing

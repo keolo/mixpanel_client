@@ -86,13 +86,13 @@ describe Mixpanel::Client do
         event    '["test-event"]'
         funnel   'down-the-rabbit-hole'
         name     'ricky-bobby'
-        type     'tall-dark-handsome'
+        type     'A'
         unit     'hour'
         interval  24
         limit     5
         format    'csv'
         bucket    'list'
-        values    '["uno", "dos"]'
+        values    '["tiger", "blood"]'
       end
 
       Mixpanel::Client::OPTIONS.each do |option|

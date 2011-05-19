@@ -10,9 +10,6 @@
 
 # URI related helpers
 class Mixpanel::URI
-  # Create an http error class for us to use
-  class HTTPError < StandardError; end
-
   def self.mixpanel(resource, params)
     File.join([Mixpanel::Client::BASE_URI, Mixpanel::Client::API_VERSION, resource.to_s]) + "?#{self.encode(params)}"
   end

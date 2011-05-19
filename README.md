@@ -7,7 +7,6 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
     gem install mixpanel_client
 
-
 ## Usage
 
     require 'rubygems'
@@ -35,6 +34,7 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
  * Reverted to namespacing via module name because it's a better practice.
    I.e. Use `Mixpanel::Client` instead of `MixpanelClient`.
  * Added 'values' as an optional parameter
+ * `gem install mixpanel_client --pre`
 
 ### 1.0.1
  * Minor housekeeping and organizing

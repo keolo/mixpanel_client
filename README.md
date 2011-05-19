@@ -46,6 +46,7 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
 ## Collaborators and Maintainers
 [Keolo Keagy](http://github.com/keolo) (Author)  
+[Railwaymen](http://github.com/railwaymen)  
 [Nathan Chong](http://github.com/paramaw)  
 [Paul McMahon](http://github.com/pwim)  
 [Chad Etzel](http://github.com/jazzychad)

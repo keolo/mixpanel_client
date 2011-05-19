@@ -92,6 +92,7 @@ describe Mixpanel::Client do
         limit     5
         format    'csv'
         bucket    'list'
+        values    '["uno", "dos"]'
       end
 
       Mixpanel::Client::OPTIONS.each do |option|

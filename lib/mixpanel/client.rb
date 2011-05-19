@@ -20,7 +20,7 @@ module Mixpanel
     API_VERSION  = '2.0'
 
     # The mixpanel client can be used to easily consume data through the mixpanel API
-    OPTIONS = [:resource, :event, :funnel, :name, :type, :unit, :interval, :limit, :format, :bucket]
+    OPTIONS = [:resource, :event, :funnel, :name, :type, :unit, :interval, :limit, :format, :bucket, :values]
     attr_reader :uri
     attr_accessor :api_key, :api_secret
 

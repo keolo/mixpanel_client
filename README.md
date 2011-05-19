@@ -16,12 +16,15 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
     client = Mixpanel::Client.new('api_key' => 'changeme', 'api_secret' => 'changeme')
 
     data = client.request do
-      resource 'events/retention'
+      resource 'events/properties'
       event    '["test-event"]'
+      name     'hello'
+      values   '["uno", "dos"]'
       type     'general'
       unit     'hour'
       interval  24
-      bucket   'test'
+      limit     5
+      bucket   'kicked'
     end
 
     puts data.inspect

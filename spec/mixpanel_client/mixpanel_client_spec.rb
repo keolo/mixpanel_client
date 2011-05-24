@@ -2,9 +2,17 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Mixpanel::Client do
   before :all do
-    config = {'api_key' => 'test', 'api_secret' => 'test'}
-    @client = Mixpanel::Client.new(config)
+    @client = Mixpanel::Client.new('test_key', 'test_secret')
     @uri = Regexp.escape(Mixpanel::Client::BASE_URI)
+  end
+
+  context 'when initializing a new Mixpanel::Client' do
+    it 'should raise an ArgumentError exception if no api_secret is given' do
+      lambda{Mixpanel::Client.new('test_key')}.should raise_error(Mixpanel::Client::ArgumentError)
+    end
+    it 'should not raise an exception if a hash/config is given' do
+      Mixpanel::Client.new('api_key' => 'test_key', 'api_secret' => 'test_secret').should_not raise_error(ArgumentError)
+    end
   end
 
   context 'when making an invalid request' do

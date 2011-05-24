@@ -9,18 +9,20 @@
 # http://mixpanel.com/api/docs/guides/api/
 
 # URI related helpers
-class Mixpanel::URI
-  def self.mixpanel(resource, params)
-    File.join([Mixpanel::Client::BASE_URI, Mixpanel::Client::API_VERSION, resource.to_s]) + "?#{self.encode(params)}"
-  end
+module Mixpanel
+  class URI
+    def self.mixpanel(resource, params)
+      File.join([Mixpanel::Client::BASE_URI, Mixpanel::Client::API_VERSION, resource.to_s]) + "?#{self.encode(params)}"
+    end
 
-  def self.encode(params)
-    params.map{|key,val| "#{key}=#{CGI.escape(val.to_s)}"}.sort.join('&')
-  end
+    def self.encode(params)
+      params.map{|key,val| "#{key}=#{CGI.escape(val.to_s)}"}.sort.join('&')
+    end
 
-  def self.get(uri)
-    ::URI.parse(uri).read
-  rescue OpenURI::HTTPError => error
-    raise HTTPError, JSON.parse(error.io.read)['error']
+    def self.get(uri)
+      ::URI.parse(uri).read
+    rescue OpenURI::HTTPError => error
+      raise HTTPError, JSON.parse(error.io.read)['error']
+    end
   end
 end

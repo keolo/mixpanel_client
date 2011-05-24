@@ -12,7 +12,8 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
     require 'rubygems'
     require 'mixpanel_client'
 
-    client = Mixpanel::Client.new('api_key' => 'changeme', 'api_secret' => 'changeme')
+    # Configuration can be given as parameters or a hash.
+    client = Mixpanel::Client.new('api_key', 'api_secret')
 
     data = client.request do
       resource 'events/properties'

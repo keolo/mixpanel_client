@@ -12,8 +12,7 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
     require 'rubygems'
     require 'mixpanel_client'
 
-    # Configuration can be given as parameters or a hash.
-    client = Mixpanel::Client.new('api_key', 'api_secret')
+    client = Mixpanel::Client.new('api_key' => 'changeme', 'api_secret' => 'changeme')
 
     data = client.request do
       resource 'events/properties'
@@ -31,6 +30,9 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
 ## Changelog
 
+### 2.0.0.beta2
+ * Added JSON to gemspec for ruby versions less than 1.9.
+
 ### 2.0.0.beta1
  * Reverted to namespacing via module name because it's a better practice.
    I.e. Use `Mixpanel::Client` instead of `MixpanelClient`.
@@ -47,6 +49,7 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
 ## Collaborators and Maintainers
 [Keolo Keagy](http://github.com/keolo) (Author)  
+[Mike Ferrier](http://github.com/mferrier)  
 [Railwaymen](http://github.com/railwaymen)  
 [Nathan Chong](http://github.com/paramaw)  
 [Paul McMahon](http://github.com/pwim)  

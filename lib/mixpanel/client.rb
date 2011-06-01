@@ -32,17 +32,9 @@ module Mixpanel
       "
     end
 
-    def initialize(config_or_api_key, api_secret=nil)
-      if config_or_api_key.is_a? Hash
-        config = config_or_api_key
-        @api_key    = config['api_key']
-        @api_secret = config['api_secret']
-      else
-        raise(ArgumentError, 'need api_secret') unless api_secret
-        api_key = config_or_api_key
-        @api_key    = api_key
-        @api_secret = api_secret
-      end
+    def initialize(config)
+      @api_key    = config['api_key']
+      @api_secret = config['api_secret']
     end
 
     def params

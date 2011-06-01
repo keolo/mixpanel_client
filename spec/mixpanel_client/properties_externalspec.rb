@@ -6,7 +6,7 @@ describe 'External calls to mixpanel' do
   before :all do
     config = YAML.load_file(File.dirname(__FILE__) + '/../../config/mixpanel.yml')
     config.should_not be_nil
-    @client = Mixpanel::Client.new(config['api_key'], config['api_secret'])
+    @client = Mixpanel::Client.new(config)
   end
 
   context 'when requesting event properties' do

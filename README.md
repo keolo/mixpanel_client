@@ -2,6 +2,7 @@
 
 Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
+[Mixpanel Data API Reference](http://mixpanel.com/api/docs/guides/api/v2)
 
 ## Installation
 
@@ -12,7 +13,8 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
     require 'rubygems'
     require 'mixpanel_client'
 
-    client = Mixpanel::Client.new('api_key' => 'changeme', 'api_secret' => 'changeme')
+    config = {'api_key' => 'changeme', 'api_secret' => 'changeme'}
+    client = Mixpanel::Client.new(config)
 
     data = client.request do
       resource 'events/properties'
@@ -23,7 +25,7 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
       unit     'hour'
       interval  24
       limit     5
-      bucket   'kicked'
+      bucket   'contents'
     end
 
     puts data.inspect

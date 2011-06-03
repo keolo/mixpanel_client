@@ -1,6 +1,15 @@
+#!/usr/bin/env ruby -Ku
+
+# Mixpanel API Ruby Client Library
+#
 # Set version number for mixpanel_client
+#
+# Copyright (c) 2009+ Keolo Keagy
+# See LICENSE for details
 module Mixpanel
+  # Return metrics from Mixpanel Data API
   class Client
+    # Mixpanel::Client library version
     VERSION = '2.0.0.beta2'
   end
 end

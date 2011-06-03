@@ -19,6 +19,8 @@ config/mixpanel.yml
 coverage
 rdoc
 pkg
+doc
+.yardoc
 
 ## PROJECT::SPECIFIC
 test/

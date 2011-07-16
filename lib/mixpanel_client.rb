@@ -7,7 +7,7 @@
 # Copyright (c) 2009+ Keolo Keagy.
 # See LICENSE for details.
 
-# Third-party libraries.
+# Libraries.
 require 'cgi'
 require 'digest/md5'
 require 'open-uri'

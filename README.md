@@ -32,6 +32,9 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
 ## Changelog
 
+### 2.0.0
+ * Manually tested compatibility with Mixpanel gem. 
+
 ### 2.0.0.beta2
  * Added JSON to gemspec for ruby versions less than 1.9.
 

@@ -98,6 +98,12 @@ describe Mixpanel::Client do
         format    'csv'
         bucket    'list'
         values    '["tiger", "blood"]'
+        #below options only in segmentation events
+        from_date '2011-08-11'
+        to_date   '2011-08-12'
+        on        'properties["product_id"]'
+        where     '1 in properties["product_id"]'
+        buckets   '5'
       end
 
       Mixpanel::Client::OPTIONS.each do |option|

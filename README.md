@@ -32,6 +32,9 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
 ## Changelog
 
+### 2.0.1
+ * Added options used in segmentation resources.
+
 ### 2.0.0
  * Manually tested compatibility with Mixpanel gem. 
 
@@ -55,7 +58,7 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 ## Collaborators and Maintainers
 [Keolo Keagy](http://github.com/keolo) (Author)  
 [Mike Ferrier](http://github.com/mferrier)  
-[Railwaymen](http://github.com/railwaymen)  
+[Grzegorz Forysinski](http://github.com/railwaymen)  
 [Nathan Chong](http://github.com/paramaw)  
 [Paul McMahon](http://github.com/pwim)  
 [Chad Etzel](http://github.com/jazzychad)

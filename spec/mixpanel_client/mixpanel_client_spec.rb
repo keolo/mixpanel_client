@@ -87,6 +87,7 @@ describe Mixpanel::Client do
       stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"events": [], "type": "general"}')
 
       @client.request do
+        # This is not a real request. It just lists all possible options.
         resource 'events'
         event    '["test-event"]'
         funnel   'down-the-rabbit-hole'
@@ -98,7 +99,6 @@ describe Mixpanel::Client do
         format    'csv'
         bucket    'list'
         values    '["tiger", "blood"]'
-        # Below options only in segmentation events
         from_date '2011-08-11'
         to_date   '2011-08-12'
         on        'properties["product_id"]'

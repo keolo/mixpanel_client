@@ -17,6 +17,7 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
     client = Mixpanel::Client.new(config)
 
     data = client.request do
+      # Available options
       resource  'events/properties'
       event     '["test-event"]'
       name      'hello'
@@ -26,7 +27,6 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
       interval   24
       limit      5
       bucket    'contents'
-      # Below options only in segmentation events
       from_date '2011-08-11'
       to_date   '2011-08-12'
       on        'properties["product_id"]'

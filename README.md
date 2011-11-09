@@ -7,6 +7,10 @@ Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 ## Installation
 
     gem install mixpanel_client
+    
+or if you use a Gemfile
+
+    gem 'mixpanel_client'
 
 ## Usage
 

@@ -8,5 +8,7 @@
 # See LICENSE for details
 module Mixpanel
   # URI related exceptions
-  class URI::HTTPError < StandardError; end
+  class Error < StandardError; end
+  class HTTPError < Error; end
+  class ParseError < Error; end
 end

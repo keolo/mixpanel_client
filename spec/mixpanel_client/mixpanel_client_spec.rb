@@ -99,6 +99,7 @@ describe Mixpanel::Client do
         format    'csv'
         bucket    'list'
         values    '["tiger", "blood"]'
+				timezone	'-8'
         from_date '2011-08-11'
         to_date   '2011-08-12'
         on        'properties["product_id"]'

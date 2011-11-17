@@ -25,7 +25,11 @@ module Mixpanel
         if format == 'csv'
           data
         else
-          JSON.parse(data)
+          begin
+            JSON.parse(data)
+          rescue JSON::ParserError => error
+            raise ParseError, error
+          end
         end
       end
     end

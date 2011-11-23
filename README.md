@@ -26,6 +26,7 @@ or if you use a Gemfile
       event     '["test-event"]'
       name      'hello'
       values    '["uno", "dos"]'
+      timezone  '-8'
       type      'general'
       unit      'hour'
       interval   24

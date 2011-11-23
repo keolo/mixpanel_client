@@ -42,6 +42,10 @@ or if you use a Gemfile
 
 ## Changelog
 
+### 2.0.2
+ * Added timezone to available options.
+ * All exceptions can be caught under Mixpanel::Error.
+
 ### 2.0.1
  * Added options used in segmentation resources.
 
@@ -67,6 +71,9 @@ or if you use a Gemfile
 
 ## Collaborators and Maintainers
 [Keolo Keagy](http://github.com/keolo) (Author)  
+[Jason Logsdon](https://github.com/jasonlogsdon) 
+[James R](https://github.com/Cev)
+[Mike Ferrier](http://github.com/mferrier)  
 [Mike Ferrier](http://github.com/mferrier)  
 [Grzegorz Forysinski](http://github.com/railwaymen)  
 [Nathan Chong](http://github.com/paramaw)  

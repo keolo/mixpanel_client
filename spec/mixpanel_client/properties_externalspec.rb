@@ -16,7 +16,7 @@ describe 'External calls to mixpanel' do
           resource 'properties'
         end
       }
-      data.should raise_error(Mixpanel::URI::HTTPError)
+      data.should raise_error(Mixpanel::HTTPError)
     end
 
     it 'should return events' do

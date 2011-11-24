@@ -72,8 +72,8 @@ or if you use a Gemfile
 
 ## Collaborators and Maintainers
 [Keolo Keagy](http://github.com/keolo) (Author)  
-[Jason Logsdon](https://github.com/jasonlogsdon) 
-[James R](https://github.com/Cev)
+[Jason Logsdon](https://github.com/jasonlogsdon)  
+[James R](https://github.com/Cev)  
 [Mike Ferrier](http://github.com/mferrier)  
 [Mike Ferrier](http://github.com/mferrier)  
 [Grzegorz Forysinski](http://github.com/railwaymen)  

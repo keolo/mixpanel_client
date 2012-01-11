@@ -44,17 +44,32 @@ or if you use a Gemfile
 ## Development
 List of rake tasks.
 
-  rake -T
+    rake -T
 
 Run specs.
 
-  rake spec
+    rake spec
 
 Run external specs.
 
-  cp config/mixpanel.template.yml config/mixpanel.yml
-  vi config/mixpanel.yml
-  rake spec:externals
+    cp config/mixpanel.template.yml config/mixpanel.yml
+    vi config/mixpanel.yml
+    rake spec:externals
+
+## Pushing Gem
+Update version
+  
+    vi lib/mixpanel/version.rb
+
+Commit and push local changes
+    
+    git commit -am "Some message."
+    git push
+    git status
+
+Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
+  
+    rake release
 
 
 ## Changelog

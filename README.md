@@ -74,30 +74,33 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
 
 ## Changelog
 
-### 2.0.2
+### v2.1.0
+ * Updated json dependency to 1.6.
+
+### v2.0.2
  * Added timezone to available options.
  * All exceptions can be caught under Mixpanel::Error.
 
-### 2.0.1
+### v2.0.1
  * Added options used in segmentation resources.
 
-### 2.0.0
+### v2.0.0
  * Manually tested compatibility with Mixpanel gem. 
 
-### 2.0.0.beta2
+### v2.0.0.beta2
  * Added JSON to gemspec for ruby versions less than 1.9.
 
-### 2.0.0.beta1
+### v2.0.0.beta1
  * Reverted to namespacing via module name because it's a better practice.
    I.e. Use `Mixpanel::Client` instead of `MixpanelClient`.
  * Added 'values' as an optional parameter
  * `gem install mixpanel_client --pre`
 
-### 1.0.1
+### v1.0.1
  * Minor housekeeping and organizing
  * Refactored specs
 
-### 1.0.0
+### v1.0.0
  * Changed "Mixpanel" class name to "MixpanelClient" to prevent naming collision in other 
    libraries. [a710a84e8ba4b6f018b7](https://github.com/keolo/mixpanel_client/commit/a710a84e8ba4b6f018b7404ab9fabc8f08b4a4f3)
 
@@ -105,7 +108,6 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
 [Keolo Keagy](http://github.com/keolo) (Author)  
 [Jason Logsdon](https://github.com/jasonlogsdon)  
 [James R](https://github.com/Cev)  
-[Mike Ferrier](http://github.com/mferrier)  
 [Mike Ferrier](http://github.com/mferrier)  
 [Grzegorz Forysinski](http://github.com/railwaymen)  
 [Nathan Chong](http://github.com/paramaw)  

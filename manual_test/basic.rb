@@ -1,5 +1,7 @@
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'rubygems'
-require 'lib/mixpanel_client'
+require 'mixpanel_client'
 require 'yaml'
 
 config = YAML.load_file(File.dirname(__FILE__) + '/../config/mixpanel.yml')['mixpanel']

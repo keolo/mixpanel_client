@@ -40,6 +40,22 @@ or if you use a Gemfile
 
     puts data.inspect
 
+## Development
+List of rake tasks.
+
+  rake -T
+
+Run specs.
+
+  rake spec
+
+Run external specs.
+
+  cp config/mixpanel.template.yml config/mixpanel.yml
+  vi config/mixpanel.yml
+  rake spec:externals
+
+
 ## Changelog
 
 ### 2.0.1

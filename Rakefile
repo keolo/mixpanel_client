@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'rake'
-require 'metric_fu'
 
 require 'bundler'
 Bundler::GemHelper.install_tasks
@@ -27,7 +26,7 @@ end
 task :spec 
 task :default => :spec
 
-require 'rake/rdoctask'
+require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ''
   rdoc.rdoc_dir = 'rdoc'

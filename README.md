@@ -26,6 +26,7 @@ or if you use a Gemfile
       event     '["test-event"]'
       name      'hello'
       values    '["uno", "dos"]'
+      timezone  '-8'
       type      'general'
       unit      'hour'
       interval   24
@@ -58,6 +59,10 @@ Run external specs.
 
 ## Changelog
 
+### 2.0.2
+ * Added timezone to available options.
+ * All exceptions can be caught under Mixpanel::Error.
+
 ### 2.0.1
  * Added options used in segmentation resources.
 
@@ -83,6 +88,9 @@ Run external specs.
 
 ## Collaborators and Maintainers
 [Keolo Keagy](http://github.com/keolo) (Author)  
+[Jason Logsdon](https://github.com/jasonlogsdon)  
+[James R](https://github.com/Cev)  
+[Mike Ferrier](http://github.com/mferrier)  
 [Mike Ferrier](http://github.com/mferrier)  
 [Grzegorz Forysinski](http://github.com/railwaymen)  
 [Nathan Chong](http://github.com/paramaw)  

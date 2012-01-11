@@ -56,7 +56,7 @@ Run external specs.
     vi config/mixpanel.yml
     rake spec:externals
 
-## Pushing Gem
+## Releasing Gem
 Update version
   
     vi lib/mixpanel/version.rb

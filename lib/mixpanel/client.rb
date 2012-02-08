@@ -9,7 +9,7 @@
 module Mixpanel
   # Return metrics from Mixpanel Data API
   class Client
-    BASE_URI = 'http://mixpanel.com/api/2.0'
+    BASE_URI = 'https://mixpanel.com/api/2.0'
 
     attr_reader   :uri
     attr_accessor :api_key, :api_secret

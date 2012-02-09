@@ -5,11 +5,11 @@ describe Mixpanel::URI do
   describe '.mixpanel' do
     it 'should return a properly formatted mixpanel uri as a string (without an endpoint)' do
       resource, params  = ['events', {:c => 'see', :a => 'ey'}]
-      Mixpanel::URI.mixpanel(resource, params).should == 'http://mixpanel.com/api/2.0/events?a=ey&c=see'
+      Mixpanel::URI.mixpanel(resource, params).should == "#{Mixpanel::Client::BASE_URI}/events?a=ey&c=see"
     end
     it 'should return a properly formatted mixpanel uri as a string (with an endpoint)' do
       resource, params  = ['events/top', {:c => 'see', :a => 'ey'}]
-      Mixpanel::URI.mixpanel(resource, params).should == 'http://mixpanel.com/api/2.0/events/top?a=ey&c=see'
+      Mixpanel::URI.mixpanel(resource, params).should == "#{Mixpanel::Client::BASE_URI}/events/top?a=ey&c=see"
     end
   end
 

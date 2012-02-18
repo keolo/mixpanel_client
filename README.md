@@ -41,6 +41,33 @@ or if you use a Gemfile
 
     puts data.inspect
 
+## Parallel
+
+    require 'rubygems'
+    require 'mixpanel_client'
+
+    config = {'api_key' => 'changeme', 'api_secret' => 'changeme', 'parallel' => true}
+    client = Mixpanel::Client.new(config)
+
+    first_request = client.request do
+    ...
+    end
+
+    second_request = client.request do
+    ...
+    end
+
+    third_request = client.request do
+    ...
+    end
+
+    client.run_parallel_requests
+    
+    puts first_request.handled_response
+    puts second_request.handled_response
+    puts third_request.handled_response    
+    
+
 ## Development
 List of rake tasks.
 
@@ -74,7 +101,10 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
 
 ## Changelog
 
-### v.2.2.1
+### v3.0.0
+ * Parallel requests option.
+
+ ### v.2.2.1
  * 	Added support for the raw data export API.
 
 ### v2.2.0

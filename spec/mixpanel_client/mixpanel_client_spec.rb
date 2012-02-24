@@ -88,12 +88,12 @@ describe Mixpanel::Client do
 
       @client.request do
         # This is not a real request. It just lists all possible options.
-        resource 'events'
-        event    '["test-event"]'
-        funnel   'down-the-rabbit-hole'
-        name     'ricky-bobby'
-        type     'A'
-        unit     'hour'
+        resource  'events'
+        event     '["test-event"]'
+        funnel_id 'down-the-rabbit-hole'
+        name      'ricky-bobby'
+        type      'A'
+        unit      'hour'
         interval  24
         limit     5
         format    'csv'

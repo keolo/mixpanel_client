@@ -2,7 +2,7 @@
 
 Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
-[Mixpanel Data API Reference](http://mixpanel.com/api/docs/guides/api/v2)
+[Mixpanel Data API Reference](https://mixpanel.com/docs/api-documentation/data-export-api)
 
 ## Installation
 

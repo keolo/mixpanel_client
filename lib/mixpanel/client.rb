@@ -15,7 +15,7 @@ module Mixpanel
     attr_accessor :api_key, :api_secret
 
     # Availalbe options for a Mixpanel API request
-    OPTIONS = [:resource, :event, :funnel, :name, :type, :unit, :interval, :limit, :format, :bucket,
+    OPTIONS = [:resource, :event, :funnel_id, :name, :type, :unit, :interval, :limit, :format, :bucket,
                :values, :from_date, :to_date, :on, :where, :buckets, :timezone]
 
     # Dynamically define accessor methods for each option

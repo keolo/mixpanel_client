@@ -75,6 +75,7 @@ describe 'External calls to mixpanel' do
     end
 
     it 'should return retention' do
+      pending 'Retention now has its own endpoint.'
       data = @client.request do
         resource 'events/retention'
         event    '["test-event"]'
@@ -86,6 +87,7 @@ describe 'External calls to mixpanel' do
     end
 
     it 'should return retention in csv format' do
+      pending 'Retention now has its own endpoint.'
       data = @client.request do
         resource 'events/retention'
         event    '["test-event"]'

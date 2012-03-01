@@ -10,11 +10,12 @@ module Mixpanel
   # Return metrics from Mixpanel Data API
   class Client
     BASE_URI = 'https://mixpanel.com/api/2.0'
+    DATA_URI = 'https://data.mixpanel.com/api/2.0'
 
     attr_reader   :uri
     attr_accessor :api_key, :api_secret
 
-    # Availalbe options for a Mixpanel API request
+    # Available options for a Mixpanel API request
     OPTIONS = [:resource, :event, :funnel_id, :name, :type, :unit, :interval, :limit, :format, :bucket,
                :values, :from_date, :to_date, :on, :where, :buckets, :timezone]
 
@@ -61,6 +62,7 @@ module Mixpanel
       instance_eval(&options)
       @uri = URI.mixpanel(resource, normalize_params(params))
       response = URI.get(@uri)
+      response = %Q|[#{response.split("\n").join(',')}]| if resource == 'export'
       Utils.to_hash(response, @format)
     end
 
@@ -93,6 +95,10 @@ module Mixpanel
         :api_key => @api_key,
         :expire  => Time.now.to_i + 600 # Grant this request 10 minutes
       ).merge!(:sig => Utils.generate_signature(params, @api_secret))
+    end
+    
+    def self.base_uri_for_resource(resource)
+      resource == 'export' ? DATA_URI : BASE_URI
     end
   end
 end

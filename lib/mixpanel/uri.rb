@@ -10,7 +10,8 @@ module Mixpanel
   # Utilities to assist generating and requesting URIs
   class URI
     def self.mixpanel(resource, params)
-      "#{File.join([Mixpanel::Client::BASE_URI, resource.to_s])}?#{self.encode(params)}"
+      base = Mixpanel::Client.base_uri_for_resource(resource)
+      "#{File.join([base, resource.to_s])}?#{self.encode(params)}"
     end
 
     def self.encode(params)

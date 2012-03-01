@@ -11,6 +11,10 @@ describe Mixpanel::URI do
       resource, params  = ['events/top', {:c => 'see', :a => 'ey'}]
       Mixpanel::URI.mixpanel(resource, params).should == "#{Mixpanel::Client::BASE_URI}/events/top?a=ey&c=see"
     end
+    it 'should return a uri with a different endpoint when doing a raw data export' do
+      resource, params  = ['export', {:c => 'see', :a => 'ey'}]
+      Mixpanel::URI.mixpanel(resource, params).should == "#{Mixpanel::Client::DATA_URI}/export?a=ey&c=see"
+    end
   end
 
   describe '.encode' do

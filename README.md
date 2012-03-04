@@ -74,9 +74,12 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
 
 ## Changelog
 
+### v.2.2.1
+ * 	Added support for the raw data export API.
+
 ### v2.2.0
-  * BASE_URI is now https
-  * Changed funnel to funnel_id
+  * BASE_URI is now https.
+  * Changed funnel to funnel_id.
 
 ### v2.1.0
  * Updated json dependency to 1.6.
@@ -109,6 +112,8 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
    libraries. [a710a84e8ba4b6f018b7](https://github.com/keolo/mixpanel_client/commit/a710a84e8ba4b6f018b7404ab9fabc8f08b4a4f3)
 
 ## Collaborators and Maintainers
+Feel free to add your name and link here.
+
 [Keolo Keagy](http://github.com/keolo) (Author)  
 [Jason Logsdon](https://github.com/jasonlogsdon)  
 [James R](https://github.com/Cev)  

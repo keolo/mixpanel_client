@@ -74,6 +74,10 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
 
 ## Changelog
 
+### v2.2.0
+  * BASE_URI is now https
+  * Changed funnel to funnel_id
+
 ### v2.1.0
  * Updated json dependency to 1.6.
 

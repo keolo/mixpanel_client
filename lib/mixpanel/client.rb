@@ -16,8 +16,8 @@ module Mixpanel
     attr_accessor :api_key, :api_secret
 
     # Available options for a Mixpanel API request
-    OPTIONS = [:resource, :event, :funnel_id, :name, :type, :unit, :interval, :limit, :format, :bucket,
-               :values, :from_date, :to_date, :on, :where, :buckets, :timezone]
+    OPTIONS = [:resource, :event, :events, :funnel_id, :name, :type, :unit, :interval, :limit, 
+               :format, :bucket, :values, :from_date, :to_date, :on, :where, :buckets, :timezone]
 
     # Dynamically define accessor methods for each option
     OPTIONS.each do |option|
@@ -61,6 +61,7 @@ module Mixpanel
       reset_options
       instance_eval(&options)
       @uri = URI.mixpanel(resource, normalize_params(params))
+      # p @uri
       response = URI.get(@uri)
       response = %Q|[#{response.split("\n").join(',')}]| if resource == 'export'
       Utils.to_hash(response, @format)

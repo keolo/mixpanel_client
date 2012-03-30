@@ -61,7 +61,6 @@ module Mixpanel
       reset_options
       instance_eval(&options)
       @uri = URI.mixpanel(resource, normalize_params(params))
-      # p @uri
       response = URI.get(@uri)
       response = %Q|[#{response.split("\n").join(',')}]| if resource == 'export'
       Utils.to_hash(response, @format)

@@ -105,10 +105,11 @@ describe Mixpanel::Client do
         on        'properties["product_id"]'
         where     '1 in properties["product_id"]'
         buckets   '5'
+        events    [{"event" => "page:view"}, {"event" => "button:click"}].to_json
       end
 
       Mixpanel::Client::OPTIONS.each do |option|
-        @client.send(option).should_not be_nil
+        @client.send(option).should_not be_nil, "#{option} option was nil"
       end
 
       @client.request do

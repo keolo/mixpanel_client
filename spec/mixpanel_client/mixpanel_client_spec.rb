@@ -106,6 +106,10 @@ describe Mixpanel::Client do
         where     '1 in properties["product_id"]'
         buckets   '5'
         events    [{"event" => "page:view"}, {"event" => "button:click"}].to_json
+        retention_type "birth"
+        born_event 'some-event'
+        born_where '"name" == properties["other"]'
+        interval_count 1
       end
 
       Mixpanel::Client::OPTIONS.each do |option|

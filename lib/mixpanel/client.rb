@@ -16,8 +16,9 @@ module Mixpanel
     attr_accessor :api_key, :api_secret
 
     # Available options for a Mixpanel API request
-    OPTIONS = [:resource, :event, :events, :funnel_id, :name, :type, :unit, :interval, :limit, 
-               :format, :bucket, :values, :from_date, :to_date, :on, :where, :buckets, :timezone]
+    OPTIONS = [:resource, :event, :events, :funnel_id, :name, :type, :unit, :interval, :limit,
+               :format, :bucket, :values, :from_date, :to_date, :on, :where, :buckets, :timezone,
+               :retention_type, :born_event, :born_where, :interval_count]
 
     # Dynamically define accessor methods for each option
     OPTIONS.each do |option|
@@ -96,7 +97,7 @@ module Mixpanel
         :expire  => Time.now.to_i + 600 # Grant this request 10 minutes
       ).merge!(:sig => Utils.generate_signature(params, @api_secret))
     end
-    
+
     def self.base_uri_for_resource(resource)
       resource == 'export' ? DATA_URI : BASE_URI
     end

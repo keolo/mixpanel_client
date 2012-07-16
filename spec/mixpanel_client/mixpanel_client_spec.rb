@@ -95,6 +95,7 @@ describe Mixpanel::Client do
         type      'A'
         unit      'hour'
         interval  24
+        length    1
         limit     5
         format    'csv'
         bucket    'list'

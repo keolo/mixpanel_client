@@ -88,25 +88,27 @@ describe Mixpanel::Client do
 
       @client.request do
         # This is not a real request. It just lists all possible options.
-        resource  'events'
-        event     '["test-event"]'
-        funnel_id 'down-the-rabbit-hole'
-        name      'ricky-bobby'
-        type      'A'
-        unit      'hour'
-        interval  24
-        length    1
-        limit     5
-        format    'csv'
-        bucket    'list'
-        values    '["tiger", "blood"]'
-				timezone	'-8'
-        from_date '2011-08-11'
-        to_date   '2011-08-12'
-        on        'properties["product_id"]'
-        where     '1 in properties["product_id"]'
-        buckets   '5'
-        events    [{"event" => "page:view"}, {"event" => "button:click"}].to_json
+        resource       'events'
+        event          '["test-event"]'
+        funnel_id      'down-the-rabbit-hole'
+        name           'ricky-bobby'
+        type           'A'
+        unit           'hour'
+        interval       24
+        length         1
+        limit          5
+        format         'csv'
+        bucket         'list'
+        values         '["tiger", "blood"]'
+				timezone	     '-8'
+        from_date      '2011-08-11'
+        to_date        '2011-08-12'
+        on             'properties["product_id"]'
+        where          '1 in properties["product_id"]'
+        buckets        '5'
+        events         [{"event" => "page:view"}, {"event" => "button:click"}].to_json
+        retention_type 'abc'
+        interval_count 'def'
       end
 
       Mixpanel::Client::OPTIONS.each do |option|

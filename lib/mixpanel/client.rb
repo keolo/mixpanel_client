@@ -18,7 +18,7 @@ module Mixpanel
     # Available options for a Mixpanel API request
     OPTIONS = [:resource, :event, :events, :funnel_id, :name, :type, :unit, :interval, :length, :limit,
                :format, :bucket, :values, :from_date, :to_date, :on, :where, :buckets, :timezone,
-               :retention_type, :interval_count, :born_event]
+               :retention_type, :interval_count, :born_event, :born_where]
 
     # Dynamically define accessor methods for each option
     OPTIONS.each do |option|

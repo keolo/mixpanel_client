@@ -109,6 +109,7 @@ describe Mixpanel::Client do
         events         [{"event" => "page:view"}, {"event" => "button:click"}].to_json
         retention_type 'abc'
         born_event     'test-event'
+        born_where          '1 in properties["product_id"]'
         interval_count 'def'
       end
 

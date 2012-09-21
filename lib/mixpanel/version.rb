@@ -5,7 +5,6 @@
 # Set version number for mixpanel_client
 #
 # Copyright (c) 2009+ Keolo Keagy
-# contributed to by Bill DeRusha
 # See LICENSE for details
 module Mixpanel
   # Return metrics from Mixpanel Data API

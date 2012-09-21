@@ -74,6 +74,9 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
 
 ## Changelog
 
+### v.2.2.3
+ * 	Added some more options.
+
 ### v.2.2.2
  * 	Added some more options.
 

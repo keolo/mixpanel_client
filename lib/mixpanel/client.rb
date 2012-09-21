@@ -13,7 +13,7 @@ module Mixpanel
     DATA_URI = 'https://data.mixpanel.com/api/2.0'
 
     attr_reader   :uri
-    attr_accessor :api_key, :api_secret
+    attr_accessor :api_key, :api_secret, :options
 
     # Available options for a Mixpanel API request
     OPTIONS = [:resource, :event, :events, :funnel_id, :name, :type, :unit, :interval, :length, :limit,
@@ -32,13 +32,16 @@ module Mixpanel
     # Configure the client
     #
     # @example
-    #   config = {'api_key' => '123', 'api_secret' => '456'}
+    #   config = {:api_key => '123', :api_secret => '456',
+    #             :options => {:username => 'Bill'}}
     #   client = Mixpanel::Client.new(config)
     #
     # @param [Hash] config consisting of an 'api_key' and an 'api_secret'
-    def initialize(config)
-      @api_key    = config['api_key']
-      @api_secret = config['api_secret']
+    # Additional options may be added to an options hash for client-specific data
+    def initialize(config, options = {})
+      @options    = config[:options]
+      @api_key    = config[:api_key]
+      @api_secret = config[:api_secret]
     end
 
     # Return mixpanel data as a JSON object or CSV string

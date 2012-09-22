@@ -21,7 +21,6 @@ or if you use a Gemfile
     client = Mixpanel::Client.new(config)
 
     data = client.request('events/properties', {
-      # Available options
       event:     '["test-event"]',
       name:      'hello',
       values:    '["uno", "dos"]',

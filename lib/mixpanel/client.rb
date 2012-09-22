@@ -41,8 +41,9 @@ module Mixpanel
     #     bucket:   'contents'
     #   })
     #
-    # @options [Block] options variables used to make a specific request for mixpanel data
-    # @return  [JSON, String] mixpanel response as a JSON object or CSV string
+    # @resource [String] mixpanel api resource endpoint
+    # @options  [Hash] options variables used to make a specific request for mixpanel data
+    # @return   [JSON, String] mixpanel response as a JSON object or CSV string
     def request(resource, options)
       @format = options[:format] || :json
       @uri = URI.mixpanel(resource, normalize_options(options))

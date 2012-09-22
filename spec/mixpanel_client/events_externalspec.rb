@@ -20,13 +20,12 @@ describe 'External calls to mixpanel' do
     end
 
     it 'should return events' do
-      data = @client.request do
-        resource 'events'
-        event    '["test-event"]'
-        type     'general'
-        unit     'hour'
-        interval  24
-      end
+      data = @client.request('events', {
+        event    => '["test-event"]',
+        type     => 'general',
+        unit     => 'hour',
+        interval =>  24
+      }
       data.should_not be_a Exception
     end
 

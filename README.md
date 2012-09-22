@@ -17,27 +17,27 @@ or if you use a Gemfile
     require 'rubygems'
     require 'mixpanel_client'
 
-    config = {'api_key' => 'changeme', 'api_secret' => 'changeme'}
+    config = {api_key: 'changeme', api_secret: 'changeme'}
     client = Mixpanel::Client.new(config)
 
-    data = client.request do
+    data = client.request('events/properties', {
       # Available options
-      resource  'events/properties'
-      event     '["test-event"]'
-      name      'hello'
-      values    '["uno", "dos"]'
-      timezone  '-8'
-      type      'general'
-      unit      'hour'
-      interval   24
-      limit      5
-      bucket    'contents'
-      from_date '2011-08-11'
-      to_date   '2011-08-12'
-      on        'properties["product_id"]'
-      where     '1 in properties["product_id"]'
-      buckets   '5'
-    end
+      event:     '["test-event"]',
+      name:      'hello',
+      values:    '["uno", "dos"]',
+      timezone:  '-8',
+      type:      'general',
+      unit:      'hour',
+      interval:   24,
+      limit:      5,
+      bucket:    'contents',
+      from_date: '2011-08-11',
+      to_date:   '2011-08-12',
+      on:        'properties["product_id"]',
+      where:     '1 in properties["product_id"]',
+      buckets:   '5',
+      # etc.
+    })
 
     puts data.inspect
 
@@ -73,6 +73,10 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
 
 
 ## Changelog
+
+### v.3.0.0
+ * NOTE: This version breaks backwards compatibility.
+ * Use a regular ruby hash instead of metaprogramming for mixpanel options.
 
 ### v.2.2.3
  * 	Added some more options.

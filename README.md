@@ -21,21 +21,13 @@ or if you use a Gemfile
     client = Mixpanel::Client.new(config)
 
     data = client.request('events/properties', {
-      event:     '["test-event"]',
-      name:      'hello',
+      event:     'splash features',
+      name:      'feature',
       values:    '["uno", "dos"]',
-      timezone:  '-8',
-      type:      'general',
-      unit:      'hour',
-      interval:   24,
+      type:      'unique',
+      unit:      'day',
+      interval:   7,
       limit:      5,
-      bucket:    'contents',
-      from_date: '2011-08-11',
-      to_date:   '2011-08-12',
-      on:        'properties["product_id"]',
-      where:     '1 in properties["product_id"]',
-      buckets:   '5',
-      # etc.
     })
 
     puts data.inspect

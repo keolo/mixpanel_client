@@ -13,7 +13,7 @@ module Mixpanel
     DATA_URI = 'https://data.mixpanel.com/api/2.0'
 
     attr_reader   :uri
-    attr_accessor :api_key, :api_secret
+    attr_accessor :api_key, :api_secret, :parallel
 
     # Configure the client
     #
@@ -25,6 +25,7 @@ module Mixpanel
     def initialize(config)
       @api_key    = config[:api_key]
       @api_secret = config[:api_secret]
+      @parallel = config[:parallel] || false
     end
 
     # Return mixpanel data as a JSON object or CSV string
@@ -47,9 +48,41 @@ module Mixpanel
     def request(resource, options)
       @format = options[:format] || :json
       @uri = URI.mixpanel(resource, normalize_options(options))
-      response = URI.get(@uri)
-      response = %Q|[#{response.split("\n").join(',')}]| if resource == 'export'
-      Utils.to_hash(response, @format)
+      if @parallel
+        parallel_request = prepare_parallel_request
+        hydra.queue parallel_request
+        parallel_request
+      else
+        response = URI.get(@uri)
+        response = %Q|[#{response.split("\n").join(',')}]| if resource == 'export'
+        Utils.to_hash(response, @format)
+      end
+    end
+
+    def prepare_parallel_request
+      request = ::Typhoeus::Request.new(@uri)
+      request.on_complete do |response|
+        if response.success?
+          Utils.to_hash(response.body, @format)
+        elsif response.timed_out?
+          raise TimeoutError
+        elsif response.code == 0
+          # Could not get an http response, something's wrong.
+          raise HTTPError, response.curl_error_message
+        else
+          # Received a non-successful http response.
+          raise HTTPError, response.body.present? ? JSON.parse(response.body)['error'] : response.code.to_s
+        end
+      end
+      request
+    end
+
+    def run_parallel_requests
+      hydra.run
+    end
+
+    def hydra
+      @hydra ||= ::Typhoeus::Hydra.new      
     end
 
     private

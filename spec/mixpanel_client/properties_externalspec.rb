@@ -12,25 +12,22 @@ describe 'External calls to mixpanel' do
   context 'when requesting event properties' do
     it 'should raise an error for bad requests' do
       data = lambda {
-        @client.request do
-          resource 'properties'
-        end
+        @client.request('properties', {})
       }
       data.should raise_error(Mixpanel::HTTPError)
     end
 
     it 'should return events' do
-      data = @client.request do
-        resource 'events/properties'
-        event    '["test-event"]'
-        name     'hello'
-        values   '["uno", "dos"]'
-        type     'general'
-        unit     'hour'
-        interval  24
-        limit     5
-        bucket   'kicked'
-      end
+      data = @client.request('events/properties', {
+        :event    => '["test-event"]',
+        :name     => 'hello',
+        :values   => '["uno", "dos"]',
+        :type     => 'general',
+        :unit     => 'hour',
+        :interval =>  24,
+        :limit    =>  5,
+        :bucket   => 'kicked'
+      })
       data.should_not be_a Exception
     end
   end

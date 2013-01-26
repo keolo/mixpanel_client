@@ -13,20 +13,7 @@ module Mixpanel
     DATA_URI = 'https://data.mixpanel.com/api/2.0'
 
     attr_reader   :uri
-    attr_accessor :api_key, :api_secret, :parallel, :hydra
-
-    # Available options for a Mixpanel API request
-    OPTIONS = [:resource, :event, :funnel_id, :name, :type, :unit, :interval, :limit, :format, :bucket,
-               :values, :from_date, :to_date, :on, :where, :buckets, :timezone]
-
-    # Dynamically define accessor methods for each option
-    OPTIONS.each do |option|
-      class_eval "
-        def #{option}(arg=nil)
-          arg ? @#{option} = arg : @#{option}
-        end
-      "
-    end
+    attr_accessor :api_key, :api_secret, :parallel
 
     # Configure the client
     #
@@ -36,36 +23,34 @@ module Mixpanel
     #
     # @param [Hash] config consisting of an 'api_key' and an 'api_secret'
     def initialize(config)
-      @api_key    = config['api_key']
-      @api_secret = config['api_secret']
-      @parallel = config['parallel'] || false
-      @hydra = config['hydra'] || ::Typhoeus::Hydra.new if @parallel
+      @api_key    = config[:api_key]
+      @api_secret = config[:api_secret]
+      @parallel = config[:parallel] || false
     end
 
     # Return mixpanel data as a JSON object or CSV string
     #
     # @example
-    #   data = client.request do
-    #     resource 'events/properties'
-    #     event    '["test-event"]'
-    #     name     'hello'
-    #     values   '["uno", "dos"]'
-    #     type     'general'
-    #     unit     'hour'
-    #     interval  24
-    #     limit     5
-    #     bucket   'contents'
-    #   end
+    #   data = client.request('events/properties', {
+    #     event:    '["test-event"]',
+    #     name:     'hello',
+    #     values:   '["uno", "dos"]',
+    #     type:     'general',
+    #     unit:     'hour',
+    #     interval:  24,
+    #     limit:     5,
+    #     bucket:   'contents'
+    #   })
     #
-    # @param  [Block] options variables used to make a specific request for mixpanel data
-    # @return [JSON, String] mixpanel response as a JSON object or CSV string
-    def request(&options)
-      reset_options
-      instance_eval(&options)
-      @uri = URI.mixpanel(resource, normalize_params(params))
+    # @resource [String] mixpanel api resource endpoint
+    # @options  [Hash] options variables used to make a specific request for mixpanel data
+    # @return   [JSON, String] mixpanel response as a JSON object or CSV string
+    def request(resource, options)
+      @format = options[:format] || :json
+      @uri = URI.mixpanel(resource, normalize_options(options))
       if @parallel
         parallel_request = prepare_parallel_request
-        @hydra.queue parallel_request
+        hydra.queue parallel_request
         parallel_request
       else
         response = URI.get(@uri)
@@ -93,40 +78,26 @@ module Mixpanel
     end
 
     def run_parallel_requests
-      @hydra.run
+      hydra.run
+    end
+
+    def hydra
+      @hydra ||= ::Typhoeus::Hydra.new      
     end
 
     private
 
-    # Reset options so we can reuse the Mixpanel::Client object without the options persisting
-    # between requests
-    def reset_options
-      (OPTIONS - [:resource]).each do |option|
-        eval "remove_instance_variable(:@#{option}) if defined?(@#{option})"
-      end
-    end
-
-    # Return a hash of options for a given request
-    #
-    # @return [Hash] collection of options passed in from the request method
-    def params
-      OPTIONS.inject({}) do |params, param|
-        option = send(param)
-        params.merge!(param => option) if param != :resource && !option.nil?
-        params
-      end
-    end
-
     # Return a hash of options along with defaults and a generated signature
     #
     # @return [Hash] collection of options including defaults and generated signature
-    def normalize_params(params)
-      params.merge!(
+    def normalize_options(options)
+      options.merge!(
+        :format  => @format,
         :api_key => @api_key,
         :expire  => Time.now.to_i + 600 # Grant this request 10 minutes
-      ).merge!(:sig => Utils.generate_signature(params, @api_secret))
+      ).merge!(:sig => Utils.generate_signature(options, @api_secret))
     end
-    
+
     def self.base_uri_for_resource(resource)
       resource == 'export' ? DATA_URI : BASE_URI
     end

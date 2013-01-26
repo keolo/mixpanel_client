@@ -17,27 +17,18 @@ or if you use a Gemfile
     require 'rubygems'
     require 'mixpanel_client'
 
-    config = {'api_key' => 'changeme', 'api_secret' => 'changeme'}
+    config = {api_key: 'changeme', api_secret: 'changeme'}
     client = Mixpanel::Client.new(config)
 
-    data = client.request do
-      # Available options
-      resource  'events/properties'
-      event     '["test-event"]'
-      name      'hello'
-      values    '["uno", "dos"]'
-      timezone  '-8'
-      type      'general'
-      unit      'hour'
-      interval   24
-      limit      5
-      bucket    'contents'
-      from_date '2011-08-11'
-      to_date   '2011-08-12'
-      on        'properties["product_id"]'
-      where     '1 in properties["product_id"]'
-      buckets   '5'
-    end
+    data = client.request('events/properties', {
+      event:     'splash features',
+      name:      'feature',
+      values:    '["uno", "dos"]',
+      type:      'unique',
+      unit:      'day',
+      interval:   7,
+      limit:      5,
+    })
 
     puts data.inspect
 
@@ -46,26 +37,28 @@ or if you use a Gemfile
     require 'rubygems'
     require 'mixpanel_client'
 
-    config = {'api_key' => 'changeme', 'api_secret' => 'changeme', 'parallel' => true}
+    config = {api_key: 'changeme', api_secret: 'changeme', parallel: true}    
     client = Mixpanel::Client.new(config)
 
-    first_request = client.request do
+    first_request = client.request('events/properties', {
     ...
-    end
+    })
 
-    second_request = client.request do
+    second_request = client.request('events/properties', {
     ...
-    end
+    })
 
-    third_request = client.request do
+    third_request = client.request('events/properties', {
     ...
-    end
+    })
 
+    ...
+    
     client.run_parallel_requests
     
-    puts first_request.handled_response
-    puts second_request.handled_response
-    puts third_request.handled_response    
+    puts first_request.response.handled_response
+    puts second_request.response.handled_response
+    puts third_request.response.handled_response    
     
 
 ## Development
@@ -101,10 +94,21 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
 
 ## Changelog
 
-### v3.0.0
+
+### v3.1.0
  * Parallel requests option.
 
- ### v.2.2.1
+### v.3.0.0
+ * NOTE: This version breaks backwards compatibility.
+ * Use a regular ruby hash instead of metaprogramming for mixpanel options.
+
+### v.2.2.3
+ * 	Added some more options.
+
+### v.2.2.2
+ * 	Added some more options.
+
+### v.2.2.1
  * 	Added support for the raw data export API.
 
 ### v2.2.0
@@ -145,6 +149,7 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
 Feel free to add your name and link here.
 
 [Keolo Keagy](http://github.com/keolo) (Author)  
+[Bill DeRusha](https://github.com/bderusha)  
 [Jason Logsdon](https://github.com/jasonlogsdon)  
 [James R](https://github.com/Cev)  
 [Mike Ferrier](http://github.com/mferrier)  

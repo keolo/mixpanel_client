@@ -32,6 +32,35 @@ or if you use a Gemfile
 
     puts data.inspect
 
+## Parallel
+
+    require 'rubygems'
+    require 'mixpanel_client'
+
+    config = {api_key: 'changeme', api_secret: 'changeme', parallel: true}    
+    client = Mixpanel::Client.new(config)
+
+    first_request = client.request('events/properties', {
+    ...
+    })
+
+    second_request = client.request('events/properties', {
+    ...
+    })
+
+    third_request = client.request('events/properties', {
+    ...
+    })
+
+    ...
+    
+    client.run_parallel_requests
+    
+    puts first_request.response.handled_response
+    puts second_request.response.handled_response
+    puts third_request.response.handled_response    
+    
+
 ## Development
 List of rake tasks.
 
@@ -64,6 +93,10 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
 
 
 ## Changelog
+
+
+### v3.1.0
+ * Parallel requests option.
 
 ### v.3.0.0
  * NOTE: This version breaks backwards compatibility.

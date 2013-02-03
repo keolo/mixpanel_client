@@ -10,5 +10,6 @@ module Mixpanel
   # URI related exceptions
   class Error < StandardError; end
   class HTTPError < Error; end
+  class TimeoutError < Error; end
   class ParseError < Error; end
 end

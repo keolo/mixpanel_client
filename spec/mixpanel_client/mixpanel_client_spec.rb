@@ -59,6 +59,16 @@ describe Mixpanel::Client do
       data.should == {"events"=>[], "type"=>"general"}
     end
 
+    it 'does not modify the provided options' do
+      options = { foo: 'bar' }
+      # Stub Mixpanel request
+      stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"events": [], "type": "general"}')
+      expect {
+        @client.request('events/top', options)
+      }.to_not change { options }
+    end
+
+
     context "with parallel option enabled" do
       before :all do
         @parallel_client = Mixpanel::Client.new(:api_key => 'test_key', :api_secret => 'test_secret', :parallel => true)

@@ -91,11 +91,12 @@ module Mixpanel
     #
     # @return [Hash] collection of options including defaults and generated signature
     def normalize_options(options)
-      options.merge!(
+      normalized_options = options.dup
+      normalized_options.merge!(
         :format  => @format,
         :api_key => @api_key,
         :expire  => Time.now.to_i + 600 # Grant this request 10 minutes
-      ).merge!(:sig => Utils.generate_signature(options, @api_secret))
+      ).merge!(:sig => Utils.generate_signature(normalized_options, @api_secret))
     end
 
     def self.base_uri_for_resource(resource)

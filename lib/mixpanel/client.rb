@@ -46,8 +46,7 @@ module Mixpanel
     # @options  [Hash] options variables used to make a specific request for mixpanel data
     # @return   [JSON, String] mixpanel response as a JSON object or CSV string
     def request(resource, options)
-      @format = options[:format] || :json
-      @uri = URI.mixpanel(resource, normalize_options(options))
+      @uri = request_uri(resource, options)
       if @parallel
         parallel_request = prepare_parallel_request
         hydra.queue parallel_request
@@ -57,6 +56,28 @@ module Mixpanel
         response = %Q|[#{response.split("\n").join(',')}]| if resource == 'export'
         Utils.to_hash(response, @format)
       end
+    end
+
+    # Return mixpanel URI to the data
+    #
+    # @example
+    #   uri = client.request_uri('events/properties', {
+    #     event:    '["test-event"]',
+    #     name:     'hello',
+    #     values:   '["uno", "dos"]',
+    #     type:     'general',
+    #     unit:     'hour',
+    #     interval:  24,
+    #     limit:     5,
+    #     bucket:   'contents'
+    #   })
+    #
+    # @resource [String] mixpanel api resource endpoint
+    # @options  [Hash] options variables used to make a specific request for mixpanel data
+    # @return   [JSON, String] mixpanel response as a JSON object or CSV string
+    def request_uri(resource, options)
+      @format = options[:format] || :json
+      URI.mixpanel(resource, normalize_options(options))
     end
 
     def prepare_parallel_request

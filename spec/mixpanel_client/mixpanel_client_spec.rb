@@ -68,6 +68,32 @@ describe Mixpanel::Client do
       }.to_not change { options }
     end
 
+    context 'with a custom expiry time' do
+      # Stub Mixpanel request
+      before { stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"events": [], "type": "general"}') }
+      let(:expiry)   { Time.now + 100000 }
+      let(:fake_url) { Mixpanel::Client::BASE_URI }
+
+      specify 'Client#request should return a hash with empty events and type' do
+        # With endpoint
+        data = @client.request('events/top', {
+          :type   => 'general',
+          :expire => expiry
+        })
+        data.should == {"events"=>[], "type"=>"general"}
+      end
+
+      specify 'Mixpanel::URI instance should receive the custom expiry time in the options[:expiry] instead of 600s' do
+        Mixpanel::URI.should_receive(:mixpanel).with do |*args|
+          args.pop[:expire].should == expiry.to_i
+          true
+        end.and_return(fake_url)
+        @client.request('events/top', {
+          :type   => 'general',
+          :expire => expiry
+        })
+      end
+    end
 
     context "with parallel option enabled" do
       before :all do

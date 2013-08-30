@@ -101,17 +101,17 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
 ### v3.1.0
  * Parallel requests option.
 
-### v.3.0.0
+### v3.0.0
  * NOTE: This version breaks backwards compatibility.
  * Use a regular ruby hash instead of metaprogramming for mixpanel options.
 
-### v.2.2.3
+### v2.2.3
  * 	Added some more options.
 
-### v.2.2.2
+### v2.2.2
  * 	Added some more options.
 
-### v.2.2.1
+### v2.2.1
  * 	Added support for the raw data export API.
 
 ### v2.2.0

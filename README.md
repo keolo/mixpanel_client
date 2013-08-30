@@ -94,6 +94,9 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
 
 ## Changelog
 
+### v3.1.2
+ * Gem updates
+
 ### v3.1.1
  * Avoid overriding the arg of client.request
  * Allow retrieving the request_uri of a Mixpanel request

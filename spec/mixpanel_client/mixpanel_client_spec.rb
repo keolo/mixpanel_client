@@ -8,7 +8,7 @@ describe Mixpanel::Client do
 
   context 'when initializing a new Mixpanel::Client' do
     it 'should not raise an exception if a hash is given' do
-      Mixpanel::Client.new('api_key' => 'test_key', 'api_secret' => 'test_secret').should_not raise_error(ArgumentError)
+      Mixpanel::Client.new('api_key' => 'test_key', 'api_secret' => 'test_secret').should_not raise_error
     end
 
     it 'should set a parallel option as false by default' do
@@ -88,15 +88,15 @@ describe Mixpanel::Client do
       end
 
       describe '#hydra' do
-        it 'should return a Typhoeus::Hydra object' do     
-          @parallel_client.hydra.should be_a Typhoeus::Hydra  
-        end 
+        it 'should return a Typhoeus::Hydra object' do
+          @parallel_client.hydra.should be_a Typhoeus::Hydra
+        end
       end
 
       describe '#run_parallel_requests' do
         it 'should run queued requests' do
           # Stub Mixpanel request
-          stub_request(:any, /^#{@uri}.*/).to_return(:body => '{"legend_size": 1, "data": {"series": ["2010-05-29","2010-05-30","2010-05-31"], 
+          stub_request(:any, /^#{@uri}.*/).to_return(:body => '{"legend_size": 1, "data": {"series": ["2010-05-29","2010-05-30","2010-05-31"],
                                                                                          "values": {
                                                                                             "account-page": {"2010-05-30": 1},
                                                                                             "splash features": {"2010-05-29": 6,
@@ -108,7 +108,7 @@ describe Mixpanel::Client do
                                                              }')
 
 
-          stub_request(:any, /^#{@uri}.*secondevent.*/).to_return(:body => '{"legend_size": 2, "data": {"series": ["2010-05-29","2010-05-30","2010-05-31"], 
+          stub_request(:any, /^#{@uri}.*secondevent.*/).to_return(:body => '{"legend_size": 2, "data": {"series": ["2010-05-29","2010-05-30","2010-05-31"],
                                                                                          "values": {
                                                                                             "account-page": {"2010-05-30": 2},
                                                                                             "splash features": {"2010-05-29": 8,

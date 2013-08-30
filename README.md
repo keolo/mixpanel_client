@@ -152,8 +152,8 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
 Feel free to add your name and link here.
 
 [Keolo Keagy](http://github.com/keolo) (Author)  
-[Hiroshige Umino](https://github.com/yaotti)
-[Gabor Ratky](https://github.com/rgabo)
+[Hiroshige Umino](https://github.com/yaotti)  
+[Gabor Ratky](https://github.com/rgabo)  
 [Bill DeRusha](https://github.com/bderusha)  
 [Jason Logsdon](https://github.com/jasonlogsdon)  
 [James R](https://github.com/Cev)  

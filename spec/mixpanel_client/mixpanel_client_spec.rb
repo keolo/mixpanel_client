@@ -48,6 +48,18 @@ describe Mixpanel::Client do
       data.should == {"data"=>{"series"=>[], "values"=>{}}, "legend_size"=>0}
     end
 
+    it 'should work when it receives an integer response on import' do
+      @import_uri = Regexp.escape(Mixpanel::Client::IMPORT_URI)
+      # Stub Mixpanel import request to return a realistic response
+      stub_request(:get, /^#{@import_uri}.*/).to_return(:body => '1')
+
+      data = @client.request('import', {
+        :data    => 'base64_encoded_data',
+        :api_key => 'test_key'
+      })
+      data.should == [1]
+    end
+
     it 'should work with an endpoint, method, and type' do
       # Stub Mixpanel request
       stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"events": [], "type": "general"}')

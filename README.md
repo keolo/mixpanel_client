@@ -32,6 +32,15 @@ or if you use a Gemfile
 
     puts data.inspect
 
+
+    # use the import API, which allows one to specify a time in the past, unlike the track API. note that you need to include your api token in the data.
+    # See https://mixpanel.com/docs/api-documentation/importing-events-older-than-31-days for all the details.
+    data_to_import = {'event' => 'firstLogin', 'properties' => {'distinct_id' => guid, 'time' => time_as_integer_seconds_since_epoch, 'token' => api_token}}
+    require 'base64' # co-located with the Base64 call below for clarity
+    encoded_data = Base64.encode64(data_to_import.to_json)
+    data = client.request('import', {:data => encoded_data, :api_key => api_key})
+    # data == [1] # => true # you can only import one event at a time
+
 ## Parallel
 
     require 'rubygems'
@@ -93,6 +102,9 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
 
 
 ## Changelog
+
+### v3.1.3
+ * 	Added support for the import API.
 
 ### v3.1.2
  * Gem updates
@@ -165,6 +177,7 @@ Feel free to add your name and link here.
 [Nathan Chong](http://github.com/paramaw)  
 [Paul McMahon](http://github.com/pwim)  
 [Chad Etzel](http://github.com/jazzychad)
+[Kevin Burnett](http://github.com/burnettk)
 
 ## Copyright
 

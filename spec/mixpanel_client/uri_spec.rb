@@ -15,6 +15,10 @@ describe Mixpanel::URI do
       resource, params  = ['export', {:c => 'see', :a => 'ey'}]
       Mixpanel::URI.mixpanel(resource, params).should == "#{Mixpanel::Client::DATA_URI}/export?a=ey&c=see"
     end
+    it 'should return a uri with a the correct endpoint when doing an import' do
+      resource, params  = ['import', {:c => 'see', :a => 'ey'}]
+      Mixpanel::URI.mixpanel(resource, params).should == "#{Mixpanel::Client::IMPORT_URI}/import?a=ey&c=see"
+    end
   end
 
   describe '.encode' do

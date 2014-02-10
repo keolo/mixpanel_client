@@ -11,6 +11,7 @@ module Mixpanel
   class Client
     BASE_URI = 'https://mixpanel.com/api/2.0'
     DATA_URI = 'https://data.mixpanel.com/api/2.0'
+    IMPORT_URI = 'https://api.mixpanel.com'
 
     attr_reader   :uri
     attr_accessor :api_key, :api_secret, :parallel
@@ -53,7 +54,7 @@ module Mixpanel
         parallel_request
       else
         response = URI.get(@uri)
-        response = %Q|[#{response.split("\n").join(',')}]| if resource == 'export'
+        response = %Q|[#{response.split("\n").join(',')}]| if %w(export import).include?(resource)
         Utils.to_hash(response, @format)
       end
     end
@@ -121,7 +122,13 @@ module Mixpanel
     end
 
     def self.base_uri_for_resource(resource)
-      resource == 'export' ? DATA_URI : BASE_URI
+      if resource == 'export'
+        DATA_URI
+      elsif resource == 'import'
+        IMPORT_URI
+      else
+        BASE_URI
+      end
     end
   end
 end

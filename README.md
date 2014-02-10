@@ -33,8 +33,9 @@ or if you use a Gemfile
     puts data.inspect
 
 
-    # use the import API, which allows one to specify a time in the past, unlike the track API. note that you need to include your api token in the data.
-    # See https://mixpanel.com/docs/api-documentation/importing-events-older-than-31-days for all the details.
+    # use the import API, which allows one to specify a time in the past, unlike the track API.
+    # note that you need to include your api token in the data. More details at:
+    # https://mixpanel.com/docs/api-documentation/importing-events-older-than-31-days
     data_to_import = {'event' => 'firstLogin', 'properties' => {'distinct_id' => guid, 'time' => time_as_integer_seconds_since_epoch, 'token' => api_token}}
     require 'base64' # co-located with the Base64 call below for clarity
     encoded_data = Base64.encode64(data_to_import.to_json)
@@ -176,8 +177,8 @@ Feel free to add your name and link here.
 [Grzegorz Forysinski](http://github.com/railwaymen)  
 [Nathan Chong](http://github.com/paramaw)  
 [Paul McMahon](http://github.com/pwim)  
-[Chad Etzel](http://github.com/jazzychad)
-[Kevin Burnett](http://github.com/burnettk)
+[Chad Etzel](http://github.com/jazzychad)  
+[Kevin Burnett](http://github.com/burnettk)  
 
 ## Copyright
 

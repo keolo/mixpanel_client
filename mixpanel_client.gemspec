@@ -3,6 +3,7 @@ $:.push File.expand_path('../lib', __FILE__)
 require 'mixpanel/version'
 
 Gem::Specification.new do |s|
+  s.license     = 'MIT'
   s.name        = 'mixpanel_client'
   s.version     = Mixpanel::Client::VERSION
   s.platform    = Gem::Platform::RUBY

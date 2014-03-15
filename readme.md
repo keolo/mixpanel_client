@@ -1,4 +1,4 @@
-# Mixpanel API Client
+# Mixpanel Data API Client
 
 [![Gem Version](https://badge.fury.io/rb/mixpanel_client.png)](http://badge.fury.io/rb/mixpanel_client)
 

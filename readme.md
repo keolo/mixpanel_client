@@ -19,8 +19,10 @@ or if you use a Gemfile
     require 'rubygems'
     require 'mixpanel_client'
 
-    config = {api_key: 'changeme', api_secret: 'changeme'}
-    client = Mixpanel::Client.new(config)
+    client = Mixpanel::Client.new(
+      api_key:    'changeme', 
+      api_secret: 'changeme'
+    )
 
     data = client.request(
       'events/properties',
@@ -63,8 +65,11 @@ or if you use a Gemfile
     require 'rubygems'
     require 'mixpanel_client'
 
-    config = {api_key: 'changeme', api_secret: 'changeme', parallel: true}    
-    client = Mixpanel::Client.new(config)
+    client = Mixpanel::Client.new(
+      api_key:    'changeme', 
+      api_secret: 'changeme',
+      parallel:   true
+    )
 
     first_request = client.request(
       'events/properties',

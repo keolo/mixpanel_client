@@ -21,6 +21,18 @@ describe Mixpanel::Client do
   end
 
   context 'when making an invalid request' do
+    it 'should raise an error when API key is null' do
+      stub_request(:get, /^#{@uri}.*/).to_return(:body => '{}')
+      client = Mixpanel::Client.new(:api_key => nil, :api_secret => 'test_secret')
+      lambda {client.request('events', {})}.should raise_error
+    end
+
+    it 'should raise an error when API secret is null' do
+      stub_request(:get, /^#{@uri}.*/).to_return(:body => '{}')
+      client = Mixpanel::Client.new(:api_key => 'test_key', :api_secret => nil)
+      lambda {client.request('events', {})}.should raise_error
+    end
+
     it 'should return an argument error "Wrong number of arguments" if using the deprecated usage' do
       # Stub Mixpanel request
       stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"legend_size": 0, "data": {"series": [], "values": {}}}')

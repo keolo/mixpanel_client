@@ -27,5 +27,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rspec',   '>=2.5.0')
   s.add_development_dependency('webmock', '>=1.17.4')
   s.add_development_dependency('pry',     '>=0.9.12.6')
+  s.add_development_dependency('pry-byebug', '>=1.3.2') if RUBY_VERSION >= '2.0'
+  s.add_development_dependency('pry-stack_explorer', '>=0.4.9')
   s.add_development_dependency('rubocop', '>=0.19.0')
 end

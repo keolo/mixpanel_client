@@ -6,7 +6,7 @@ require 'yaml'
 
 config = YAML.load_file(File.dirname(__FILE__) + '/../config/mixpanel.yml')['mixpanel']
 
-client = Mixpanel::Client.new({api_key: config['api_key'], api_secret: config['api_secret']})
+client = Mixpanel::Client.new({api_key: config[:api_key], api_secret: config[:api_secret]})
 
 data = client.request('events/properties', {
   event:    '["test-event"]',

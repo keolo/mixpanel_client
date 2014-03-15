@@ -6,5 +6,5 @@ rvm_gemset_create_on_use_flag=1
 rvm_project_rvmrc_default=1
 
 # Use rvm with a specific version of ruby and gemset
-rvm use ruby-1.9.3-p392
-rvm gemset use mixpanel_client_1.9.3-p392
+rvm use ruby-2.0.0-p195
+rvm gemset use mixpanel_client_2.0.0-p195

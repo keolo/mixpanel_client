@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
   s.add_runtime_dependency('json', '~> 1.6') if RUBY_VERSION < '1.9'
-  s.add_runtime_dependency('typhoeus', '~> 0.5.4')
+  s.add_runtime_dependency('typhoeus', '~> 0.6.7')
   s.add_development_dependency('bundler', '>=1.2')
   s.add_development_dependency('rake',    '>=0.9.2.2')
   s.add_development_dependency('rdoc',    '>=3.11')

@@ -44,19 +44,28 @@ module Mixpanel
     #   })
     #
     # @resource [String] mixpanel api resource endpoint
-    # @options  [Hash] options variables used to make a specific request for mixpanel data
+    # @options  [Hash] options variables used to make a specific request for
+    #           mixpanel data
     # @return   [JSON, String] mixpanel response as a JSON object or CSV string
     def request(resource, options)
       @uri = request_uri(resource, options)
-      if @parallel
-        parallel_request = prepare_parallel_request
-        hydra.queue parallel_request
-        parallel_request
-      else
-        response = URI.get(@uri)
-        response = %Q([#{response.split("\n").join(',')}]) if %w(export import).include?(resource)
-        Utils.to_hash(response, @format)
+      @parallel ? make_parallel_request : make_normal_request(resource)
+    end
+
+    def make_parallel_request
+      parallel_request = prepare_parallel_request
+      hydra.queue parallel_request
+      parallel_request
+    end
+
+    def make_normal_request(resource)
+      response = URI.get(@uri)
+
+      if %w(export import).include?(resource)
+        response = %Q([#{response.split("\n").join(',')}])
       end
+
+      Utils.to_hash(response, @format)
     end
 
     # Return mixpanel URI to the data
@@ -74,7 +83,8 @@ module Mixpanel
     #   })
     #
     # @resource [String] mixpanel api resource endpoint
-    # @options  [Hash] options variables used to make a specific request for mixpanel data
+    # @options  [Hash] options variables used to make a specific request for
+    #           mixpanel data
     # @return   [JSON, String] mixpanel response as a JSON object or CSV string
     def request_uri(resource, options)
       @format = options[:format] || :json
@@ -84,6 +94,7 @@ module Mixpanel
     # rubocop:disable MethodLength
     def prepare_parallel_request
       request = ::Typhoeus::Request.new(@uri)
+
       request.on_complete do |response|
         if response.success?
           Utils.to_hash(response.body, @format)
@@ -94,9 +105,16 @@ module Mixpanel
           fail HTTPError, response.curl_error_message
         else
           # Received a non-successful http response.
-          fail HTTPError, response.body.present? ? JSON.parse(response.body)['error'] : response.code.to_s
+          if response.body && response.body != ''
+            error_message = JSON.parse(response.body)['error']
+          else
+            error_message = response.code.to_s
+          end
+
+          fail HTTPError, error_message
         end
       end
+
       request
     end
     # rubocop:enable MethodLength
@@ -113,7 +131,8 @@ module Mixpanel
 
     # Return a hash of options along with defaults and a generated signature
     #
-    # @return [Hash] collection of options including defaults and generated signature
+    # @return [Hash] collection of options including defaults and generated
+    #         signature
     def normalize_options(options)
       normalized_options = options.dup
       normalized_options.merge!(

@@ -6,5 +6,5 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 60
-LineLength:
-  Max: 262
+#LineLength:
+#  Max: 262

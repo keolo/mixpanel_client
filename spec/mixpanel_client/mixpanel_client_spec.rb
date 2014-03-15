@@ -25,11 +25,11 @@ describe Mixpanel::Client do
       # Stub Mixpanel request
       stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"legend_size": 0, "data": {"series": [], "values": {}}}')
 
-      data = lambda do@client.request(nil, :events, {
-        :event    => '["test-event"]',
-        :unit     => 'hour',
-        :interval =>  24
-        })
+      data = lambda do@client.request(nil, :events,
+                                      :event    => '["test-event"]',
+                                      :unit     => 'hour',
+                                      :interval =>  24
+        )
       end
       data.should raise_error(ArgumentError)
     end
@@ -41,11 +41,11 @@ describe Mixpanel::Client do
       stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"legend_size": 0, "data": {"series": [], "values": {}}}')
 
       # No endpoint
-      data = @client.request('events', {
-        :event    => '["test-event"]',
-        :unit     => 'hour',
-        :interval => 24
-      })
+      data = @client.request('events',
+                             :event    => '["test-event"]',
+                             :unit     => 'hour',
+                             :interval => 24
+      )
       data.should == {"data"=>{"series"=>[], "values"=>{}}, "legend_size"=>0}
     end
 
@@ -54,10 +54,10 @@ describe Mixpanel::Client do
       # Stub Mixpanel import request to return a realistic response
       stub_request(:get, /^#{@import_uri}.*/).to_return(:body => '1')
 
-      data = @client.request('import', {
-        :data    => 'base64_encoded_data',
-        :api_key => 'test_key'
-      })
+      data = @client.request('import',
+                             :data    => 'base64_encoded_data',
+                             :api_key => 'test_key'
+      )
       data.should == [1]
     end
 
@@ -66,9 +66,9 @@ describe Mixpanel::Client do
       stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"events": [], "type": "general"}')
 
       # With endpoint
-      data = @client.request('events/top', {
-        :type => 'general'
-      })
+      data = @client.request('events/top',
+                             :type => 'general'
+      )
       data.should == {"events"=>[], "type"=>"general"}
     end
 
@@ -89,10 +89,10 @@ describe Mixpanel::Client do
 
       specify 'Client#request should return a hash with empty events and type' do
         # With endpoint
-        data = @client.request('events/top', {
-          :type   => 'general',
-          :expire => expiry
-        })
+        data = @client.request('events/top',
+                               :type   => 'general',
+                               :expire => expiry
+        )
         data.should == {"events"=>[], "type"=>"general"}
       end
 
@@ -101,10 +101,10 @@ describe Mixpanel::Client do
           args.pop[:expire].should == expiry.to_i
           true
         end.and_return(fake_url)
-        @client.request('events/top', {
-          :type   => 'general',
-          :expire => expiry
-        })
+        @client.request('events/top',
+                        :type   => 'general',
+                        :expire => expiry
+        )
       end
     end
 
@@ -118,11 +118,11 @@ describe Mixpanel::Client do
         stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"legend_size": 0, "data": {"series": [], "values": {}}}')
 
         # No endpoint
-        data = @parallel_client.request('events', {
-          :event    => '["test-event"]',
-          :unit     => 'hour',
-          :interval => 24
-        })
+        data = @parallel_client.request('events',
+                                        :event    => '["test-event"]',
+                                        :unit     => 'hour',
+                                        :interval => 24
+        )
         data.should be_a Typhoeus::Request
       end
 
@@ -158,16 +158,16 @@ describe Mixpanel::Client do
                                                                                         }
                                                              }')
 
-          first_request = @parallel_client.request('events', {
-            :event    => '["firstevent"]',
-            :unit     => 'day'
-          })
+          first_request = @parallel_client.request('events',
+                                                   :event    => '["firstevent"]',
+                                                   :unit     => 'day'
+          )
 
 
-          second_request = @parallel_client.request('events', {
-            :event    => '["secondevent"]',
-            :unit     => 'day'
-          })
+          second_request = @parallel_client.request('events',
+                                                    :event    => '["secondevent"]',
+                                                    :unit     => 'day'
+          )
 
           @parallel_client.run_parallel_requests
 

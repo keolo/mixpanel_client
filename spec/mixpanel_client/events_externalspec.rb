@@ -18,75 +18,75 @@ describe 'External calls to mixpanel' do
     end
 
     it 'should return events' do
-      data = @client.request('events', {
-        :event    => '["test-event"]',
-        :type     => 'general',
-        :unit     => 'hour',
-        :interval =>  24
-      })
+      data = @client.request('events',
+                             :event    => '["test-event"]',
+                             :type     => 'general',
+                             :unit     => 'hour',
+                             :interval =>  24
+      )
       data.should_not be_a Exception
     end
 
     it 'should return events in csv format' do
-      data = @client.request('events', {
-        :event    => '["test-event"]',
-        :type     => 'general',
-        :unit     => 'hour',
-        :interval =>  24,
-        :format   => 'csv'
-      })
+      data = @client.request('events',
+                             :event    => '["test-event"]',
+                             :type     => 'general',
+                             :unit     => 'hour',
+                             :interval =>  24,
+                             :format   => 'csv'
+      )
       data.should_not be_a Exception
     end
 
     it 'should return events with optional bucket' do
-      data = @client.request('events', {
-        :event    => '["test-event"]',
-        :type     => 'general',
-        :unit     => 'hour',
-        :interval =>  24,
-        :bucket   => 'test'
-      })
+      data = @client.request('events',
+                             :event    => '["test-event"]',
+                             :type     => 'general',
+                             :unit     => 'hour',
+                             :interval =>  24,
+                             :bucket   => 'test'
+      )
       data.should_not be_a Exception
     end
 
     it 'should return top events' do
-      data = @client.request('events/top', {
-        :type     => 'general',
-        :limit    => 10
-      })
+      data = @client.request('events/top',
+                             :type     => 'general',
+                             :limit    => 10
+      )
       data.should_not be_a Exception
     end
 
     it 'should return names' do
-      data = @client.request('events/names', {
-        :type     => 'general',
-        :unit     => 'hour',
-        :interval =>  24,
-        :limit    => 10
-      })
+      data = @client.request('events/names',
+                             :type     => 'general',
+                             :unit     => 'hour',
+                             :interval =>  24,
+                             :limit    => 10
+      )
       data.should_not be_a Exception
     end
 
     it 'should return retention' do
       pending 'Retention now has its own endpoint.'
-      data = @client.request('events/retention', {
-        :event    => '["test-event"]',
-        :type     => 'general',
-        :unit     => 'hour',
-        :interval =>  24
-      })
+      data = @client.request('events/retention',
+                             :event    => '["test-event"]',
+                             :type     => 'general',
+                             :unit     => 'hour',
+                             :interval =>  24
+      )
       data.should_not be_a Exception
     end
 
     it 'should return retention in csv format' do
       pending 'Retention now has its own endpoint.'
-      data = @client.request('events/retention', {
-        :event    => '["test-event"]',
-        :type     => 'general',
-        :unit     => 'hour',
-        :interval =>  24,
-        :format   => 'csv'
-      })
+      data = @client.request('events/retention',
+                             :event    => '["test-event"]',
+                             :type     => 'general',
+                             :unit     => 'hour',
+                             :interval =>  24,
+                             :format   => 'csv'
+      )
       data.should_not be_a Exception
     end
   end

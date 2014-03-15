@@ -5,16 +5,11 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 4
-# Cop supports --auto-correct.
-#Blocks:
-#  Enabled: false
-
 # Offense count: 22
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
-BracesAroundHashParameters:
-  Enabled: false
+#BracesAroundHashParameters:
+#  Enabled: false
 
 # Offense count: 1
 Documentation:

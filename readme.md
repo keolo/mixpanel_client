@@ -62,6 +62,8 @@ or if you use a Gemfile
 
 ## Parallel
 
+You may also make requests in parallel by passing `parallel: true` to `Mixpanel::Client.new`.
+
     require 'rubygems'
     require 'mixpanel_client'
 

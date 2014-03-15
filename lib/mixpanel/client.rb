@@ -19,7 +19,7 @@ module Mixpanel
     # Configure the client
     #
     # @example
-    #   config = {'api_key' => '123', 'api_secret' => '456'}
+    #   config = {api_key: '123', api_secret: '456'}
     #   client = Mixpanel::Client.new(config)
     #
     # @param [Hash] config consisting of an 'api_key' and an 'api_secret'
@@ -32,16 +32,17 @@ module Mixpanel
     # Return mixpanel data as a JSON object or CSV string
     #
     # @example
-    #   data = client.request('events/properties', {
+    #   data = client.request(
+    #     'events/properties',
     #     event:    '["test-event"]',
     #     name:     'hello',
     #     values:   '["uno", "dos"]',
     #     type:     'general',
     #     unit:     'hour',
-    #     interval:  24,
-    #     limit:     5,
+    #     interval: 24,
+    #     limit:    5,
     #     bucket:   'contents'
-    #   })
+    #   )
     #
     # @resource [String] mixpanel api resource endpoint
     # @options  [Hash] options variables used to make a specific request for
@@ -71,16 +72,17 @@ module Mixpanel
     # Return mixpanel URI to the data
     #
     # @example
-    #   uri = client.request_uri('events/properties', {
+    #   uri = client.request_uri(
+    #     'events/properties',
     #     event:    '["test-event"]',
     #     name:     'hello',
     #     values:   '["uno", "dos"]',
     #     type:     'general',
     #     unit:     'hour',
-    #     interval:  24,
-    #     limit:     5,
+    #     interval: 24,
+    #     limit:    5,
     #     bucket:   'contents'
-    #   })
+    #   )
     #
     # @resource [String] mixpanel api resource endpoint
     # @options  [Hash] options variables used to make a specific request for

@@ -31,7 +31,7 @@ or if you use a Gemfile
       unit:      'day',
       from_date: '2013-12-1',
       to_date:   '2014-3-1',
-      limit:      5
+      limit:     5
     )
 
     puts data.inspect

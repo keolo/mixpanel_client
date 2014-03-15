@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/mixpanel_client.png)](http://badge.fury.io/rb/mixpanel_client)
+
 # Mixpanel API Client (for API version 2.0)
 
 Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.

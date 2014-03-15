@@ -81,6 +81,7 @@ module Mixpanel
       URI.mixpanel(resource, normalize_options(options))
     end
 
+    # rubocop:disable MethodLength
     def prepare_parallel_request
       request = ::Typhoeus::Request.new(@uri)
       request.on_complete do |response|
@@ -98,6 +99,7 @@ module Mixpanel
       end
       request
     end
+    # rubocop:enable MethodLength
 
     def run_parallel_requests
       hydra.run

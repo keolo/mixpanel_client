@@ -8,8 +8,3 @@
 # Offense count: 60
 LineLength:
   Max: 262
-
-# Offense count: 1
-# Configuration parameters: CountComments.
-MethodLength:
-  Max: 13

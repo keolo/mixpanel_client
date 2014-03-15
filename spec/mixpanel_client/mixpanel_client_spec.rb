@@ -171,7 +171,7 @@ describe Mixpanel::Client do
 
           first_request.response.handled_response.should eq(
             'data' => {
-              'series' => ['2010-05-29', '2010-05-30', '2010-05-31'],
+              'series' => %w(2010-05-29 2010-05-30 2010-05-31),
               'values' => {
                 'splash features' => {
                   '2010-05-29' => 6,
@@ -188,7 +188,7 @@ describe Mixpanel::Client do
 
           second_request.response.handled_response.should eq(
             'data' => {
-              'series' => ['2010-05-29', '2010-05-30', '2010-05-31'],
+              'series' => %w(2010-05-29 2010-05-30 2010-05-31),
               'values' => {
                 'splash features' => {
                   '2010-05-29' => 8,

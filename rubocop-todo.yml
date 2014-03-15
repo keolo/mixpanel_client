@@ -13,8 +13,3 @@ LineLength:
 # Configuration parameters: CountComments.
 MethodLength:
   Max: 13
-
-# Offense count: 2
-# Cop supports --auto-correct.
-WordArray:
-  MinSize: 3

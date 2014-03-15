@@ -15,10 +15,6 @@ MethodLength:
   Max: 13
 
 # Offense count: 2
-Void:
-  Enabled: false
-
-# Offense count: 2
 # Cop supports --auto-correct.
 WordArray:
   MinSize: 3

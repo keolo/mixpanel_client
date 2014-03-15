@@ -98,7 +98,7 @@ describe Mixpanel::Client do
 
       specify 'Mixpanel::URI instance should receive the custom expiry time in the options[:expiry] instead of 600s' do
         Mixpanel::URI.should_receive(:mixpanel).with do |*args|
-          args.pop[:expire].should == expiry.to_i
+          args.pop[:expire].should eq expiry.to_i
           true
         end.and_return(fake_url)
         @client.request('events/top',
@@ -169,9 +169,39 @@ describe Mixpanel::Client do
 
           @parallel_client.run_parallel_requests
 
-          first_request.response.handled_response.should == { 'data' => { 'series' => ['2010-05-29', '2010-05-30', '2010-05-31'], 'values' => { 'splash features' => { '2010-05-29' => 6, '2010-05-30' => 4, '2010-05-31' => 5 }, 'account-page' => { '2010-05-30' => 1 } } }, 'legend_size' => 1 }
+          first_request.response.handled_response.should eq(
+            'data' => {
+              'series' => ['2010-05-29', '2010-05-30', '2010-05-31'],
+              'values' => {
+                'splash features' => {
+                  '2010-05-29' => 6,
+                  '2010-05-30' => 4,
+                  '2010-05-31' => 5
+                },
+                'account-page' => {
+                  '2010-05-30' => 1
+                }
+              }
+            },
+            'legend_size' => 1
+          )
 
-          second_request.response.handled_response.should == { 'data' => { 'series' => ['2010-05-29', '2010-05-30', '2010-05-31'], 'values' => { 'splash features' => { '2010-05-29' => 8, '2010-05-30' => 6, '2010-05-31' => 7 }, 'account-page' => { '2010-05-30' => 2 } } }, 'legend_size' => 2 }
+          second_request.response.handled_response.should eq(
+            'data' => {
+              'series' => ['2010-05-29', '2010-05-30', '2010-05-31'],
+              'values' => {
+                'splash features' => {
+                  '2010-05-29' => 8,
+                  '2010-05-30' => 6,
+                  '2010-05-31' => 7
+                },
+                'account-page' => {
+                  '2010-05-30' => 2
+                }
+              }
+            },
+            'legend_size' => 2
+          )
         end
       end
     end

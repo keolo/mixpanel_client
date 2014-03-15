@@ -22,7 +22,8 @@ or if you use a Gemfile
     config = {api_key: 'changeme', api_secret: 'changeme'}
     client = Mixpanel::Client.new(config)
 
-    data = client.request('events/properties', {
+    data = client.request(
+      'events/properties',
       event:     'splash features',
       name:      'feature',
       values:    '["uno", "dos"]',
@@ -30,21 +31,22 @@ or if you use a Gemfile
       unit:      'day',
       from_date: '2013-12-1',
       to_date:   '2014-3-1',
-      limit:      5,
-    })
+      limit:      5
+    )
 
     puts data.inspect
 
     # The API also supports passing a time interval rather than an explicit date range
-    data = client.request('events/properties', {
-      event:     'splash features',
-      name:      'feature',
-      values:    '["uno", "dos"]',
-      type:      'unique',
-      unit:      'day',
-      interval:   7,
-      limit:      5,
-    })
+    data = client.request(
+      'events/properties',
+      event:    'splash features',
+      name:     'feature',
+      values:   '["uno", "dos"]',
+      type:     'unique',
+      unit:     'day',
+      interval: 7,
+      limit:    5
+    )
 
 
     # use the import API, which allows one to specify a time in the past, unlike the track API.
@@ -64,17 +66,20 @@ or if you use a Gemfile
     config = {api_key: 'changeme', api_secret: 'changeme', parallel: true}    
     client = Mixpanel::Client.new(config)
 
-    first_request = client.request('events/properties', {
-    ...
-    })
+    first_request = client.request(
+      'events/properties',
+      ...
+    )
 
-    second_request = client.request('events/properties', {
-    ...
-    })
+    second_request = client.request(
+      'events/properties',
+      ...
+    )
 
-    third_request = client.request('events/properties', {
-    ...
-    })
+    third_request = client.request(
+      'events/properties',
+      ...
+    )
 
     ...
     

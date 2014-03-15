@@ -112,6 +112,10 @@ Run external specs.
     vi config/mixpanel.yml
     rake spec:externals
 
+Run rubocop and fix offences.
+
+    rubocop
+
 
 ## Changelog
 [Changelog](changelog.md)

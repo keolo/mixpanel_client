@@ -11,7 +11,7 @@ module Mixpanel
   class URI
     def self.mixpanel(resource, params)
       base = Mixpanel::Client.base_uri_for_resource(resource)
-      "#{File.join([base, resource.to_s])}?#{self.encode(params)}"
+      "#{File.join([base, resource.to_s])}?#{encode(params)}"
     end
 
     def self.encode(params)

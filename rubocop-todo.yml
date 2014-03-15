@@ -16,8 +16,8 @@ MethodLength:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-RedundantSelf:
-  Enabled: false
+#RedundantSelf:
+#  Enabled: false
 
 # Offense count: 3
 # Cop supports --auto-correct.

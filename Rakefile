@@ -23,7 +23,7 @@ RSpec::Core::RakeTask.new(:rcov) do |spec|
   spec.rcov = true
 end
 
-task :spec 
+task :spec
 task :default => :spec
 
 require 'rdoc/task'

@@ -83,7 +83,7 @@ describe Mixpanel::Client do
     context 'with a custom expiry time' do
       # Stub Mixpanel request
       before { stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"events": [], "type": "general"}') }
-      let(:expiry)   { Time.now + 100000 }
+      let(:expiry)   { Time.now + 100_000 }
       let(:fake_url) { Mixpanel::Client::BASE_URI }
 
       specify 'Client#request should return a hash with empty events and type' do

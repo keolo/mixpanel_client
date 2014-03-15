@@ -11,9 +11,9 @@ describe 'External calls to mixpanel' do
 
   context 'when requesting events' do
     it 'should raise an error for bad requests' do
-      data = lambda {
+      data = lambda do
         @client.request('events', {})
-      }
+      end
       data.should raise_error(Mixpanel::HTTPError)
     end
 

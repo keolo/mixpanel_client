@@ -25,11 +25,12 @@ describe Mixpanel::Client do
       # Stub Mixpanel request
       stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"legend_size": 0, "data": {"series": [], "values": {}}}')
 
-      data = lambda{@client.request(nil, :events, {
+      data = lambda do@client.request(nil, :events, {
         :event    => '["test-event"]',
         :unit     => 'hour',
         :interval =>  24
-      })}
+        })
+      end
       data.should raise_error(ArgumentError)
     end
   end
@@ -75,9 +76,9 @@ describe Mixpanel::Client do
       options = { foo: 'bar' }
       # Stub Mixpanel request
       stub_request(:get, /^#{@uri}.*/).to_return(:body => '{"events": [], "type": "general"}')
-      expect {
+      expect do
         @client.request('events/top', options)
-      }.to_not change { options }
+      end.to_not change { options }
     end
 
     context 'with a custom expiry time' do

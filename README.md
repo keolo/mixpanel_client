@@ -116,6 +116,10 @@ Create tag v2.0.2 and build and push mixpanel_client-2.0.2.gem to Rubygems
 
 ## Changelog
 
+### v3.1.4
+ * Updated docs
+ * Updated to latest typhoeus gem
+
 ### v3.1.3
  * 	Added support for the import API.
  * 	Allow setting of custom expiry.

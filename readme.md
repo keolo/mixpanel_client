@@ -138,4 +138,4 @@ Feel free to add your name and link here.
 
 ## Copyright
 
-Copyright (c) 2009+ Keolo Keagy. See LICENSE for details.
+Copyright (c) 2009+ Keolo Keagy. See [license](license) for details.

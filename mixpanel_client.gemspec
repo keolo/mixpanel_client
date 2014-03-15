@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version     = Mixpanel::Client::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Keolo Keagy']
-  s.email       = ['keolo@dreampointmedia.com']
+  s.email       = ['keolo@kea.gy']
   s.homepage    = 'http://github.com/keolo/mixpanel_client' 
   s.summary     = %q{Ruby Mixpanel API Client Library}
   s.description = %q{Simple ruby client interface to the Mixpanel API.}
@@ -21,11 +21,11 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.add_runtime_dependency('json',        '~> 1.6') if RUBY_VERSION < '1.9'
   s.add_runtime_dependency('typhoeus',    '~> 0.6.7')
-  s.add_development_dependency('bundler', '>=1.2')
-  s.add_development_dependency('rake',    '>=0.9.2.2')
-  s.add_development_dependency('rdoc',    '>=3.11')
+  s.add_development_dependency('bundler', '>=1.5.3')
+  s.add_development_dependency('rake',    '>=10.1.1')
+  s.add_development_dependency('rdoc',    '>=4.1.1')
   s.add_development_dependency('rspec',   '>=2.5.0')
-  s.add_development_dependency('webmock', '>=1.9.0')
+  s.add_development_dependency('webmock', '>=1.17.4')
   s.add_development_dependency('pry',     '>=0.9.12.6')
   s.add_development_dependency('rubocop', '>=0.19.0')
 end

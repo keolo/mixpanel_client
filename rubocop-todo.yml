@@ -5,14 +5,10 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 1
-#Documentation:
-#  Enabled: false
-
 # Offense count: 3
 # Cop supports --auto-correct.
-EmptyLines:
-  Enabled: false
+#EmptyLines:
+#  Enabled: false
 
 # Offense count: 105
 # Cop supports --auto-correct.

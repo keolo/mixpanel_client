@@ -13,7 +13,6 @@ f = client.request('events/top',
                    :type =>     'general'
 )
 
-
 s = client.request('events/names',
                    :type =>     'general'
 )

@@ -146,7 +146,6 @@ describe Mixpanel::Client do
                                                                                         }
                                                              }')
 
-
           stub_request(:any, /^#{@uri}.*secondevent.*/).to_return(:body => '{"legend_size": 2, "data": {"series": ["2010-05-29","2010-05-30","2010-05-31"],
                                                                                          "values": {
                                                                                             "account-page": {"2010-05-30": 2},
@@ -162,7 +161,6 @@ describe Mixpanel::Client do
                                                    :event    => '["firstevent"]',
                                                    :unit     => 'day'
           )
-
 
           second_request = @parallel_client.request('events',
                                                     :event    => '["secondevent"]',

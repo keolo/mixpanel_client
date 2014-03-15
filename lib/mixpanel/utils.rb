@@ -9,6 +9,12 @@
 module Mixpanel
   # Utility methods for Mixpanel::Client
   class Client
+    # Mixpanel API Ruby Client Library
+    #
+    # Utility helpers
+    #
+    # Copyright (c) 2009+ Keolo Keagy
+    # See LICENSE for details
     module Utils
       # Return a string composed of hashed values specified by the mixpanel data API
       #

@@ -113,6 +113,8 @@ module Mixpanel
     #
     # @return [Hash] collection of options including defaults and generated signature
     def normalize_options(options)
+      raise "api_key not defined. This is available in the settings page of your account." if @api_key.nil?
+      raise "api_secret not defined. This is available in the settings page of your account." if @api_secret.nil?
       normalized_options = options.dup
       normalized_options.merge!(
         :format  => @format,

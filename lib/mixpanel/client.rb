@@ -54,7 +54,7 @@ module Mixpanel
         parallel_request
       else
         response = URI.get(@uri)
-        response = %Q|[#{response.split("\n").join(',')}]| if %w(export import).include?(resource)
+        response = %Q([#{response.split("\n").join(',')}]) if %w(export import).include?(resource)
         Utils.to_hash(response, @format)
       end
     end

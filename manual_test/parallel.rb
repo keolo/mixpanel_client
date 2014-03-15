@@ -21,4 +21,3 @@ client.run_parallel_requests
 
 puts f.response.handled_response.inspect
 puts s.response.handled_response.inspect
-

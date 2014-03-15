@@ -8,7 +8,7 @@ describe Mixpanel::Client do
 
   context 'when initializing a new Mixpanel::Client' do
     it 'should not raise an exception if a hash is given' do
-      Mixpanel::Client.new('api_key' => 'test_key', 'api_secret' => 'test_secret').should_not{raise_error}
+      Mixpanel::Client.new('api_key' => 'test_key', 'api_secret' => 'test_secret').should_not { raise_error }
     end
 
     it 'should set a parallel option as false by default' do
@@ -46,7 +46,7 @@ describe Mixpanel::Client do
                              unit: 'hour',
                              interval: 24
       )
-      data.should == {"data"=>{"series"=>[], "values"=>{}}, "legend_size"=>0}
+      data.should == { 'data' => { 'series' => [], 'values' => {} }, 'legend_size' => 0 }
     end
 
     it 'should work when it receives an integer response on import' do
@@ -69,7 +69,7 @@ describe Mixpanel::Client do
       data = @client.request('events/top',
                              type: 'general'
       )
-      data.should == {"events"=>[], "type"=>"general"}
+      data.should == { 'events' => [], 'type' => 'general' }
     end
 
     it 'does not modify the provided options' do
@@ -93,7 +93,7 @@ describe Mixpanel::Client do
                                type: 'general',
                                expire: expiry
         )
-        data.should == {"events"=>[], "type"=>"general"}
+        data.should == { 'events' => [], 'type' => 'general' }
       end
 
       specify 'Mixpanel::URI instance should receive the custom expiry time in the options[:expiry] instead of 600s' do
@@ -108,12 +108,12 @@ describe Mixpanel::Client do
       end
     end
 
-    context "with parallel option enabled" do
+    context 'with parallel option enabled' do
       before :all do
         @parallel_client = Mixpanel::Client.new(api_key: 'test_key', api_secret: 'test_secret', parallel: true)
       end
 
-      it "should return Typhoeus::Request" do
+      it 'should return Typhoeus::Request' do
         # Stub Mixpanel request
         stub_request(:get, /^#{@uri}.*/).to_return(body: '{"legend_size": 0, "data": {"series": [], "values": {}}}')
 
@@ -169,9 +169,9 @@ describe Mixpanel::Client do
 
           @parallel_client.run_parallel_requests
 
-          first_request.response.handled_response.should == {"data"=>{"series"=>["2010-05-29", "2010-05-30", "2010-05-31"], "values"=>{"splash features"=>{"2010-05-29"=>6, "2010-05-30"=>4, "2010-05-31"=>5}, "account-page"=>{"2010-05-30"=>1}}}, "legend_size"=>1}
+          first_request.response.handled_response.should == { 'data' => { 'series' => ['2010-05-29', '2010-05-30', '2010-05-31'], 'values' => { 'splash features' => { '2010-05-29' => 6, '2010-05-30' => 4, '2010-05-31' => 5 }, 'account-page' => { '2010-05-30' => 1 } } }, 'legend_size' => 1 }
 
-          second_request.response.handled_response.should == {"data"=>{"series"=>["2010-05-29", "2010-05-30", "2010-05-31"], "values"=>{"splash features"=>{"2010-05-29"=>8, "2010-05-30"=>6, "2010-05-31"=>7}, "account-page"=>{"2010-05-30"=>2}}}, "legend_size"=>2}
+          second_request.response.handled_response.should == { 'data' => { 'series' => ['2010-05-29', '2010-05-30', '2010-05-31'], 'values' => { 'splash features' => { '2010-05-29' => 8, '2010-05-30' => 6, '2010-05-31' => 7 }, 'account-page' => { '2010-05-30' => 2 } } }, 'legend_size' => 2 }
         end
       end
     end
@@ -179,15 +179,15 @@ describe Mixpanel::Client do
 
   describe '#hash_args' do
     it 'should return a hashed string alpha sorted by key names.' do
-      args              = {c: 'see', a: 'ey', d: 'dee', b: 'bee'}
-      args_alpha_sorted = {a: 'ey', b: 'bee', c: 'see', d: 'dee'}
+      args              = { c: 'see', a: 'ey', d: 'dee', b: 'bee' }
+      args_alpha_sorted = { a: 'ey', b: 'bee', c: 'see', d: 'dee' }
       Mixpanel::Client::Utils.generate_signature(args, @client.api_secret).should == Mixpanel::Client::Utils.generate_signature(args_alpha_sorted, @client.api_secret)
     end
   end
 
   describe '#to_hash' do
     it 'should return a ruby hash given json as a string' do
-      Mixpanel::Client::Utils.to_hash('{"a" : "ey", "b" : "bee"}', :json).should == {'a' => 'ey', 'b' => 'bee'}
+      Mixpanel::Client::Utils.to_hash('{"a" : "ey", "b" : "bee"}', :json).should == { 'a' => 'ey', 'b' => 'bee' }
     end
   end
 

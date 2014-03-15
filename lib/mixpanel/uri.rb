@@ -15,7 +15,7 @@ module Mixpanel
     end
 
     def self.encode(params)
-      params.map{|key,val| "#{key}=#{CGI.escape(val.to_s)}"}.sort.join('&')
+      params.map { |key, val| "#{key}=#{CGI.escape(val.to_s)}" }.sort.join('&')
     end
 
     def self.get(uri)

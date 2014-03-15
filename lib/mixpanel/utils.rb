@@ -20,7 +20,7 @@ module Mixpanel
       #
       # @return [String] md5 hash signature required by mixpanel data API
       def self.generate_signature(args, api_secret)
-        Digest::MD5.hexdigest(args.map{|key,val| "#{key}=#{val}"}.sort.join + api_secret)
+        Digest::MD5.hexdigest(args.map { |key, val| "#{key}=#{val}" }.sort.join + api_secret)
       end
 
       # Return a JSON object or a string depending on a given format

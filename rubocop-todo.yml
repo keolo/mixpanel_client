@@ -14,56 +14,6 @@ LineLength:
 MethodLength:
   Max: 13
 
-# Offense count: 1
-# Cop supports --auto-correct.
-#RedundantSelf:
-#  Enabled: false
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-#SignalException:
-#  Enabled: false
-
-# Offense count: 2
-# Cop supports --auto-correct.
-SpaceAfterComma:
-  Enabled: false
-
-# Offense count: 28
-# Cop supports --auto-correct.
-SpaceAroundOperators:
-  Enabled: false
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-SpaceBeforeBlockBraces:
-  Enabled: false
-
-# Offense count: 6
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, EnforcedStyleForEmptyBraces, SpaceBeforeBlockParameters.
-SpaceInsideBlockBraces:
-  Enabled: false
-
-# Offense count: 48
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces, SupportedStyles.
-SpaceInsideHashLiteralBraces:
-  Enabled: false
-
-# Offense count: 39
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-StringLiterals:
-  Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-TrailingBlankLines:
-  Enabled: false
-
 # Offense count: 2
 Void:
   Enabled: false

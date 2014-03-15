@@ -87,13 +87,13 @@ module Mixpanel
         if response.success?
           Utils.to_hash(response.body, @format)
         elsif response.timed_out?
-          raise TimeoutError
+          fail TimeoutError
         elsif response.code == 0
           # Could not get an http response, something's wrong.
-          raise HTTPError, response.curl_error_message
+          fail HTTPError, response.curl_error_message
         else
           # Received a non-successful http response.
-          raise HTTPError, response.body.present? ? JSON.parse(response.body)['error'] : response.code.to_s
+          fail HTTPError, response.body.present? ? JSON.parse(response.body)['error'] : response.code.to_s
         end
       end
       request

@@ -24,9 +24,10 @@ module Mixpanel
     #
     # @param [Hash] config consisting of an 'api_key' and an 'api_secret'
     def initialize(config)
-      @api_key    = config[:api_key]
-      @api_secret = config[:api_secret]
+      @api_key    = config[:api_key] || config["api_key"]
+      @api_secret = config[:api_secret] || config["api_secret"]
       @parallel = config[:parallel] || false
+      raise ConfigurationError if @api_key.nil? || @api_secret.nil?
     end
 
     # Return mixpanel data as a JSON object or CSV string

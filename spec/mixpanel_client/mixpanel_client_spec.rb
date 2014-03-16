@@ -36,23 +36,21 @@ describe Mixpanel::Client do
 
   context 'when making an invalid request' do
     it 'should raise an error when API key is null' do
-      data = lambda do
-        client = Mixpanel::Client.new(
-          api_key: nil,
+      expect do
+        Mixpanel::Client.new(
+          api_key:    nil,
           api_secret: 'test_secret'
         )
-      end
-      data.should raise_error
+      end.to raise_error
     end
 
     it 'should raise an error when API secret is null' do
-      data = lambda do
-        client = Mixpanel::Client.new(
-          api_key: 'test_key',
+      expect do
+        Mixpanel::Client.new(
+          api_key:    'test_key',
           api_secret: nil
         )
-      end
-      data.should raise_error
+      end.to raise_error
     end
 
     it 'should return an argument error "Wrong number of arguments" if using
@@ -63,12 +61,16 @@ describe Mixpanel::Client do
           body: '{"legend_size": 0, "data": {"series": [], "values": {}}}'
         )
 
-      data = lambda do@client.request(nil, :events,
-                                      event: '["test-event"]',
-                                      unit: 'hour',
-                                      interval: 24
+      data = lambda do
+        @client.request(
+          nil,
+          :events,
+          event: '["test-event"]',
+          unit: 'hour',
+          interval: 24
         )
       end
+
       data.should raise_error(ArgumentError)
     end
   end
@@ -82,11 +84,13 @@ describe Mixpanel::Client do
         )
 
       # No endpoint
-      data = @client.request('events',
-                             event: '["test-event"]',
-                             unit: 'hour',
-                             interval: 24
+      data = @client.request(
+        'events',
+        event: '["test-event"]',
+        unit: 'hour',
+        interval: 24
       )
+
       data.should eq(
         'data' => {
           'series' => [],
@@ -101,10 +105,12 @@ describe Mixpanel::Client do
       # Stub Mixpanel import request to return a realistic response
       stub_request(:get, /^#{@import_uri}.*/).to_return(body: '1')
 
-      data = @client.request('import',
-                             data: 'base64_encoded_data',
-                             api_key: 'test_key'
+      data = @client.request(
+        'import',
+        data: 'base64_encoded_data',
+        api_key: 'test_key'
       )
+
       data.should == [1]
     end
 
@@ -173,9 +179,11 @@ describe Mixpanel::Client do
           args.pop[:expire].should eq expiry.to_i
           true
         end.and_return(fake_url)
-        @client.request('events/top',
-                        type: 'general',
-                        expire: expiry
+
+        @client.request(
+          'events/top',
+          type: 'general',
+          expire: expiry
         )
       end
     end

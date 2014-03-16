@@ -13,20 +13,22 @@ config = YAML.load_file(File.join(
 ))['mixpanel']
 
 client = Mixpanel::Client.new(
-  api_key: config[:api_key],
+  api_key:    config[:api_key],
   api_secret: config[:api_secret],
-  parallel: true
+  parallel:   true
 )
 
-f = client.request('events/top',
-                   type: 'general'
+uno = client.request(
+  'events/top',
+  type: 'general'
 )
 
-s = client.request('events/names',
-                   type: 'general'
+dos = client.request(
+  'events/names',
+  type: 'general'
 )
 
 client.run_parallel_requests
 
-puts f.response.handled_response.inspect
-puts s.response.handled_response.inspect
+puts uno.response.handled_response.inspect
+puts dos.response.handled_response.inspect

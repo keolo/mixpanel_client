@@ -1,6 +1,6 @@
 # For now we're ignoring rules in the following file. We should gradually
 # remove rules over time so that we don't need this file anymore.
-inherit_from: rubocop-todo.yml
+#inherit_from: rubocop-todo.yml
 
 AllCops:
   Includes:

@@ -35,6 +35,26 @@ describe Mixpanel::Client do
   end
 
   context 'when making an invalid request' do
+    it 'should raise an error when API key is null' do
+      data = lambda do
+        client = Mixpanel::Client.new(
+          api_key: nil,
+          api_secret: 'test_secret'
+        )
+      end
+      data.should raise_error
+    end
+
+    it 'should raise an error when API secret is null' do
+      data = lambda do
+        client = Mixpanel::Client.new(
+          api_key: 'test_key',
+          api_secret: nil
+        )
+      end
+      data.should raise_error
+    end
+
     it 'should return an argument error "Wrong number of arguments" if using
         the deprecated usage' do
       # Stub Mixpanel request

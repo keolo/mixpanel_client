@@ -9,8 +9,8 @@
 module Mixpanel
   # Return metrics from Mixpanel Data API
   class Client
-    BASE_URI = 'https://mixpanel.com/api/2.0'
-    DATA_URI = 'https://data.mixpanel.com/api/2.0'
+    BASE_URI   = 'https://mixpanel.com/api/2.0'
+    DATA_URI   = 'https://data.mixpanel.com/api/2.0'
     IMPORT_URI = 'https://api.mixpanel.com'
 
     attr_reader   :uri

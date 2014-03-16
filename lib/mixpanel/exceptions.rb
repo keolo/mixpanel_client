@@ -12,4 +12,5 @@ module Mixpanel
   class HTTPError < Error; end
   class TimeoutError < Error; end
   class ParseError < Error; end
+  class ConfigurationError < Error; end
 end

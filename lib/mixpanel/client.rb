@@ -56,6 +56,7 @@ module Mixpanel
     end
 
     def make_parallel_request
+      require 'typhoeus'
       parallel_request = prepare_parallel_request
       hydra.queue parallel_request
       parallel_request

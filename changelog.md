@@ -1,6 +1,7 @@
 ### v4.1.0
  * Drop support for config keys to be strings. Use symbols instead
  * Fixed some rubocop offences
+ * Require Typhoeus when used
 
 ### v4.0.1
  * Raise ConfigurationError if api_key or api_secret are not present

@@ -11,13 +11,6 @@ describe Mixpanel::Client do
   end
 
   context 'when initializing a new Mixpanel::Client' do
-    it 'should not raise an exception if a hash is given' do
-      Mixpanel::Client.new(
-        'api_key' => 'test_key',
-        'api_secret' => 'test_secret'
-      ).should_not { raise_error }
-    end
-
     it 'should set a parallel option as false by default' do
       Mixpanel::Client.new(
         api_key: 'test_key',

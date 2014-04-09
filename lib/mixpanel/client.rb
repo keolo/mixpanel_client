@@ -24,9 +24,9 @@ module Mixpanel
     #
     # @param [Hash] config consisting of an 'api_key' and an 'api_secret'
     def initialize(config)
-      @api_key    = config[:api_key]    || config['api_key']
-      @api_secret = config[:api_secret] || config['api_secret']
-      @parallel   = config[:parallel]   || config['parallel']   || false
+      @api_key    = config[:api_key]
+      @api_secret = config[:api_secret]
+      @parallel   = config[:parallel]   || false
 
       fail ConfigurationError if @api_key.nil? || @api_secret.nil?
     end
@@ -105,10 +105,10 @@ module Mixpanel
         elsif response.timed_out?
           fail TimeoutError
         elsif response.code == 0
-          # Could not get an http response, something's wrong.
+          # Could not get an http response, something's wrong
           fail HTTPError, response.curl_error_message
         else
-          # Received a non-successful http response.
+          # Received a non-successful http response
           if response.body && response.body != ''
             error_message = JSON.parse(response.body)['error']
           else
@@ -139,15 +139,21 @@ module Mixpanel
     #         signature
     def normalize_options(options)
       normalized_options = options.dup
+
       normalized_options
         .merge!(
-          format: @format,
+          format:  @format,
           api_key: @api_key,
-          expire: options[:expire] ? options[:expire].to_i : Time.now.to_i + 600
+          expire:  request_expires_at(normalized_options)
         )
         .merge!(
           sig: Utils.generate_signature(normalized_options, @api_secret)
         )
+    end
+
+    def request_expires_at(options)
+      ten_minutes_from_now = Time.now.to_i + 600
+      options[:expire] ? options[:expire].to_i : ten_minutes_from_now
     end
 
     def self.base_uri_for_resource(resource)

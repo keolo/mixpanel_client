@@ -139,11 +139,15 @@ module Mixpanel
     #         signature
     def normalize_options(options)
       normalized_options = options.dup
-      normalized_options.merge!(
-        format: @format,
-        api_key: @api_key,
-        expire: options[:expire] ? options[:expire].to_i : Time.now.to_i + 600
-      ).merge!(sig: Utils.generate_signature(normalized_options, @api_secret))
+      normalized_options
+        .merge!(
+          format: @format,
+          api_key: @api_key,
+          expire: options[:expire] ? options[:expire].to_i : Time.now.to_i + 600
+        )
+        .merge!(
+          sig: Utils.generate_signature(normalized_options, @api_secret)
+        )
     end
 
     def self.base_uri_for_resource(resource)

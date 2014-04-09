@@ -121,20 +121,8 @@ Run rubocop and fix offences.
 
 
 ## Collaborators and Maintainers
-Feel free to add your name and link here.
+[Contributors](https://github.com/keolo/mixpanel_client/graphs/contributors)
 
-[Keolo Keagy](http://github.com/keolo) (Author)  
-[Hiroshige Umino](https://github.com/yaotti)  
-[Gabor Ratky](https://github.com/rgabo)  
-[Bill DeRusha](https://github.com/bderusha)  
-[Jason Logsdon](https://github.com/jasonlogsdon)  
-[James R](https://github.com/Cev)  
-[Mike Ferrier](http://github.com/mferrier)  
-[Grzegorz Forysinski](http://github.com/railwaymen)  
-[Nathan Chong](http://github.com/paramaw)  
-[Paul McMahon](http://github.com/pwim)  
-[Chad Etzel](http://github.com/jazzychad)  
-[Kevin Burnett](http://github.com/burnettk)  
 
 ## Copyright
 

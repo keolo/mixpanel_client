@@ -65,7 +65,7 @@ module Mixpanel
     def make_normal_request(resource)
       response = URI.get(@uri)
 
-      if %w(export import).include?(resource)
+      if %w(export import).include?(resource) && @format != 'raw'
         response = %Q([#{response.split("\n").join(',')}])
       end
 

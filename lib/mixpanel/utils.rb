@@ -34,7 +34,7 @@ module Mixpanel
       # @param [String] data either CSV or JSON formatted
       # @return [JSON, String] data
       def self.to_hash(data, format)
-        if format == 'csv'
+        if format == 'csv' || format == 'raw'
           data
         else
           begin

@@ -1,3 +1,6 @@
+### v4.1.1
+ * Add raw response
+
 ### v4.1.0
  * Drop support for config keys to be strings. Use symbols instead
  * Fixed some rubocop offences

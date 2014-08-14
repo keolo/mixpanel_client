@@ -1,6 +1,7 @@
 # Mixpanel Data API Client
 
 [![Gem Version](https://badge.fury.io/rb/mixpanel_client.png)](http://badge.fury.io/rb/mixpanel_client)
+[![Code Climate](https://codeclimate.com/github/keolo/mixpanel_client/badges/gpa.svg)](https://codeclimate.com/github/keolo/mixpanel_client)
 
 Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 

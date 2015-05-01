@@ -1,3 +1,6 @@
+### v4.1.2
+ * Removes typhoeus version lock, fixes a "broken" test
+
 ### v4.1.1
  * Add raw response
 
@@ -59,7 +62,7 @@
  * Added options used in segmentation resources.
 
 ### v2.0.0
- * Manually tested compatibility with Mixpanel gem. 
+ * Manually tested compatibility with Mixpanel gem.
 
 ### v2.0.0.beta2
  * Added JSON to gemspec for ruby versions less than 1.9.
@@ -75,5 +78,5 @@
  * Refactored specs
 
 ### v1.0.0
- * Changed "Mixpanel" class name to "MixpanelClient" to prevent naming collision in other 
+ * Changed "Mixpanel" class name to "MixpanelClient" to prevent naming collision in other
    libraries. [a710a84e8ba4b6f018b7](https://github.com/keolo/mixpanel_client/commit/a710a84e8ba4b6f018b7404ab9fabc8f08b4a4f3)

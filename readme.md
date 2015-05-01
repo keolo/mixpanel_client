@@ -1,6 +1,6 @@
 # Mixpanel Data API Client
 
-[![Gem Version](https://badge.fury.io/rb/mixpanel_client.png)](http://badge.fury.io/rb/mixpanel_client)
+[![Gem Version](https://badge.fury.io/rb/mixpanel_client.svg)](http://badge.fury.io/rb/mixpanel_client)
 [![Code Climate](https://codeclimate.com/github/keolo/mixpanel_client/badges/gpa.svg)](https://codeclimate.com/github/keolo/mixpanel_client)
 
 Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
@@ -21,7 +21,7 @@ or if you use a Gemfile
     require 'mixpanel_client'
 
     client = Mixpanel::Client.new(
-      api_key:    'changeme', 
+      api_key:    'changeme',
       api_secret: 'changeme'
     )
 
@@ -68,7 +68,7 @@ You may also make requests in parallel by passing in the `parallel: true` option
     require 'mixpanel_client'
 
     client = Mixpanel::Client.new(
-      api_key:    'changeme', 
+      api_key:    'changeme',
       api_secret: 'changeme',
       parallel:   true
     )
@@ -89,13 +89,13 @@ You may also make requests in parallel by passing in the `parallel: true` option
     )
 
     ...
-    
+
     client.run_parallel_requests
-    
+
     puts first_request.response.handled_response
     puts second_request.response.handled_response
-    puts third_request.response.handled_response    
-    
+    puts third_request.response.handled_response
+
 
 ## Development
 List of rake tasks.

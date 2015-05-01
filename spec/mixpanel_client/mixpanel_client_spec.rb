@@ -168,7 +168,7 @@ describe Mixpanel::Client do
 
       specify 'Mixpanel::URI instance should receive the custom expiry time in
                the options[:expiry] instead of 600s' do
-        Mixpanel::URI.should_receive(:mixpanel).with do |*args|
+        Mixpanel::URI.should_receive(:mixpanel) do |*args|
           args.pop[:expire].should eq expiry.to_i
           true
         end.and_return(fake_url)

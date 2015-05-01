@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ['keolo@kea.gy']
   s.homepage    = 'http://github.com/keolo/mixpanel_client' 
   s.summary     = %q{Ruby Mixpanel API Client Library}
-  s.description = %q{Simple ruby client interface to the Mixpanel API.}
+  s.description = %q{Simple ruby client interface to the Mixpanel Data API.}
 
   s.rubyforge_project = 'mixpanel_client'
 

@@ -19,9 +19,30 @@ module Mixpanel
     end
 
     def self.get(uri)
-      ::URI.parse(uri).read
-    rescue OpenURI::HTTPError => error
-      raise HTTPError, JSON.parse(error.io.read)['error']
+      uri        = URI(uri)
+      enable_ssl = uri.scheme == 'https'
+      string   = ''
+      tempfile = Tempfile.new('mixpanel_export')
+
+      Net::HTTP.start(uri.host, uri.port, use_ssl: enable_ssl) do |http|
+        request  = Net::HTTP::Get.new uri
+
+        http.request(request) do |response|
+          open tempfile, 'w' do |io|
+            response.read_body do |chunk|
+              io.write chunk
+            end
+          end
+        end
+      end
+
+      open(tempfile) do |file|
+        while chunk = file.read(512)
+          string << chunk
+        end
+      end
+
+      string
     end
   end
 end

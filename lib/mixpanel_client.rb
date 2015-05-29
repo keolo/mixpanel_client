@@ -10,7 +10,8 @@
 # Libraries.
 require 'cgi'
 require 'digest/md5'
-require 'open-uri'
+require 'uri'
+require 'net/http'
 require 'json' unless defined?(JSON)
 
 # Mixpanel::Client libraries.

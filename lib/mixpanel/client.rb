@@ -91,7 +91,7 @@ module Mixpanel
     # @options  [Hash] options variables used to make a specific request for
     #           mixpanel data
     # @return   [JSON, String] mixpanel response as a JSON object or CSV string
-    def request_uri(resource, options)
+    def request_uri(resource, options = {} )
       @format = options[:format] || :json
       URI.mixpanel(resource, normalize_options(options))
     end

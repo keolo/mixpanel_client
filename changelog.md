@@ -1,3 +1,6 @@
+### v4.1.3
+ * Make request options optional. Closes #46.
+
 ### v4.1.2
  * Removes typhoeus version lock, fixes a "broken" test
 

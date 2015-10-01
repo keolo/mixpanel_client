@@ -27,6 +27,7 @@ module Mixpanel
       @api_key    = config[:api_key]
       @api_secret = config[:api_secret]
       @parallel   = config[:parallel]   || false
+      @verbose = config[:verbose] || false
 
       fail ConfigurationError if @api_key.nil? || @api_secret.nil?
     end
@@ -93,7 +94,7 @@ module Mixpanel
     # @return   [JSON, String] mixpanel response as a JSON object or CSV string
     def request_uri(resource, options = {} )
       @format = options[:format] || :json
-      URI.mixpanel(resource, normalize_options(options))
+      URI.mixpanel(resource, normalize_options(options), @verbose)
     end
 
     # rubocop:disable MethodLength

@@ -25,6 +25,21 @@ describe Mixpanel::Client do
         parallel: true
       ).parallel.should eq true
     end
+
+    it 'should set a timeout option as nil by default' do
+      Mixpanel::Client.new(
+        api_key: 'test_key',
+        api_secret: 'test_secret'
+      ).timeout.should be_nil
+    end
+
+    it 'should be able to set a timeout option when passed' do
+      Mixpanel::Client.new(
+        api_key: 'test_key',
+        api_secret: 'test_secret',
+        timeout: 3
+      ).timeout.should eql 3
+    end
   end
 
   context 'when making an invalid request' do

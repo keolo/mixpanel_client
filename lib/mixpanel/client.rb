@@ -14,7 +14,7 @@ module Mixpanel
     IMPORT_URI = 'https://api.mixpanel.com'
 
     attr_reader   :uri
-    attr_accessor :api_key, :api_secret, :parallel
+    attr_accessor :api_key, :api_secret, :parallel, :timeout
 
     # Configure the client
     #
@@ -27,6 +27,7 @@ module Mixpanel
       @api_key    = config[:api_key]
       @api_secret = config[:api_secret]
       @parallel   = config[:parallel]   || false
+      @timeout    = config[:timeout]    || nil
 
       fail ConfigurationError if @api_key.nil? || @api_secret.nil?
     end
@@ -63,7 +64,7 @@ module Mixpanel
     end
 
     def make_normal_request(resource)
-      response = URI.get(@uri)
+      response = URI.get(@uri, @timeout)
 
       if %w(export import).include?(resource) && @format != 'raw'
         response = %Q([#{response.split("\n").join(',')}])

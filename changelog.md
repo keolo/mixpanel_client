@@ -1,3 +1,6 @@
+### v4.1.4
+ * Add timeout option: Merged PR #48
+
 ### v4.1.3
  * Make request options optional. Closes #46.
 

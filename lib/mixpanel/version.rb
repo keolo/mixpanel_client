@@ -10,6 +10,6 @@ module Mixpanel
   # Return metrics from Mixpanel Data API
   class Client
     # Mixpanel::Client library version
-    VERSION = '4.1.3'
+    VERSION = '4.1.4'
   end
 end

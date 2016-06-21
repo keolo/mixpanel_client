@@ -5,7 +5,8 @@ describe Mixpanel::URI do
   describe '.mixpanel' do
     it 'should return a properly formatted mixpanel uri as a string (without an
         endpoint)' do
-      resource, params  = ['events', { c: 'see', a: 'ey' }]
+      resource = 'events'
+      params = { c: 'see', a: 'ey' }
 
       Mixpanel::URI.mixpanel(resource, params).should eq(
         "#{Mixpanel::Client::BASE_URI}/events?a=ey&c=see"
@@ -14,7 +15,8 @@ describe Mixpanel::URI do
 
     it 'should return a properly formatted mixpanel uri as a string (with an
         endpoint)' do
-      resource, params  = ['events/top', { c: 'see', a: 'ey' }]
+      resource = 'events/top'
+      params = { c: 'see', a: 'ey' }
 
       Mixpanel::URI.mixpanel(resource, params).should eq(
         "#{Mixpanel::Client::BASE_URI}/events/top?a=ey&c=see"
@@ -23,7 +25,8 @@ describe Mixpanel::URI do
 
     it 'should return a uri with a different endpoint when doing a raw data
         export' do
-      resource, params  = ['export', { c: 'see', a: 'ey' }]
+      resource = 'export'
+      params = { c: 'see', a: 'ey' }
 
       Mixpanel::URI.mixpanel(resource, params).should eq(
         "#{Mixpanel::Client::DATA_URI}/export?a=ey&c=see"
@@ -32,7 +35,8 @@ describe Mixpanel::URI do
 
     it 'should return a uri with a the correct endpoint when doing an
         import' do
-      resource, params  = ['import', { c: 'see', a: 'ey' }]
+      resource = 'import'
+      params = { c: 'see', a: 'ey' }
       Mixpanel::URI.mixpanel(resource, params).should eq(
         "#{Mixpanel::Client::IMPORT_URI}/import?a=ey&c=see"
       )
@@ -57,7 +61,6 @@ describe Mixpanel::URI do
     end
 
     context 'when timeout is not nil' do
-
       context 'when the request times out' do
         it 'should return a timeout error' do
           stub_request(:get, 'http://example.com').to_timeout
@@ -75,7 +78,6 @@ describe Mixpanel::URI do
           Mixpanel::URI.get('http://example.com', 3).should eq 'something'
         end
       end
-
     end
   end
 end

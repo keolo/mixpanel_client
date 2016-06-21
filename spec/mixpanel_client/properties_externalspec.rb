@@ -5,11 +5,11 @@ WebMock.allow_net_connect!
 describe 'External calls to mixpanel' do
   before :all do
     config = YAML.load_file(File.join(
-      File.dirname(__FILE__),
-      '..',
-      '..',
-      'config',
-      'mixpanel.yml'
+                              File.dirname(__FILE__),
+                              '..',
+                              '..',
+                              'config',
+                              'mixpanel.yml'
     ))['mixpanel']
 
     config.should_not be_nil
@@ -34,7 +34,7 @@ describe 'External calls to mixpanel' do
                              interval: 24,
                              limit: 5,
                              bucket: 'kicked'
-      )
+                            )
       data.should_not be_a Exception
     end
   end

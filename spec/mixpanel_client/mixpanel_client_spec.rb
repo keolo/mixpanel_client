@@ -331,9 +331,9 @@ describe Mixpanel::Client do
       )
 
       sorted_signature = Mixpanel::Client::Utils.generate_signature(
-          args_alpha_sorted,
-          @client.api_secret
-        )
+        args_alpha_sorted,
+        @client.api_secret
+      )
 
       unsorted_signature.should eq sorted_signature
     end

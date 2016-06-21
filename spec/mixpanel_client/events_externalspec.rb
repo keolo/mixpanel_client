@@ -5,11 +5,11 @@ WebMock.allow_net_connect!
 describe 'External calls to mixpanel' do
   before :all do
     config = YAML.load_file(File.join(
-      File.dirname(__FILE__),
-      '..',
-      '..',
-      'config',
-      'mixpanel.yml'
+                              File.dirname(__FILE__),
+                              '..',
+                              '..',
+                              'config',
+                              'mixpanel.yml'
     ))['mixpanel']
 
     config.should_not be_nil
@@ -30,7 +30,7 @@ describe 'External calls to mixpanel' do
                              type: 'general',
                              unit: 'hour',
                              interval: 24
-      )
+                            )
       data.should_not be_a Exception
     end
 
@@ -41,7 +41,7 @@ describe 'External calls to mixpanel' do
                              unit: 'hour',
                              interval: 24,
                              format: 'csv'
-      )
+                            )
       data.should_not be_a Exception
     end
 
@@ -52,7 +52,7 @@ describe 'External calls to mixpanel' do
                              unit: 'hour',
                              interval: 24,
                              bucket: 'test'
-      )
+                            )
       data.should_not be_a Exception
     end
 
@@ -60,7 +60,7 @@ describe 'External calls to mixpanel' do
       data = @client.request('events/top',
                              type: 'general',
                              limit: 10
-      )
+                            )
       data.should_not be_a Exception
     end
 
@@ -70,7 +70,7 @@ describe 'External calls to mixpanel' do
                              unit: 'hour',
                              interval: 24,
                              limit: 10
-      )
+                            )
       data.should_not be_a Exception
     end
 
@@ -81,7 +81,7 @@ describe 'External calls to mixpanel' do
                              type: 'general',
                              unit: 'hour',
                              interval: 24
-      )
+                            )
       data.should_not be_a Exception
     end
 
@@ -93,7 +93,7 @@ describe 'External calls to mixpanel' do
                              unit: 'hour',
                              interval: 24,
                              format: 'csv'
-      )
+                            )
       data.should_not be_a Exception
     end
   end

@@ -13,7 +13,7 @@ module Mixpanel
     DATA_URI   = 'https://data.mixpanel.com/api/2.0'
     IMPORT_URI = 'https://api.mixpanel.com'
 
-    attr_reader   :uri
+    attr_reader :uri
     attr_accessor :api_key, :api_secret, :parallel, :timeout
 
     # Configure the client
@@ -26,8 +26,8 @@ module Mixpanel
     def initialize(config)
       @api_key    = config[:api_key]
       @api_secret = config[:api_secret]
-      @parallel   = config[:parallel]   || false
-      @timeout    = config[:timeout]    || nil
+      @parallel   = config[:parallel] || false
+      @timeout    = config[:timeout] || nil
 
       fail ConfigurationError if @api_key.nil? || @api_secret.nil?
     end
@@ -67,7 +67,7 @@ module Mixpanel
       response = URI.get(@uri, @timeout)
 
       if %w(export import).include?(resource) && @format != 'raw'
-        response = %Q([#{response.split("\n").join(',')}])
+        response = %([#{response.split("\n").join(',')}])
       end
 
       Utils.to_hash(response, @format)
@@ -92,7 +92,7 @@ module Mixpanel
     # @options  [Hash] options variables used to make a specific request for
     #           mixpanel data
     # @return   [JSON, String] mixpanel response as a JSON object or CSV string
-    def request_uri(resource, options = {} )
+    def request_uri(resource, options = {})
       @format = options[:format] || :json
       URI.mixpanel(resource, normalize_options(options))
     end

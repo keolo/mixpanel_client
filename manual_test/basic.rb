@@ -5,10 +5,10 @@ require 'mixpanel_client'
 require 'yaml'
 
 config = YAML.load_file(File.join(
-  File.dirname(__FILE__),
-  '..',
-  'config',
-  'mixpanel.yml'
+                          File.dirname(__FILE__),
+                          '..',
+                          'config',
+                          'mixpanel.yml'
 ))['mixpanel']
 
 client = Mixpanel::Client.new(
@@ -21,6 +21,6 @@ data = client.request('events/properties',
                       type:     'general',
                       unit:     'hour',
                       name:     'test'
-)
+                     )
 
 puts data.inspect

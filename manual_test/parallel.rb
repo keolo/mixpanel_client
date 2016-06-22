@@ -5,11 +5,12 @@ require 'mixpanel_client'
 require 'yaml'
 require 'typhoeus'
 
-config = YAML.load_file(File.join(
-                          File.dirname(__FILE__),
-                          '..',
-                          'config',
-                          'mixpanel.yml'
+config = YAML.load_file(
+  File.join(
+    File.dirname(__FILE__),
+    '..',
+    'config',
+    'mixpanel.yml'
 ))['mixpanel']
 
 client = Mixpanel::Client.new(

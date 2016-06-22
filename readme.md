@@ -2,6 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/mixpanel_client.svg)](http://badge.fury.io/rb/mixpanel_client)
 [![Code Climate](https://codeclimate.com/github/keolo/mixpanel_client/badges/gpa.svg)](https://codeclimate.com/github/keolo/mixpanel_client)
+[ ![Codeship Status for keolo/mixpanel_client](https://codeship.com/projects/4d247060-1ad9-0134-e1c3-0e8ad2af7d49/status?branch=master)](https://codeship.com/projects/159479)
 
 Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 

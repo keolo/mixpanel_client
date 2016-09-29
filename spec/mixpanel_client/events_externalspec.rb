@@ -12,7 +12,7 @@ describe 'External calls to mixpanel' do
                               'mixpanel.yml'
     ))['mixpanel']
 
-    config.should_not be_nil
+    expect(config).to_not be_nil
     @client = Mixpanel::Client.new(config)
   end
 
@@ -21,7 +21,7 @@ describe 'External calls to mixpanel' do
       data = lambda do
         @client.request('events', {})
       end
-      data.should raise_error(Mixpanel::HTTPError)
+      expect(data).to raise_error(Mixpanel::HTTPError)
     end
 
     it 'should return events' do
@@ -31,7 +31,7 @@ describe 'External calls to mixpanel' do
                              unit: 'hour',
                              interval: 24
                             )
-      data.should_not be_a Exception
+      expect(data).to_not be_a Exception
     end
 
     it 'should return events in csv format' do
@@ -42,7 +42,7 @@ describe 'External calls to mixpanel' do
                              interval: 24,
                              format: 'csv'
                             )
-      data.should_not be_a Exception
+      expect(data).to_not be_a Exception
     end
 
     it 'should return events with optional bucket' do
@@ -53,7 +53,7 @@ describe 'External calls to mixpanel' do
                              interval: 24,
                              bucket: 'test'
                             )
-      data.should_not be_a Exception
+      expect(data).to_not be_a Exception
     end
 
     it 'should return top events' do
@@ -61,7 +61,7 @@ describe 'External calls to mixpanel' do
                              type: 'general',
                              limit: 10
                             )
-      data.should_not be_a Exception
+      expect(data).to_not be_a Exception
     end
 
     it 'should return names' do
@@ -71,7 +71,7 @@ describe 'External calls to mixpanel' do
                              interval: 24,
                              limit: 10
                             )
-      data.should_not be_a Exception
+      expect(data).to_not be_a Exception
     end
 
     it 'should return retention' do
@@ -82,7 +82,7 @@ describe 'External calls to mixpanel' do
                              unit: 'hour',
                              interval: 24
                             )
-      data.should_not be_a Exception
+      expect(data).to_not be_a Exception
     end
 
     it 'should return retention in csv format' do
@@ -94,7 +94,7 @@ describe 'External calls to mixpanel' do
                              interval: 24,
                              format: 'csv'
                             )
-      data.should_not be_a Exception
+      expect(data).to_not be_a Exception
     end
   end
 end

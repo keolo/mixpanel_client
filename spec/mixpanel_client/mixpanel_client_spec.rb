@@ -12,33 +12,33 @@ describe Mixpanel::Client do
 
   context 'when initializing a new Mixpanel::Client' do
     it 'should set a parallel option as false by default' do
-      Mixpanel::Client.new(
+      expect(Mixpanel::Client.new(
         api_key: 'test_key',
         api_secret: 'test_secret'
-      ).parallel.should eq false
+      ).parallel).to eq(false)
     end
 
     it 'should be able to set a parallel option when passed' do
-      Mixpanel::Client.new(
+      expect(Mixpanel::Client.new(
         api_key: 'test_key',
         api_secret: 'test_secret',
         parallel: true
-      ).parallel.should eq true
+      ).parallel).to eq(true)
     end
 
     it 'should set a timeout option as nil by default' do
-      Mixpanel::Client.new(
+      expect(Mixpanel::Client.new(
         api_key: 'test_key',
         api_secret: 'test_secret'
-      ).timeout.should be_nil
+      ).timeout).to be_nil
     end
 
     it 'should be able to set a timeout option when passed' do
-      Mixpanel::Client.new(
+      expect(Mixpanel::Client.new(
         api_key: 'test_key',
         api_secret: 'test_secret',
         timeout: 3
-      ).timeout.should eql 3
+      ).timeout).to eql(3)
     end
   end
 
@@ -79,7 +79,7 @@ describe Mixpanel::Client do
         )
       end
 
-      data.should raise_error(ArgumentError)
+      expect(data).to raise_error(ArgumentError)
     end
   end
 
@@ -99,7 +99,7 @@ describe Mixpanel::Client do
         interval: 24
       )
 
-      data.should eq(
+      expect(data).to eq(
         'data' => {
           'series' => [],
           'values' => {}
@@ -119,7 +119,7 @@ describe Mixpanel::Client do
         api_key: 'test_key'
       )
 
-      data.should == [1]
+      expect(data).to eq([1])
     end
 
     it 'should work with an endpoint, method, and type' do
@@ -135,7 +135,7 @@ describe Mixpanel::Client do
         type: 'general'
       )
 
-      data.should eq(
+      expect(data).to eq(
         'events' => [],
         'type'   => 'general'
       )
@@ -183,7 +183,7 @@ describe Mixpanel::Client do
 
       specify 'Mixpanel::URI instance should receive the custom expiry time in
                the options[:expiry] instead of 600s' do
-        Mixpanel::URI.should_receive(:mixpanel) do |*args|
+        expect(Mixpanel::URI).to receive(:mixpanel) do |*args|
           args.pop[:expire].should eq expiry.to_i
           true
         end.and_return(fake_url)
@@ -220,7 +220,7 @@ describe Mixpanel::Client do
           interval: 24
         )
 
-        data.should be_a Typhoeus::Request
+        expect(data).to be_a Typhoeus::Request
       end
 
       describe '#hydra' do
@@ -341,10 +341,10 @@ describe Mixpanel::Client do
 
   describe '#to_hash' do
     it 'should return a ruby hash given json as a string' do
-      Mixpanel::Client::Utils.to_hash(
+      expect(Mixpanel::Client::Utils.to_hash(
         '{"a" : "ey", "b" : "bee"}',
         :json
-      ).should eq(
+      )).to eq(
         'a' => 'ey',
         'b' => 'bee'
       )

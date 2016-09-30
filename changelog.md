@@ -1,3 +1,7 @@
+### v4.1.5
+ * Use new authentication method for mixpanel. Fixes #52.
+ * Use `expect` rspec syntax
+
 ### v4.1.4
  * Add timeout option: Merged PR #48
 

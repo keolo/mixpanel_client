@@ -64,7 +64,7 @@ module Mixpanel
     end
 
     def make_normal_request(resource)
-      response = URI.get(@uri, @timeout)
+      response = URI.get(@uri, @timeout, @api_secret)
 
       if %w(export import).include?(resource) && @format != 'raw'
         response = %([#{response.split("\n").join(',')}])
@@ -99,7 +99,7 @@ module Mixpanel
 
     # rubocop:disable MethodLength
     def prepare_parallel_request
-      request = ::Typhoeus::Request.new(@uri)
+      request = ::Typhoeus::Request.new(@uri, userpwd: "#{@api_secret}:")
 
       request.on_complete do |response|
         if response.success?
@@ -145,11 +145,7 @@ module Mixpanel
       normalized_options
         .merge!(
           format:  @format,
-          api_key: @api_key,
           expire:  request_expires_at(normalized_options)
-        )
-        .merge!(
-          sig: Utils.generate_signature(normalized_options, @api_secret)
         )
     end
 

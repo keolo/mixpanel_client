@@ -57,7 +57,7 @@ describe Mixpanel::URI do
     it 'should return a string response' do
       stub_request(:get, 'http://example.com').to_return(body: 'something')
 
-      Mixpanel::URI.get('http://example.com', nil).should eq 'something'
+      Mixpanel::URI.get('http://example.com', nil, 'secret').should eq 'something'
     end
 
     context 'when timeout is not nil' do
@@ -66,7 +66,7 @@ describe Mixpanel::URI do
           stub_request(:get, 'http://example.com').to_timeout
 
           expect do
-            Mixpanel::URI.get('http://example.com', 3)
+            Mixpanel::URI.get('http://example.com', 3, 'secret')
           end.to raise_error Timeout::Error
         end
       end
@@ -75,7 +75,7 @@ describe Mixpanel::URI do
         it 'should return a string response' do
           stub_request(:get, 'http://example.com').to_return(body: 'something')
 
-          Mixpanel::URI.get('http://example.com', 3).should eq 'something'
+          Mixpanel::URI.get('http://example.com', 3, 'secret').should eq 'something'
         end
       end
     end

@@ -11,7 +11,8 @@ config = YAML.load_file(
     '..',
     'config',
     'mixpanel.yml'
-))['mixpanel']
+  )
+)['mixpanel']
 
 client = Mixpanel::Client.new(
   api_key:    config[:api_key],

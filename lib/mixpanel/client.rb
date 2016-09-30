@@ -9,12 +9,22 @@
 module Mixpanel
   # Return metrics from Mixpanel Data API
   class Client
-    BASE_URI   = 'https://mixpanel.com/api/2.0'
-    DATA_URI   = 'https://data.mixpanel.com/api/2.0'
-    IMPORT_URI = 'https://api.mixpanel.com'
+    BASE_URI   = 'https://mixpanel.com/api/2.0'.freeze
+    DATA_URI   = 'https://data.mixpanel.com/api/2.0'.freeze
+    IMPORT_URI = 'https://api.mixpanel.com'.freeze
 
     attr_reader :uri
     attr_accessor :api_key, :api_secret, :parallel, :timeout
+
+    def self.base_uri_for_resource(resource)
+      if resource == 'export'
+        DATA_URI
+      elsif resource == 'import'
+        IMPORT_URI
+      else
+        BASE_URI
+      end
+    end
 
     # Configure the client
     #
@@ -29,7 +39,7 @@ module Mixpanel
       @parallel   = config[:parallel] || false
       @timeout    = config[:timeout] || nil
 
-      fail ConfigurationError if @api_key.nil? || @api_secret.nil?
+      raise ConfigurationError if @api_key.nil? || @api_secret.nil?
     end
 
     # Return mixpanel data as a JSON object or CSV string
@@ -97,6 +107,7 @@ module Mixpanel
       URI.mixpanel(resource, normalize_options(options))
     end
 
+    # TODO: Extract and refactor
     # rubocop:disable MethodLength
     def prepare_parallel_request
       request = ::Typhoeus::Request.new(@uri, userpwd: "#{@api_secret}:")
@@ -105,19 +116,19 @@ module Mixpanel
         if response.success?
           Utils.to_hash(response.body, @format)
         elsif response.timed_out?
-          fail TimeoutError
+          raise TimeoutError
         elsif response.code == 0
           # Could not get an http response, something's wrong
-          fail HTTPError, response.curl_error_message
+          raise HTTPError, response.curl_error_message
         else
           # Received a non-successful http response
-          if response.body && response.body != ''
-            error_message = JSON.parse(response.body)['error']
-          else
-            error_message = response.code.to_s
-          end
+          error_message = if response.body && response.body != ''
+                            JSON.parse(response.body)['error']
+                          else
+                            response.code.to_s
+                          end
 
-          fail HTTPError, error_message
+          raise HTTPError, error_message
         end
       end
 
@@ -152,16 +163,6 @@ module Mixpanel
     def request_expires_at(options)
       ten_minutes_from_now = Time.now.to_i + 600
       options[:expire] ? options[:expire].to_i : ten_minutes_from_now
-    end
-
-    def self.base_uri_for_resource(resource)
-      if resource == 'export'
-        DATA_URI
-      elsif resource == 'import'
-        IMPORT_URI
-      else
-        BASE_URI
-      end
     end
   end
 end

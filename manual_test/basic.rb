@@ -20,7 +20,6 @@ data = client.request('events/properties',
                       event:    '["test-event"]',
                       type:     'general',
                       unit:     'hour',
-                      name:     'test'
-                     )
+                      name:     'test')
 
 puts data.inspect

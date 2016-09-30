@@ -33,8 +33,7 @@ describe 'External calls to mixpanel' do
                              unit: 'hour',
                              interval: 24,
                              limit: 5,
-                             bucket: 'kicked'
-                            )
+                             bucket: 'kicked')
       data.should_not be_a Exception
     end
   end

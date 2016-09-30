@@ -29,8 +29,7 @@ describe 'External calls to mixpanel' do
                              event: '["test-event"]',
                              type: 'general',
                              unit: 'hour',
-                             interval: 24
-                            )
+                             interval: 24)
       expect(data).to_not be_a Exception
     end
 
@@ -40,8 +39,7 @@ describe 'External calls to mixpanel' do
                              type: 'general',
                              unit: 'hour',
                              interval: 24,
-                             format: 'csv'
-                            )
+                             format: 'csv')
       expect(data).to_not be_a Exception
     end
 
@@ -51,16 +49,14 @@ describe 'External calls to mixpanel' do
                              type: 'general',
                              unit: 'hour',
                              interval: 24,
-                             bucket: 'test'
-                            )
+                             bucket: 'test')
       expect(data).to_not be_a Exception
     end
 
     it 'should return top events' do
       data = @client.request('events/top',
                              type: 'general',
-                             limit: 10
-                            )
+                             limit: 10)
       expect(data).to_not be_a Exception
     end
 
@@ -69,8 +65,7 @@ describe 'External calls to mixpanel' do
                              type: 'general',
                              unit: 'hour',
                              interval: 24,
-                             limit: 10
-                            )
+                             limit: 10)
       expect(data).to_not be_a Exception
     end
 
@@ -80,8 +75,7 @@ describe 'External calls to mixpanel' do
                              event: '["test-event"]',
                              type: 'general',
                              unit: 'hour',
-                             interval: 24
-                            )
+                             interval: 24)
       expect(data).to_not be_a Exception
     end
 
@@ -92,8 +86,7 @@ describe 'External calls to mixpanel' do
                              type: 'general',
                              unit: 'hour',
                              interval: 24,
-                             format: 'csv'
-                            )
+                             format: 'csv')
       expect(data).to_not be_a Exception
     end
   end

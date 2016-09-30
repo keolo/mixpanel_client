@@ -342,8 +342,8 @@ describe Mixpanel::Client do
   describe '#to_hash' do
     it 'should return a ruby hash given json as a string' do
       expect(Mixpanel::Client::Utils.to_hash(
-        '{"a" : "ey", "b" : "bee"}',
-        :json
+               '{"a" : "ey", "b" : "bee"}',
+               :json
       )).to eq(
         'a' => 'ey',
         'b' => 'bee'

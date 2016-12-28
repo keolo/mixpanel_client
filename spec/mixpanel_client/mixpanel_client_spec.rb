@@ -43,7 +43,7 @@ describe Mixpanel::Client do
         Mixpanel::Client.new(
           api_secret: nil
         )
-      end.to raise_error
+      end.to raise_error(Mixpanel::ConfigurationError)
     end
 
     it 'should return an argument error "Wrong number of arguments" if using
@@ -167,7 +167,7 @@ describe Mixpanel::Client do
 
       describe '#hydra' do
         it 'should return a Typhoeus::Hydra object' do
-          @parallel_client.hydra.should be_a Typhoeus::Hydra
+          expect(@parallel_client.hydra).to be_a Typhoeus::Hydra
         end
       end
 
@@ -224,7 +224,7 @@ describe Mixpanel::Client do
 
           @parallel_client.run_parallel_requests
 
-          first_request.response.handled_response.should eq(
+          expect(first_request.response.handled_response).to eq(
             'data' => {
               'series' => %w(2010-05-29 2010-05-30 2010-05-31),
               'values' => {
@@ -241,7 +241,7 @@ describe Mixpanel::Client do
             'legend_size' => 1
           )
 
-          second_request.response.handled_response.should eq(
+          expect(second_request.response.handled_response).to eq(
             'data' => {
               'series' => %w(2010-05-29 2010-05-30 2010-05-31),
               'values' => {
@@ -277,7 +277,7 @@ describe Mixpanel::Client do
         @client.api_secret
       )
 
-      unsorted_signature.should eq sorted_signature
+      expect(unsorted_signature).to eq sorted_signature
     end
   end
 

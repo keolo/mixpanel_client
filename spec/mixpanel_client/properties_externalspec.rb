@@ -12,7 +12,7 @@ describe 'External calls to mixpanel' do
                               'mixpanel.yml'
     ))['mixpanel']
 
-    config.should_not be_nil
+    expect(config).not_to be_nil
     @client = Mixpanel::Client.new(config)
   end
 
@@ -21,7 +21,7 @@ describe 'External calls to mixpanel' do
       data = lambda do
         @client.request('properties', {})
       end
-      data.should raise_error(Mixpanel::HTTPError)
+      expect(data).to raise_error(Mixpanel::HTTPError)
     end
 
     it 'should return events' do
@@ -34,7 +34,7 @@ describe 'External calls to mixpanel' do
                              interval: 24,
                              limit: 5,
                              bucket: 'kicked')
-      data.should_not be_a Exception
+      expect(data().not_to be_a Exception
     end
   end
 end

@@ -3,7 +3,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Mixpanel::Client do
   before :all do
     @client = Mixpanel::Client.new(
-      api_key: 'test_key',
       api_secret: 'test_secret'
     )
 
@@ -13,14 +12,12 @@ describe Mixpanel::Client do
   context 'when initializing a new Mixpanel::Client' do
     it 'should set a parallel option as false by default' do
       expect(Mixpanel::Client.new(
-        api_key: 'test_key',
         api_secret: 'test_secret'
       ).parallel).to eq(false)
     end
 
     it 'should be able to set a parallel option when passed' do
       expect(Mixpanel::Client.new(
-        api_key: 'test_key',
         api_secret: 'test_secret',
         parallel: true
       ).parallel).to eq(true)
@@ -28,14 +25,12 @@ describe Mixpanel::Client do
 
     it 'should set a timeout option as nil by default' do
       expect(Mixpanel::Client.new(
-        api_key: 'test_key',
         api_secret: 'test_secret'
       ).timeout).to be_nil
     end
 
     it 'should be able to set a timeout option when passed' do
       expect(Mixpanel::Client.new(
-        api_key: 'test_key',
         api_secret: 'test_secret',
         timeout: 3
       ).timeout).to eql(3)
@@ -43,19 +38,9 @@ describe Mixpanel::Client do
   end
 
   context 'when making an invalid request' do
-    it 'should raise an error when API key is null' do
-      expect do
-        Mixpanel::Client.new(
-          api_key:    nil,
-          api_secret: 'test_secret'
-        )
-      end.to raise_error
-    end
-
     it 'should raise an error when API secret is null' do
       expect do
         Mixpanel::Client.new(
-          api_key:    'test_key',
           api_secret: nil
         )
       end.to raise_error
@@ -154,52 +139,9 @@ describe Mixpanel::Client do
       end.to_not change { options }
     end
 
-    context 'with a custom expiry time' do
-      # Stub Mixpanel request
-      before do
-        stub_request(:get, /^#{@uri}.*/)
-          .to_return(
-            body: '{"events": [], "type": "general"}'
-          )
-      end
-
-      let(:expiry)   { Time.now + 100_000 }
-      let(:fake_url) { Mixpanel::Client::BASE_URI }
-
-      specify 'Client#request should return a hash with empty events and
-               type' do
-        # With endpoint
-        data = @client.request(
-          'events/top',
-          type: 'general',
-          expire: expiry
-        )
-
-        data.should eq(
-          'events' => [],
-          'type'   => 'general'
-        )
-      end
-
-      specify 'Mixpanel::URI instance should receive the custom expiry time in
-               the options[:expiry] instead of 600s' do
-        expect(Mixpanel::URI).to receive(:mixpanel) do |*args|
-          args.pop[:expire].should eq expiry.to_i
-          true
-        end.and_return(fake_url)
-
-        @client.request(
-          'events/top',
-          type: 'general',
-          expire: expiry
-        )
-      end
-    end
-
     context 'with parallel option enabled' do
       before :all do
         @parallel_client = Mixpanel::Client.new(
-          api_key: 'test_key',
           api_secret: 'test_secret',
           parallel: true
         )

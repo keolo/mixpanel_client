@@ -22,7 +22,6 @@ or if you use a Gemfile
     require 'mixpanel_client'
 
     client = Mixpanel::Client.new(
-      api_key:    'changeme',
       api_secret: 'changeme'
     )
 
@@ -69,7 +68,6 @@ You may also make requests in parallel by passing in the `parallel: true` option
     require 'mixpanel_client'
 
     client = Mixpanel::Client.new(
-      api_key:    'changeme',
       api_secret: 'changeme',
       parallel:   true
     )

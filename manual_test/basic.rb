@@ -12,7 +12,6 @@ config = YAML.load_file(File.join(
 ))['mixpanel']
 
 client = Mixpanel::Client.new(
-  api_key: config[:api_key],
   api_secret: config[:api_secret]
 )
 

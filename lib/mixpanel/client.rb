@@ -14,7 +14,7 @@ module Mixpanel
     IMPORT_URI = 'https://api.mixpanel.com'.freeze
 
     attr_reader :uri
-    attr_accessor :api_key, :api_secret, :parallel, :timeout
+    attr_accessor :api_secret, :parallel, :timeout
 
     def self.base_uri_for_resource(resource)
       if resource == 'export'
@@ -29,17 +29,16 @@ module Mixpanel
     # Configure the client
     #
     # @example
-    #   config = {api_key: '123', api_secret: '456'}
+    #   config = {api_secret: '456'}
     #   client = Mixpanel::Client.new(config)
     #
-    # @param [Hash] config consisting of an 'api_key' and an 'api_secret'
+    # @param [Hash] config consisting of an 'api_secret' and additonal options
     def initialize(config)
-      @api_key    = config[:api_key]
       @api_secret = config[:api_secret]
       @parallel   = config[:parallel] || false
       @timeout    = config[:timeout] || nil
 
-      raise ConfigurationError if @api_key.nil? || @api_secret.nil?
+      raise ConfigurationError, 'api_secret is required' if @api_secret.nil?
     end
 
     # Return mixpanel data as a JSON object or CSV string
@@ -152,17 +151,7 @@ module Mixpanel
     #         signature
     def normalize_options(options)
       normalized_options = options.dup
-
-      normalized_options
-        .merge!(
-          format:  @format,
-          expire:  request_expires_at(normalized_options)
-        )
-    end
-
-    def request_expires_at(options)
-      ten_minutes_from_now = Time.now.to_i + 600
-      options[:expire] ? options[:expire].to_i : ten_minutes_from_now
+      normalized_options.merge!(format: @format)
     end
   end
 end

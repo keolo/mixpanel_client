@@ -34,7 +34,7 @@ describe 'External calls to mixpanel' do
                              interval: 24,
                              limit: 5,
                              bucket: 'kicked')
-      expect(data().not_to be_a Exception
+      expect(data).not_to be_a Exception
     end
   end
 end

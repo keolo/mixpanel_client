@@ -1,3 +1,8 @@
+### v4.1.6
+ * Remove deprecated authentication options. Fixes #55.
+ * Use `expect` rspec syntax
+ * Added codeclimate config
+
 ### v4.1.5
  * Use new authentication method for mixpanel. Fixes #52.
  * Use `expect` rspec syntax

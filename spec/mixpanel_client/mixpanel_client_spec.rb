@@ -262,25 +262,6 @@ describe Mixpanel::Client do
     end
   end
 
-  describe '#hash_args' do
-    it 'should return a hashed string alpha sorted by key names.' do
-      args              = { c: 'see', a: 'ey', d: 'dee', b: 'bee' }
-      args_alpha_sorted = { a: 'ey', b: 'bee', c: 'see', d: 'dee' }
-
-      unsorted_signature = Mixpanel::Client::Utils.generate_signature(
-        args,
-        @client.api_secret
-      )
-
-      sorted_signature = Mixpanel::Client::Utils.generate_signature(
-        args_alpha_sorted,
-        @client.api_secret
-      )
-
-      expect(unsorted_signature).to eq sorted_signature
-    end
-  end
-
   describe '#to_hash' do
     it 'should return a ruby hash given json as a string' do
       expect(Mixpanel::Client::Utils.to_hash(

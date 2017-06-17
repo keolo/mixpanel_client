@@ -23,6 +23,7 @@ or if you use a Gemfile
 
     client = Mixpanel::Client.new(
       api_secret: 'changeme'
+      timeout: 240    # Default is 60 seconds, increase if you get frequent Net::ReadTimeout errors.
     )
 
     data = client.request(

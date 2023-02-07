@@ -27,28 +27,27 @@ or if you use a Gemfile
 
     data = client.request(
       'events/properties',
-      event:     'splash features',
-      name:      'feature',
-      values:    '["uno", "dos"]',
+      event:     'Product Clicked',
+      name:      'product-clicked',
+      values:    '["value1", "value2"]',
       type:      'unique',
       unit:      'day',
-      from_date: '2013-12-1',
-      to_date:   '2014-3-1',
-      limit:     5
+      limit:     5,
+      from_date: '2013-12-1', #<- Date range
+      to_date:   '2014-3-1'   #<-
     )
 
-    puts data.inspect
+The API also supports passing a time interval rather than an explicit date range.
 
-    # The API also supports passing a time interval rather than an explicit date range
     data = client.request(
       'events/properties',
-      event:    'splash features',
-      name:     'feature',
-      values:   '["uno", "dos"]',
+      event:    'Product Clicked',
+      name:     'product-clicked',
+      values:   '["value1", "value2"]',
       type:     'unique',
       unit:     'day',
-      interval: 7,
-      limit:    5
+      limit:    5,
+      interval: 7 #<- Interval
     )
 
 Use the Import API to specify a time in the past. You'll need to include your

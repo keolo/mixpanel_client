@@ -18,11 +18,11 @@ module Mixpanel
 
     def self.base_uri_for_resource(resource)
       if resource == 'export'
-        DATA_URI
+        @@data_uri ? @@data_uri : DATA_URI
       elsif resource == 'import'
-        IMPORT_URI
+        @@import_uri ? @@import_uri : IMPORT_URI
       else
-        BASE_URI
+        @@base_uri ? @@base_uri : BASE_URI
       end
     end
 
@@ -36,6 +36,9 @@ module Mixpanel
     def initialize(config)
       @api_secret = config[:api_secret]
       @timeout    = config[:timeout] || nil
+      @@base_uri   = config[:base_uri] || nil
+      @@data_uri   = config[:data_uri] || nil
+      @@import_uri   = config[:import_uri] || nil
 
       raise ConfigurationError, 'api_secret is required' if @api_secret.nil?
     end

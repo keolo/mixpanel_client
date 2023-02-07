@@ -20,13 +20,15 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
   s.add_runtime_dependency('typhoeus')
-  s.add_development_dependency('bundler', '>=1.5.3')
-  s.add_development_dependency('rake',    '>=10.1.1')
-  s.add_development_dependency('rdoc',    '>=4.1.1')
-  s.add_development_dependency('rspec',   '>=2.5.0')
-  s.add_development_dependency('webmock', '>=1.17.4')
-  s.add_development_dependency('pry',     '>=0.9.12.6')
-  s.add_development_dependency('pry-byebug', '>=1.3.2') if RUBY_VERSION >= '2.0'
-  s.add_development_dependency('pry-stack_explorer', '>=0.4.9')
-  s.add_development_dependency('rubocop', '>=0.19.0')
+  s.add_development_dependency('bundler', '~>2.4')
+  s.add_development_dependency('rake',    '~>13.0')
+  s.add_development_dependency('rdoc',    '~>6.5')
+  s.add_development_dependency('rspec',   '~>3.12')
+  s.add_development_dependency('webmock', '~>3.18')
+  s.add_development_dependency('pry',     '~>0.14')
+  s.add_development_dependency('pry-byebug', '~>3.10')
+  s.add_development_dependency('pry-stack_explorer', '~>0.6')
+  s.add_development_dependency('rubocop', '~>1.41')
+  s.add_development_dependency('rubocop-rake', '~>0.6')
+  s.add_development_dependency('rubocop-rspec', '~>2.18')
 end

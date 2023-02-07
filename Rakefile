@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rubygems'
 require 'rake'
 
@@ -23,6 +25,7 @@ RSpec::Core::RakeTask.new(:rcov) do |spec|
   spec.rcov = true
 end
 
+desc 'Run Rspec test suite'
 task :spec
 task default: :spec
 

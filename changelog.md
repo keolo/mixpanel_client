@@ -1,11 +1,19 @@
-### v4.1.6
- * Remove deprecated authentication options. Fixes #55.
- * Use `expect` rspec syntax
- * Added codeclimate config
+# Changelog
 
-### v4.1.5
- * Use new authentication method for mixpanel. Fixes #52.
- * Use `expect` rspec syntax
+## 5.0.0
+
+- Removed parallel option in favor of having no runtime dependencies (fixes #58)
+- Updated `expect` to use block instead of an argument
+
+## 4.1.6
+
+- Remove deprecated authentication options. Fixes #55
+- Use `expect` rspec syntax
+- Added codeclimate config
+
+## 4.1.5
+- Use new authentication method for mixpanel. Fixes #52.
+- Use `expect` rspec syntax
 
 ### v4.1.4
  * Add timeout option: Merged PR #48

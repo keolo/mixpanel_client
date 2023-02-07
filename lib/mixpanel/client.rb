@@ -14,7 +14,7 @@ module Mixpanel
     IMPORT_URI = 'https://api.mixpanel.com'.freeze
 
     attr_reader :uri
-    attr_accessor :api_secret, :parallel, :timeout
+    attr_accessor :api_secret, :timeout
 
     def self.base_uri_for_resource(resource)
       if resource == 'export'
@@ -35,7 +35,6 @@ module Mixpanel
     # @param [Hash] config consisting of an 'api_secret' and additonal options
     def initialize(config)
       @api_secret = config[:api_secret]
-      @parallel   = config[:parallel] || false
       @timeout    = config[:timeout] || nil
 
       raise ConfigurationError, 'api_secret is required' if @api_secret.nil?
@@ -62,17 +61,7 @@ module Mixpanel
     # @return   [JSON, String] mixpanel response as a JSON object or CSV string
     def request(resource, options)
       @uri = request_uri(resource, options)
-      @parallel ? make_parallel_request : make_normal_request(resource)
-    end
 
-    def make_parallel_request
-      require 'typhoeus'
-      parallel_request = prepare_parallel_request
-      hydra.queue parallel_request
-      parallel_request
-    end
-
-    def make_normal_request(resource)
       response = URI.get(@uri, @timeout, @api_secret)
 
       if %w(export import).include?(resource) && @format != 'raw'
@@ -104,43 +93,6 @@ module Mixpanel
     def request_uri(resource, options = {})
       @format = options[:format] || :json
       URI.mixpanel(resource, normalize_options(options))
-    end
-
-    # TODO: Extract and refactor
-    # rubocop:disable MethodLength
-    def prepare_parallel_request
-      request = ::Typhoeus::Request.new(@uri, userpwd: "#{@api_secret}:")
-
-      request.on_complete do |response|
-        if response.success?
-          Utils.to_hash(response.body, @format)
-        elsif response.timed_out?
-          raise TimeoutError
-        elsif response.code == 0
-          # Could not get an http response, something's wrong
-          raise HTTPError, response.curl_error_message
-        else
-          # Received a non-successful http response
-          error_message = if response.body && response.body != ''
-                            JSON.parse(response.body)['error']
-                          else
-                            response.code.to_s
-                          end
-
-          raise HTTPError, error_message
-        end
-      end
-
-      request
-    end
-    # rubocop:enable MethodLength
-
-    def run_parallel_requests
-      hydra.run
-    end
-
-    def hydra
-      @hydra ||= ::Typhoeus::Hydra.new
     end
 
     private

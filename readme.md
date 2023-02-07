@@ -63,39 +63,7 @@ or if you use a Gemfile
 
 ## Parallel
 
-You may also make requests in parallel by passing in the `parallel: true` option.
-
-    require 'rubygems'
-    require 'mixpanel_client'
-
-    client = Mixpanel::Client.new(
-      api_secret: 'changeme',
-      parallel:   true
-    )
-
-    first_request = client.request(
-      'events/properties',
-      ...
-    )
-
-    second_request = client.request(
-      'events/properties',
-      ...
-    )
-
-    third_request = client.request(
-      'events/properties',
-      ...
-    )
-
-    ...
-
-    client.run_parallel_requests
-
-    puts first_request.response.handled_response
-    puts second_request.response.handled_response
-    puts third_request.response.handled_response
-
+The option to make parallel requests has been removed so that there are no runtime dependencies.
 
 ## Development
 List of rake tasks.

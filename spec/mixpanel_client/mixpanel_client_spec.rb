@@ -10,19 +10,6 @@ describe Mixpanel::Client do
   end
 
   context 'when initializing a new Mixpanel::Client' do
-    it 'should set a parallel option as false by default' do
-      expect(Mixpanel::Client.new(
-        api_secret: 'test_secret'
-      ).parallel).to eq(false)
-    end
-
-    it 'should be able to set a parallel option when passed' do
-      expect(Mixpanel::Client.new(
-        api_secret: 'test_secret',
-        parallel: true
-      ).parallel).to eq(true)
-    end
-
     it 'should set a timeout option as nil by default' do
       expect(Mixpanel::Client.new(
         api_secret: 'test_secret'
@@ -54,7 +41,7 @@ describe Mixpanel::Client do
           body: '{"legend_size": 0, "data": {"series": [], "values": {}}}'
         )
 
-      data = lambda do
+      expect {
         @client.request(
           nil,
           :events,
@@ -62,9 +49,7 @@ describe Mixpanel::Client do
           unit: 'hour',
           interval: 24
         )
-      end
-
-      expect(data).to raise_error(ArgumentError)
+      }.to raise_error(ArgumentError)
     end
   end
 
@@ -137,128 +122,6 @@ describe Mixpanel::Client do
       expect do
         @client.request('events/top', options)
       end.to_not change { options }
-    end
-
-    context 'with parallel option enabled' do
-      before :all do
-        @parallel_client = Mixpanel::Client.new(
-          api_secret: 'test_secret',
-          parallel: true
-        )
-      end
-
-      it 'should return Typhoeus::Request' do
-        # Stub Mixpanel request
-        stub_request(:get, /^#{@uri}.*/)
-          .to_return(
-            body: '{"legend_size": 0, "data": {"series": [], "values": {}}}'
-          )
-
-        # No endpoint
-        data = @parallel_client.request(
-          'events',
-          event: '["test-event"]',
-          unit: 'hour',
-          interval: 24
-        )
-
-        expect(data).to be_a Typhoeus::Request
-      end
-
-      describe '#hydra' do
-        it 'should return a Typhoeus::Hydra object' do
-          expect(@parallel_client.hydra).to be_a Typhoeus::Hydra
-        end
-      end
-
-      describe '#run_parallel_requests' do
-        it 'should run queued requests' do
-          # Stub Mixpanel request
-          stub_request(:any, /^#{@uri}.*/)
-            .to_return(
-              body: '{
-                "legend_size": 1,
-                "data": {
-                  "series": ["2010-05-29","2010-05-30","2010-05-31"],
-                  "values": {
-                    "account-page": {"2010-05-30": 1},
-                    "splash features": {
-                      "2010-05-29": 6,
-                      "2010-05-30": 4,
-                      "2010-05-31": 5
-                    }
-                  }
-                }
-              }'
-            )
-
-          stub_request(:any, /^#{@uri}.*secondevent.*/)
-            .to_return(
-              body: '{
-                "legend_size": 2,
-                "data": {
-                  "series": ["2010-05-29","2010-05-30","2010-05-31"],
-                  "values": {
-                    "account-page": {"2010-05-30": 2},
-                    "splash features": {
-                      "2010-05-29": 8,
-                      "2010-05-30": 6,
-                      "2010-05-31": 7
-                    }
-                  }
-                }
-              }'
-            )
-
-          first_request = @parallel_client.request(
-            'events',
-            event: '["firstevent"]',
-            unit: 'day'
-          )
-
-          second_request = @parallel_client.request(
-            'events',
-            event: '["secondevent"]',
-            unit: 'day'
-          )
-
-          @parallel_client.run_parallel_requests
-
-          expect(first_request.response.handled_response).to eq(
-            'data' => {
-              'series' => %w(2010-05-29 2010-05-30 2010-05-31),
-              'values' => {
-                'splash features' => {
-                  '2010-05-29' => 6,
-                  '2010-05-30' => 4,
-                  '2010-05-31' => 5
-                },
-                'account-page' => {
-                  '2010-05-30' => 1
-                }
-              }
-            },
-            'legend_size' => 1
-          )
-
-          expect(second_request.response.handled_response).to eq(
-            'data' => {
-              'series' => %w(2010-05-29 2010-05-30 2010-05-31),
-              'values' => {
-                'splash features' => {
-                  '2010-05-29' => 8,
-                  '2010-05-30' => 6,
-                  '2010-05-31' => 7
-                },
-                'account-page' => {
-                  '2010-05-30' => 2
-                }
-              }
-            },
-            'legend_size' => 2
-          )
-        end
-      end
     end
   end
 

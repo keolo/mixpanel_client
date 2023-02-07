@@ -51,7 +51,7 @@ The API also supports passing a time interval rather than an explicit date range
     )
 
 Use the Import API to specify a time in the past. You'll need to include your
-API token in the data ([more details](https://mixpanel.com/docs/api-documentation/importing-events-older-than-31-days.)).
+API token in the data ([docs](https://mixpanel.com/docs/api-documentation/importing-events-older-than-31-days.)).
 
 To import, encode the data as JSON and use Base64. Encode the data like this:
 
@@ -73,7 +73,7 @@ You can only import one event at a time.
 
 ## Parallel
 
-The option to make parallel requests has been removed so that there are no runtime dependencies.
+The option to make parallel requests has been removed (in v5) so that there are no runtime dependencies.
 
 ## Development
 

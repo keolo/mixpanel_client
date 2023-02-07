@@ -10,4 +10,4 @@
 - Verify specs pass
 - Run manual tests `lib/mixpanel/manual_test/basic.rb`
 - Run `rake build` to build the gem into the pkg directory
-- Run `rake release[remote]` to build and release to rubygems
+- Run `rake release` to build and release to rubygems

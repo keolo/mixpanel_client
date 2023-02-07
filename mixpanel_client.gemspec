@@ -29,6 +29,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency('pry-byebug', '~>3.10')
   s.add_development_dependency('pry-stack_explorer', '~>0.6')
   s.add_development_dependency('rubocop', '~>1.41')
-  s.add_development_dependency('rubocop-rake', '~>0.6')
-  s.add_development_dependency('rubocop-rspec', '~>2.18')
 end

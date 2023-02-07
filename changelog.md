@@ -12,94 +12,120 @@
 - Added codeclimate config
 
 ## 4.1.5
-- Use new authentication method for mixpanel. Fixes #52.
+
+- Use new authentication method for mixpanel. Fixes #52
 - Use `expect` rspec syntax
 
-### v4.1.4
- * Add timeout option: Merged PR #48
+## 4.1.4
 
-### v4.1.3
- * Make request options optional. Closes #46.
+- Add timeout option: Merged PR #48
 
-### v4.1.2
- * Removes typhoeus version lock, fixes a "broken" test
+## 4.1.3
 
-### v4.1.1
- * Add raw response
+- Make request options optional. Closes #46
 
-### v4.1.0
- * Drop support for config keys to be strings. Use symbols instead
- * Fixed some rubocop offences
- * Require Typhoeus when used
+## 4.1.2
 
-### v4.0.1
- * Raise ConfigurationError if api_key or api_secret are not present
+- Removes typhoeus version lock, fixes a "broken" test
 
-### v4.0.0
- * Dropped support for Ruby 1.8.x
- * Code cleanup via rubocop
+## 4.1.1
 
-### v3.1.4
- * Updated docs
- * Updated to latest typhoeus gem
+- Add raw response
 
-### v3.1.3
- * 	Added support for the import API.
- * 	Allow setting of custom expiry.
+## 4.1.0
 
-### v3.1.2
- * Gem updates
+- Drop support for config keys to be strings. Use symbols instead
+- Fixed some rubocop offences
+- Require Typhoeus when used
 
-### v3.1.1
- * Avoid overriding the arg of client.request
- * Allow retrieving the request_uri of a Mixpanel request
+## 4.0.1
 
-### v3.1.0
- * Parallel requests option.
+- Raise ConfigurationError if api_key or api_secret are not present
 
-### v3.0.0
- * NOTE: This version breaks backwards compatibility.
- * Use a regular ruby hash instead of metaprogramming for mixpanel options.
+## 4.0.0
 
-### v2.2.3
- * 	Added some more options.
+- Dropped support for Ruby 1.8.x
+- Code cleanup via rubocop
 
-### v2.2.2
- * 	Added some more options.
+## 3.1.4
 
-### v2.2.1
- * 	Added support for the raw data export API.
+- Updated docs
+- Updated to latest typhoeus gem
 
-### v2.2.0
-  * BASE_URI is now https.
-  * Changed funnel to funnel_id.
+## 3.1.3
 
-### v2.1.0
- * Updated json dependency to 1.6.
+- Added support for the import API
+- Allow setting of custom expiry
 
-### v2.0.2
- * Added timezone to available options.
- * All exceptions can be caught under Mixpanel::Error.
+## v3.1.2
 
-### v2.0.1
- * Added options used in segmentation resources.
+- Gem updates
 
-### v2.0.0
- * Manually tested compatibility with Mixpanel gem.
+## 3.1.1
 
-### v2.0.0.beta2
- * Added JSON to gemspec for ruby versions less than 1.9.
+- Avoid overriding the arg of client.request
+- Allow retrieving the request_uri of a Mixpanel request
 
-### v2.0.0.beta1
- * Reverted to namespacing via module name because it's a better practice.
+## 3.1.0
+
+- Parallel requests option
+
+## 3.0.0
+
+- NOTE: This version breaks backwards compatibility
+- Use a regular ruby hash instead of metaprogramming for mixpanel options
+
+## 2.2.3
+
+- Added some more options
+
+## 2.2.2
+
+- Added some more options
+
+## 2.2.1
+
+- Added support for the raw data export API
+
+## 2.2.0
+
+- BASE_URI is now https
+- Changed funnel to funnel_id
+
+## 2.1.0
+
+- Updated json dependency to 1.6
+
+## 2.0.2
+
+- Added timezone to available options
+- All exceptions can be caught under `Mixpanel::Error`
+
+## 2.0.1
+
+- Added options used in segmentation resources
+
+## 2.0.0
+
+- Manually tested compatibility with Mixpanel gem
+
+## 2.0.0.beta2
+
+- Added JSON to gemspec for ruby versions less than 1.9
+
+## 2.0.0.beta1
+
+- Reverted to namespacing via module name because it's a better practice.
    I.e. Use `Mixpanel::Client` instead of `MixpanelClient`.
- * Added 'values' as an optional parameter
- * `gem install mixpanel_client --pre`
+- Added 'values' as an optional parameter
+- `gem install mixpanel_client --pre`
 
-### v1.0.1
- * Minor housekeeping and organizing
- * Refactored specs
+## 1.0.1
 
-### v1.0.0
- * Changed "Mixpanel" class name to "MixpanelClient" to prevent naming collision in other
+- Minor housekeeping and organizing
+- Refactored specs
+
+## 1.0.0
+
+- Changed "Mixpanel" class name to "MixpanelClient" to prevent naming collision in other
    libraries. [a710a84e8ba4b6f018b7](https://github.com/keolo/mixpanel_client/commit/a710a84e8ba4b6f018b7404ab9fabc8f08b4a4f3)

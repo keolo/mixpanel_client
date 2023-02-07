@@ -2,7 +2,6 @@
 
 [![Gem Version](https://badge.fury.io/rb/mixpanel_client.svg)](http://badge.fury.io/rb/mixpanel_client)
 [![Code Climate](https://codeclimate.com/github/keolo/mixpanel_client/badges/gpa.svg)](https://codeclimate.com/github/keolo/mixpanel_client)
-[ ![Codeship Status for keolo/mixpanel_client](https://codeship.com/projects/4d247060-1ad9-0134-e1c3-0e8ad2af7d49/status?branch=master)](https://codeship.com/projects/159479)
 
 Ruby access to the [Mixpanel](http://mixpanel.com/) web analytics tool.
 
@@ -66,6 +65,7 @@ or if you use a Gemfile
 The option to make parallel requests has been removed so that there are no runtime dependencies.
 
 ## Development
+
 List of rake tasks.
 
     rake -T
@@ -84,14 +84,13 @@ Run rubocop and fix offences.
 
     rubocop
 
-
 ## Changelog
+
 [Changelog](changelog.md)
 
-
 ## Collaborators and Maintainers
-[Contributors](https://github.com/keolo/mixpanel_client/graphs/contributors)
 
+[Contributors](https://github.com/keolo/mixpanel_client/graphs/contributors)
 
 ## Copyright
 

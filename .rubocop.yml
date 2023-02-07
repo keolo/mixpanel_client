@@ -2,10 +2,6 @@
 # remove rules over time so that we don't need this file anymore.
 #inherit_from: rubocop-todo.yml
 
-require: 
-  - rubocop-rake
-  - rubocop-rspec
-
 AllCops:
   Include:
     - Rakefile

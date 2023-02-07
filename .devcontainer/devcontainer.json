@@ -1,0 +1,8 @@
+// See https://containers.dev/implementors/json_reference/ for configuration reference
+{
+	"name": "mixpanel_client",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+  "remoteUser": "devcontainer"
+}

@@ -34,11 +34,11 @@ module Mixpanel
     #
     # @param [Hash] config consisting of an 'api_secret' and additonal options
     def initialize(config)
-      @api_secret = config[:api_secret]
-      @timeout    = config[:timeout] || nil
-      @@base_uri   = config[:base_uri] || nil
-      @@data_uri   = config[:data_uri] || nil
-      @@import_uri   = config[:import_uri] || nil
+      @api_secret  = config[:api_secret]
+      @timeout     = config[:timeout]    || nil
+      @@base_uri   = config[:base_uri]   || nil
+      @@data_uri   = config[:data_uri]   || nil
+      @@import_uri = config[:import_uri] || nil
 
       raise ConfigurationError, 'api_secret is required' if @api_secret.nil?
     end

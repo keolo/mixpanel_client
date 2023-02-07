@@ -22,7 +22,12 @@ or if you use a Gemfile
 
     client = Mixpanel::Client.new(
       api_secret: 'changeme'
-      timeout: 240 # Default is 60 seconds, increase to reduce timeout errors.
+      timeout: 240, # Default is 60 seconds, increase to reduce timeout errors.
+
+      # Optional URI overrides (e.g. https://developer.mixpanel.com/reference/overview)
+      base_uri: 'api-eu.mixpanel.com',
+      data_uri: 'example-data.com',
+      import_uri: 'example-import.com
     )
 
     data = client.request(

@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.1.0
+
+- Merged #63: Allow URI overrides
+- Fixed #40: Added minimum supported Ruby version
+
 ## 5.0.0
 
 - Removed parallel option in favor of having no runtime dependencies (fixes #58)

@@ -27,7 +27,7 @@ or if you use a Gemfile
       # Optional URI overrides (e.g. https://developer.mixpanel.com/reference/overview)
       base_uri: 'api-eu.mixpanel.com',
       data_uri: 'example-data.com',
-      import_uri: 'example-import.com
+      import_uri: 'example-import.com'
     )
 
     data = client.request(
@@ -37,7 +37,7 @@ or if you use a Gemfile
       values:    '["value1", "value2"]',
       type:      'unique',
       unit:      'day',
-      limit:     5,
+      limit:      5,
       from_date: '2013-12-1', #<- Date range
       to_date:   '2014-3-1'   #<-
     )
@@ -51,7 +51,7 @@ The API also supports passing a time interval rather than an explicit date range
       values:   '["value1", "value2"]',
       type:     'unique',
       unit:     'day',
-      limit:    5,
+      limit:     5,
       interval: 7 #<- Interval
     )
 
